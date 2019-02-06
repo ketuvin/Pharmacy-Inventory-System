@@ -1,0 +1,260 @@
+.my-navbar {
+    background-color: #00394d;
+    border-color: #002533;
+}
+.my-navbar .navbar-brand {
+    color: #9d9d9d;
+}
+.my-navbar .navbar-brand:hover,
+.my-navbar .navbar-brand:focus {
+    color: #fff;
+    background-color: transparent;
+}
+.my-navbar .navbar-text {
+    color: #fff;
+}
+.my-navbar .navbar-nav > li > a {
+    color: #9d9d9d;
+}
+.my-navbar .navbar-nav > li > a:hover,
+.my-navbar .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+}
+.my-navbar .navbar-nav > .active > a,
+.my-navbar .navbar-nav > .active > a:hover,
+.my-navbar .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #002533;
+}
+.my-navbar .navbar-nav > .disabled > a,
+.my-navbar .navbar-nav > .disabled > a:hover,
+.my-navbar .navbar-nav > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+}
+.my-navbar .navbar-toggle {
+    border-color: #333;
+}
+.my-navbar .navbar-toggle:hover,
+.my-navbar .navbar-toggle:focus {
+    background-color: #333;
+}
+.my-navbar .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.my-navbar .navbar-collapse,
+.my-navbar .navbar-form {
+    border-color: #101010;
+}
+.my-navbar .navbar-nav > .open > a,
+.my-navbar .navbar-nav > .open > a:hover,
+.my-navbar .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #002533;
+}
+@media (max-width: 767px) {
+    .my-navbar .navbar-nav .open .dropdown-menu > .dropdown-header {
+        border-color: #002533;
+    }
+    .my-navbar .navbar-nav .open .dropdown-menu .divider {
+        background-color: #002533;
+    }
+    .my-navbar .navbar-nav .open .dropdown-menu > li > a {
+        color: #9d9d9d;
+    }
+    .my-navbar .navbar-nav .open .dropdown-menu > li > a:hover,
+    .my-navbar .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #fff;
+        background-color: transparent;
+    }
+    .my-navbar .navbar-nav .open .dropdown-menu > .active > a,
+    .my-navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .my-navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #fff;
+        background-color: #002533;
+    }
+    .my-navbar .navbar-nav .open .dropdown-menu > .disabled > a,
+    .my-navbar .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+    .my-navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #444;
+        background-color: transparent;
+    }
+}
+.my-navbar .navbar-link {
+    color: #9d9d9d;
+}
+.my-navbar .navbar-link:hover {
+    color: #fff;
+}
+.my-navbar .btn-link {
+    color: #9d9d9d;
+}
+.my-navbar .btn-link:hover,
+.my-navbar .btn-link:focus {
+    color: #fff;
+}
+.my-navbar .btn-link[disabled]:hover,
+fieldset[disabled] .my-navbar .btn-link:hover,
+.my-navbar .btn-link[disabled]:focus,
+fieldset[disabled] .my-navbar .btn-link:focus {
+    color: #444;
+}
+body {
+    background-image: url('../background.jpg');
+}
+.navbar-brand {
+    padding-bottom: 40px;
+}
+.jumbotron {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+}
+.body-content {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding: 5%;
+}
+.contacts {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding: 5%;
+    margin-top: 3%;
+}
+.site-about {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.site-contact {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.site-signup {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.site-login {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.site-request-password-reset {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.site-view {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.body-view {
+    color: #fff;
+    padding-top: 2%;
+}
+.site-update {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.body-update {
+    color: #fff;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.site-create {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.body-create {
+    color: #fff;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.table-hover > tbody > tr:hover {
+  background-color: #002533;
+  color: #fff;
+}
+h2.title {
+    padding-bottom: 5%;
+}
+p.text-span {
+    padding-top: 30%;
+}
+p.text-span1 {
+    padding-top: 40%;
+}
+p.text-span2 {
+    padding-top: 10%;
+}
+div.button {
+    padding-top: 5%;
+}
+div.col-md-4 {
+    padding-left: 0%;
+    width: 25%;
+}
+div.col-md-8 {
+    width: 73%;
+    background-color: #f5f5f5;
+    padding-left: 15px;
+}
+div.home-container {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+div.dash-container {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+/*#sidebar > ul > li > a:hover {
+    background-color: #d6d6c2;
+}
+#sidebar > ul > li > a:focus,
+#sidebar > ul > li > a:visited,
+#sidebar > ul > li > a:active {
+    background-color: #0083b3;
+    color: #fff;
+}*/
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 0px;
+}
