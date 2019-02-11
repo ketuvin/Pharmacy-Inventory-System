@@ -61,23 +61,49 @@ $this->title = 'YII2 CRUD Application';
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Change Password</h1>
                         </div>
+                        <?php $form = ActiveForm::begin(); ?>
+
                         <div class="row">
-                            <div class="col-lg-5">
-                                <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
-
-                                
-
-                                <div class="form-group">
-                                    <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <?= $form->field($user, 'currentPassword')->passwordInput(); ?>
                                 </div>
-
-                                <?php ActiveForm::end(); ?>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <?= $form->field($user, 'newPassword')->passwordInput(); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <?= $form->field($user, 'newPasswordConfirm')->passwordInput(); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-3">
+                                        <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php ActiveForm::end(); ?>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
    <!--  <script type="text/javascript">

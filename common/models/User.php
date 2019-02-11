@@ -25,6 +25,9 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+    public $currentPassword;
+    public $newPassword;
+    public $newPasswordConfirm;
 
 
     /**
@@ -53,7 +56,25 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['currentPassword', 'newPassword', 'newPasswordConfirm'], 'required'],
+            [['currentPassword'], 'validateCurrentPassword'], // check old password match
+            [['newPassword', 'newPasswordConfirm'], 'string', 'min' => 3],
+            [['newPassword', 'newPasswordConfirm'], 'filter', 'filter' => 'trim'],
+            [['newPasswordConfirm'], 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Password do not match'],
         ];
+    }
+
+    public function validateCurrentPassword() {
+
+        if (!$this->verifyPassword($this->currentPassword)) {
+            $this->addError("currentPassword", "Current password incorrect");
+        }
+    }
+
+    public function verifyPassword($password) {
+
+        $dbpassword = static::findOne(['username' => Yii::$app->user->identity->username, 'status' => self::STATUS_ACTIVE])->password_hash;
+        return Yii::$app->security->validatePassword($password, $dbpassword);
     }
 
     /**
@@ -100,6 +121,15 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => self::STATUS_ACTIVE,
         ]);
     }
+
+    //matching the old password with your existing password.
+    public function findPasswords($attribute, $params)
+    {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        if ($user->password != md5($this->old_password))
+            $this->addError($attribute, 'Old password is incorrect.');
+    }
+
 
     /**
      * Finds out if password reset token is valid
@@ -186,4 +216,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+
 }

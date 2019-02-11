@@ -159,7 +159,21 @@ class PharmacyController extends Controller
      * @return mixed
      */
     public function actionChangepassword() {
-        return $this->render('changepassword');
+        //set up user and load post data
+        $user = Yii::$app->user->identity;
+        $loadPost = $user->load(Yii::$app->request->post());
+        //Validate for normal request
+        if($loadPost && $user->validate()){
+
+            $user->password = $user->newPassword;
+            //save, set flash, and refresh page
+            $user->save(false);
+            //var dump user errors
+            Yii::$app->session->setFlash('success','You have successfully changed your password.');
+            return $this->refresh();
+
+        }
+        return $this->render('changepassword',['user' => $user]);
     }
     // public function actionDelete($ID) {
     //     $record = Records::findOne($ID)->delete();
