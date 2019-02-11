@@ -13,19 +13,19 @@ $this->title = 'YII2 CRUD Application';
         <?php
             $form = ActiveForm::begin(); 
         ?>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form ->field($record, 'ID');?>
-                </div>
-            </div>
-        </div>
-
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
                     <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>
                     <?= $form ->field($record, 'Category')->dropDownList($items, ['prompt' => 'Select']);?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-6">
+                    <?= $form ->field($record1, 'Description')->textarea(['rows' => '5']);?>
                 </div>
             </div>
         </div>

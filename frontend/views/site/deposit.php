@@ -1,12 +1,15 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
+use yii\widgets\ActiveForm;
+use app\models\Records;
 /* @var $this yii\web\View */
 
 $this->title = 'YII2 CRUD Application';
 ?>
-<div class="site-dashboard">
+<div class="site-deposit">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -14,7 +17,7 @@ $this->title = 'YII2 CRUD Application';
         </div>
     <?php endif;?>
 
-    <div class="body-dashboard">
+    <div class="body-deposit">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -56,24 +59,46 @@ $this->title = 'YII2 CRUD Application';
                     ?>
                 </div>
                 <div class="col-md-8">
-                    <div class="dash-container">
+                    <div class="deposit-container">
                         <div class="row">
-                            <h1 style="margin-bottom: 10px;">Overview</h1>
+                            <h1 style="margin-bottom: 10px;">DEPOSIT</h1>
                         </div>
+                        <?php
+                        $form = ActiveForm::begin(); 
+                        ?>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-3">
+                                        <span><?= Html::submitbutton('Deposit Stock', ['class'=>'btn btn-primary']);?></span>
+                                    </div>
+                                    <div class="col-lg-2" style="padding-left: 25px;">
+                                        <span><?= Html::a('Cancel', ['/site/deposit'], ['class' => 'btn btn-primary'])?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-   <!--  <script type="text/javascript">
-        $(function() {
-            var href = window.location.href;
-            $('div a').each(function(e,i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script> -->
 </div>

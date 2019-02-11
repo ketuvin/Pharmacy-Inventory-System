@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use app\models\Records;
+use app\models\Category;
 use yii\data\Pagination;
 /**
  * Site controller
@@ -81,14 +82,16 @@ class SiteController extends Controller
     public function actionHome() {
 
         $query = Records::find();
+        $query2 = Category::find();
         $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
         $records = $query->offset($pages->offset)
         ->limit($pages->limit)
         ->all();
-
+        $category = $query2->all();
         return $this->render('home', [
            'records' => $records,
            'pages' => $pages,
+           'category' => $category,
        ]);
 
     }
@@ -100,6 +103,7 @@ class SiteController extends Controller
 
     public function actionCreate() {
         $record = new Records();
+        $record1 = new Category();
         $formData = Yii::$app->request->post();
         if($record->load($formData)){
             if($record->save()){
@@ -110,35 +114,70 @@ class SiteController extends Controller
                 Yii::$app->getSession()->setFlash('message','Failed to post record.');
             }
         }
-        return $this->render('create', ['record' => $record]);
+        return $this->render('create', [
+            'record' => $record,
+            'record1' => $record1,
+        ]);
     }
 
     public function actionView($ID) {
-         $record = Records::findOne($ID);
+        $record = Records::findOne($ID);
         return $this->render('view', ['record' => $record]);
     }
 
-    public function actionUpdate($ID) {
+    public function actionUpdate($ID,$Category) {
         $record = Records::findOne($ID);
-        if($record->load(Yii::$app->request->post()) && $record -> save()) {
+        $record1 = Category::findOne(['Name' => $Category]);
+        $formData = Yii::$app->request->post();
+        if(($record->load($formData) && $record->save()) && ($record1->load($formData) && $record1->save())) {
             Yii::$app->getSession()->setFlash('message','Product Updated Successfully');
             return $this->redirect(['home']);
         }
          else{
-            return $this->render('update', ['record' => $record]);
+            return $this->render('update', [
+                'record' => $record,
+                'record1' => $record1,
+            ]);
         }
     }
-    public function actionAddStock($ID) {
+
+    public function actionAddstock($ID) {
         $record = Records::findOne($ID);
         if($record->load(Yii::$app->request->post()) && $record -> save()) {
             Yii::$app->getSession()->setFlash('message','Added Stock Successfully');
             return $this->redirect(['home']);
         }
         else{
+            Yii::$app->getSession()->setFlash('message','Failed to add stock.');
             return $this->render('addstock',['record' => $record]);
         }
     }
 
+    public function actionWithdraw() {
+        $record = new Records();
+        $formData = Yii::$app->request->post();
+        if($record->load($formData)){
+            if($record->save()){
+                Yii::$app->getSession()->setFlash('message','Withdraw Stock Successfully');
+                return $this->redirect(['home']);
+            }
+            else{
+                Yii::$app->getSession()->setFlash('message','Failed to withdraw stock.');
+            }
+        }
+        return $this->render('withdraw', ['record' => $record]);
+    }
+
+    public function actionDeposit() {
+        return $this->render('deposit');
+    }
+     /**
+     *
+     * @return mixed
+     */
+    public function actionChangepassword() {
+        return $this->render('changepassword');
+    }
     // public function actionDelete($ID) {
     //     $record = Records::findOne($ID)->delete();
     //     if($record) {

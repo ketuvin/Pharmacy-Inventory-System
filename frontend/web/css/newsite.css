@@ -188,6 +188,36 @@ body {
     padding-right: 5%;
     padding-left: 5%;
 }
+/*.site-withdraw {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.body-withdraw {
+    color: #fff;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}*/
+.site-addStock {
+    color: #fff;
+    background-color: rgb(0, 18, 26,.8);
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+.body-addStock {
+    color: #fff;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
 .site-create {
     color: #fff;
     background-color: rgb(0, 18, 26,.8);
@@ -240,6 +270,18 @@ div.home-container {
 div.dash-container {
     padding-top: 2%;
     padding-bottom: 2%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+div.withdraw-container {
+    padding-top: 2%;
+    padding-bottom: 5%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+div.deposit-container {
+    padding-top: 2%;
+    padding-bottom: 5%;
     padding-right: 2%;
     padding-left: 2%;
 }

@@ -13,9 +13,6 @@ $this->title = 'YII2 CRUD Application';
         <div class="row">
             <ul class="list-group" style="color: #000">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>MEDICINE ID: </strong></span><i><?php echo $record->ID;?></i>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CATEGORY: </strong></span><i><?php echo $record->Category;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">

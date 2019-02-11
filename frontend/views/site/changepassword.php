@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
+use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 
 $this->title = 'YII2 CRUD Application';
@@ -58,7 +59,20 @@ $this->title = 'YII2 CRUD Application';
                 <div class="col-md-8">
                     <div class="dash-container">
                         <div class="row">
-                            <h1 style="margin-bottom: 10px;">Overview</h1>
+                            <h1 style="margin-bottom: 10px;">Change Password</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
+
+                                
+
+                                <div class="form-group">
+                                    <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+                                </div>
+
+                                <?php ActiveForm::end(); ?>
+                            </div>
                         </div>
                     </div>
                 </div>

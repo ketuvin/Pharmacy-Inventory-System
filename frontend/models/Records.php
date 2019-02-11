@@ -4,7 +4,6 @@
 
 	class Records extends ActiveRecord {
 
-		private $ID;
 		private $Category;
 		private $Name;
 		private $Brand;
@@ -13,14 +12,18 @@
 		public function rules() {
 
 			return[
-				[['ID', 'Category', 'Name', 'Brand', 'Quantity'], 'required']
+				[['Category', 'Name', 'Brand', 'Quantity'], 'required']
 			];
+		}
+
+		public static function tableName() {
+			return '{{%records}}';
 		}
 
 		public function attributeLabels() {
         
         	return [
-            	'ID' => 'Product ID'
+            	'ID' => 'Product'
         	];
     	} 
 	}

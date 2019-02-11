@@ -15,18 +15,7 @@ $this->title = 'YII2 CRUD Application';
             <?php echo Yii::$app->session->getFlash('message');?>
         </div>
     <?php endif;?>
-    <?php 
-        Modal::begin([
-            'header' => '<h1>Add Stock</h1>',
-            'id' => 'modal',
-            'size' => 'modal-lg',
-        ]);
 
-        echo "<div id='modalContent'></div>";
-
-        Modal::end();
-
-    ?>
     <div class="body-home">
         <div class="container">
             <div class="row">
@@ -48,16 +37,20 @@ $this->title = 'YII2 CRUD Application';
                                 'icon' => 'list-alt'
                             ],
                             [
-                                'url' => ['#'],
+                                'url' => ['/site/deposit'],
+                                'label' => 'Deposit',
+                                'icon' => 'plus-sign'
+                            ],
+                            [
+                                'url' => ['/site/withdraw'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
                             [
-                                'label' => 'Help',
-                                'icon' => 'question-sign',
+                                'label' => 'User Management',
+                                'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'About', 'icon'=>'info-sign', 'url'=>['/site/about']],
-                                    ['label' => 'Contact', 'icon'=>'phone', 'url'=>['/site/contact']],
+                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/site/changepassword']],
                                 ],
                             ],
                         ],
@@ -69,15 +62,16 @@ $this->title = 'YII2 CRUD Application';
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Medicines</h1>
                             <span style="margin-bottom: 20px;"><?= Html::a('Add Product', ['/site/create'], ['class' => 'btn btn-success'])?></span>
-                            <span><?= Html::a('Withdraw', [''], ['class' => 'btn btn-success'])?></span>
+                            <span><?= Html::a('Deposit', ['/site/deposit'], ['class' => 'btn btn-success'])?></span>
+                            <span><?= Html::a('Withdraw', ['/site/withdraw'], ['class' => 'btn btn-success'])?></span>
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
                             <table class="table table-hover">
                               <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Category</th>
+                                    <th scope="col">Category Description</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Brand</th>
                                     <th scope="col">Quantity</th>
@@ -86,20 +80,29 @@ $this->title = 'YII2 CRUD Application';
                             </thead>
                             <tbody>
                                 <?php if(count($records) > 0): ?>
-                                    <?php foreach($records as $record): ?>
+                                        <?php foreach($records as $record): ?>
                                         <tr class="table-active">
-                                            <th scope="row"><?php echo $record->ID; ?></th>
-                                            <td><?php echo $record->Category; ?></td>
+                                            <th scope="row"><?php echo $record->Category; ?></th>
+                                            <td>
+                                            <?php 
+                                            foreach($category as $categ):
+                                                if($record->Category==$categ->Name){
+                                                    echo $categ->Description;
+                                                }
+                                            endforeach;   
+                                            ?>
+                                            </td>
                                             <td><?php echo $record->Name; ?></td>
                                             <td><?php echo $record->Brand; ?></td>
                                             <td><?php echo $record->Quantity; ?></td>
                                             <td>
                                                 <span><?= Html::a('View', ['view', 'ID' => $record->ID], ['class' => 'label label-primary']) ?></span>
-                                                <span><?= Html::a('Update', ['update', 'ID' => $record->ID], ['class' => 'label label-default']) ?></span>
-                                                <span><?= Html::a('Add Stock', ['addstock', 'ID' => $record->ID],['value' => Url::to(['/site/create']), 'class' => 'label label-success', 'id' => 'modalButton']) ?></span>
+                                                <span><?= Html::a('Update', ['update', 'ID' => $record->ID, 'Category' => $record->Category], ['class' => 'label label-default']) ?></span>
+                                                <span><?= Html::a('Add Stock', ['addstock', 'ID' => $record->ID], ['class' => 'label label-success']) ?></span>
+                                               
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
                                     <?php else: ?>
                                         <tr>
                                             <td>No Records Found!</td>
