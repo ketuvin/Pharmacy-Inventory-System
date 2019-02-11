@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'YII2 CRUD Application';
 ?>
-<div class="site-view">
+<div class="pharmacy-view">
 
     <h1>VIEW PRODUCT</h1>
    
@@ -28,7 +28,7 @@ $this->title = 'YII2 CRUD Application';
         </div>
 
         <div class="row">
-            <span><?= Html::a('Back', ['/site/home'], ['class' => 'btn btn-primary'])?></span>
+            <span><?= Html::a('Back', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
         </div>
     </div>
 </div>

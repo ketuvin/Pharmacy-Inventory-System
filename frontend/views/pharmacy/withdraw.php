@@ -9,7 +9,7 @@ use app\models\Records;
 
 $this->title = 'YII2 CRUD Application';
 ?>
-<div class="site-withdraw">
+<div class="pharmacy-withdraw">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -28,22 +28,22 @@ $this->title = 'YII2 CRUD Application';
                         'heading' => '<i class="glyphicon glyphicon-cog"></i> Main Navigation',
                         'items' => [
                             [
-                                'url' => ['/site/dashboard'],
+                                'url' => ['/pharmacy/dashboard'],
                                 'label' => 'Overview',
                                 'icon' => 'dashboard'
                             ],
                             [
-                                'url' => ['/site/home'],
+                                'url' => ['/pharmacy/home'],
                                 'label' => 'Medicines',
                                 'icon' => 'list-alt'
                             ],
                             [
-                                'url' => ['/site/deposit'],
+                                'url' => ['/pharmacy/deposit'],
                                 'label' => 'Deposit',
                                 'icon' => 'plus-sign'
                             ],
                             [
-                                'url' => ['/site/withdraw'],
+                                'url' => ['/pharmacy/withdraw'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
@@ -51,7 +51,7 @@ $this->title = 'YII2 CRUD Application';
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/site/changepassword']],
+                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/pharmacy/changepassword']],
                                 ],
                             ],
                         ],
@@ -92,7 +92,7 @@ $this->title = 'YII2 CRUD Application';
                                         <span><?= Html::submitbutton('Withdraw Stock', ['class'=>'btn btn-primary']);?></span>
                                     </div>
                                     <div class="col-lg-2" style="padding-left: 35px;">
-                                        <span><?= Html::a('Cancel', ['/site/withdraw'], ['class' => 'btn btn-primary'])?></span>
+                                        <span><?= Html::a('Cancel', ['/pharmacy/withdraw'], ['class' => 'btn btn-primary'])?></span>
                                     </div>
                                 </div>
                             </div>

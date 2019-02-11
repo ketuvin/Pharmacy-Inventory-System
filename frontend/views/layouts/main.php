@@ -35,8 +35,8 @@ AppAsset::register($this);
             ['label' => 'Contact', 'url' => ['/site/contact']],
         ];
         $menuItemsLogged = [
-            ['label' => 'Dashboard', 'url' => ['/site/dashboard']],
-            ['label' => 'Medicine', 'url' => ['/site/home']], 
+            ['label' => 'Dashboard', 'url' => ['/pharmacy/dashboard']],
+            ['label' => 'Medicine', 'url' => ['/pharmacy/home']], 
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
         ];
@@ -59,7 +59,7 @@ AppAsset::register($this);
         } else {
             NavBar::begin([
                 'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name . '',
-                'brandUrl' => ['/site/dashboard'],
+                'brandUrl' => ['/pharmacy/dashboard'],
                 'options' => [
                     'class' => 'my-navbar navbar-fixed-top',
                 ],

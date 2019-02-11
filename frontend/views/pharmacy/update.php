@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'YII2 CRUD Application';
 ?>
-<div class="site-update">
+<div class="pharmacy-update">
 
     <h1>UPDATE PRODUCT</h1>
    
@@ -61,7 +61,7 @@ $this->title = 'YII2 CRUD Application';
                         <span><?= Html::submitbutton('Update Product', ['class'=>'btn btn-primary']);?></span>
                     </div>
                     <div class="col-lg-2" style="padding-left: 20px;">
-                        <span><?= Html::a('Back', ['/site/home'], ['class' => 'btn btn-primary'])?></span>
+                        <span><?= Html::a('Back', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>
             </div>

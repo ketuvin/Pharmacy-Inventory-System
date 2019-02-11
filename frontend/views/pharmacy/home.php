@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 $this->title = 'YII2 CRUD Application';
 ?>
-<div class="site-home">
+<div class="pharmacy-home">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -27,22 +27,22 @@ $this->title = 'YII2 CRUD Application';
                         'heading' => '<i class="glyphicon glyphicon-cog"></i> Main Navigation',
                         'items' => [
                             [
-                                'url' => ['/site/dashboard'],
+                                'url' => ['/pharmacy/dashboard'],
                                 'label' => 'Overview',
                                 'icon' => 'dashboard'
                             ],
                             [
-                                'url' => ['/site/home'],
+                                'url' => ['/pharmacy/home'],
                                 'label' => 'Medicines',
                                 'icon' => 'list-alt'
                             ],
                             [
-                                'url' => ['/site/deposit'],
+                                'url' => ['/pharmacy/deposit'],
                                 'label' => 'Deposit',
                                 'icon' => 'plus-sign'
                             ],
                             [
-                                'url' => ['/site/withdraw'],
+                                'url' => ['/pharmacy/withdraw'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
@@ -50,7 +50,7 @@ $this->title = 'YII2 CRUD Application';
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/site/changepassword']],
+                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/pharmacy/changepassword']],
                                 ],
                             ],
                         ],
@@ -61,9 +61,9 @@ $this->title = 'YII2 CRUD Application';
                     <div class="home-container">
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Medicines</h1>
-                            <span style="margin-bottom: 20px;"><?= Html::a('Add Product', ['/site/create'], ['class' => 'btn btn-success'])?></span>
-                            <span><?= Html::a('Deposit', ['/site/deposit'], ['class' => 'btn btn-success'])?></span>
-                            <span><?= Html::a('Withdraw', ['/site/withdraw'], ['class' => 'btn btn-success'])?></span>
+                            <span style="margin-bottom: 20px;"><?= Html::a('Add Product', ['/pharmacy/create'], ['class' => 'btn btn-success'])?></span>
+                            <span><?= Html::a('Deposit', ['/pharmacy/deposit'], ['class' => 'btn btn-success'])?></span>
+                            <span><?= Html::a('Withdraw', ['/pharmacy/withdraw'], ['class' => 'btn btn-success'])?></span>
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
