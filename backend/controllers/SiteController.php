@@ -6,7 +6,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-
+use backend\models\SignupForm;
+use common\models\User;
+use yii\data\Pagination;
 /**
  * Site controller
  */
@@ -22,11 +24,11 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error','signup'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'viewadmin','adduser'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -63,6 +65,38 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionViewadmin() {
+
+        $user = User::find()->where(['role' => 10]);
+
+        $pages = new Pagination(['totalCount' => $user->count(), 'defaultPageSize' => 5]);
+        $users = $user->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+    
+        return $this->render('viewadmin', [
+           'users' => $users,
+           'pages' => $pages,
+       ]);
+
+    }
+
+    public function actionAdduser() {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                Yii::$app->session->setFlash('success', 'User Added Successfully');
+                return $this->redirect(['viewadmin']);
+            }
+            else {
+                Yii::$app->session->setFlash('error', 'Failed to add user.');
+                return $this->redirect(['adduser']);
+            }
+        }
+        
+        return $this->render('adduser', ['model' => $model]);
+    }
+
     /**
      * Login action.
      *
@@ -73,16 +107,11 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
+            return $this->redirect(['viewadmin']);
         } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            return $this->render('login', ['model' => $model]);
         }
     }
 
@@ -96,5 +125,22 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionSignup() {
+
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                Yii::$app->session->setFlash('success', 'Sign Up Successfully');
+                return $this->redirect(['login']);
+            }
+            else {
+                Yii::$app->session->setFlash('error', 'Sign Up Failed.');
+                return $this->redirect(['signup']);
+            }
+        }
+        
+        return $this->render('signup', ['model' => $model]);
     }
 }

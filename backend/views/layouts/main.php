@@ -28,19 +28,33 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Home', 'url' => ['/site/viewadmin']],
     ];
     if (Yii::$app->user->isGuest) {
+        NavBar::begin([
+            'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'my-navbar navbar-fixed-top',
+            ],
+        ]);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => $menuItems,
+        ]);
+        
+        NavBar::end();
     } else {
+        NavBar::begin([
+            'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name,
+            'brandUrl' => ['/site/viewadmin'],
+            'options' => [
+                'class' => 'my-navbar navbar-fixed-top',
+            ],
+        ]);
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -49,12 +63,13 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => $menuItems,
+        ]);
+        NavBar::end();
     }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
+    
     ?>
 
     <div class="container">
