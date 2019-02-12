@@ -1,8 +1,9 @@
 <?php
-namespace backend\models;
+namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
+use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * Signup form
@@ -14,8 +15,10 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $password_repeat;
-    public $role = 20;
-    public $confirm_status = 10;
+    public $mobile;
+    public $gender;
+    public $nationality;
+    public $address;
 
     /**
      * {@inheritdoc}
@@ -36,9 +39,12 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
-            ['password_repeat', 'compare', 'compareAttribute'=>'password', 'message' => 'Password do not match.'],
+            ['mobile', 'string'],
+            [['mobile'], PhoneInputValidator::className()],
+            ['mobile', 'required'],
+            ['gender', 'required'],
+            ['nationality', 'required'],
+            ['address', 'required'],
         ];
     }
 
@@ -56,19 +62,21 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        // if (!$this->validate()) {
-        //     return null;
-        // }
+        if (!$this->validate()) {
+            return null;
+        }
         
         $user = new User();
         $user->fullname = $this->fullname;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
-        $user->role = $this->role;
-        $user->confirm_status = $this->confirm_status;
+        $user->mobile = $this->mobile;
+        $user->gender = $this->gender;
+        $user->nationality = $this->nationality;
+        $user->address = $this->address;
         $user->generateAuthKey();
         
-        return $user->save(false) ? $user : null;
+        return $user->save() ? $user : null;
     }
 }

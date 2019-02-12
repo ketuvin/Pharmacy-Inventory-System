@@ -18,7 +18,7 @@ return [
         ],
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
@@ -37,6 +37,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlFrontEndManager' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => 'http://frontend.yii/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ]
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

@@ -23,7 +23,7 @@ class PharmacyController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['dashboard','home','withdraw','deposit','update','view','create','addstock'],
                 'rules' => [
                     [
                         'actions' => [''],
@@ -31,7 +31,7 @@ class PharmacyController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['dashboard','home','withdraw','deposit','update','view','create','addstock'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -154,32 +154,5 @@ class PharmacyController extends Controller
     public function actionDeposit() {
         return $this->render('deposit');
     }
-     /**
-     *
-     * @return mixed
-     */
-    public function actionChangepassword() {
-        //set up user and load post data
-        $user = Yii::$app->user->identity;
-        $loadPost = $user->load(Yii::$app->request->post());
-        //Validate for normal request
-        if($loadPost && $user->validate()){
-
-            $user->password = $user->newPassword;
-            //save, set flash, and refresh page
-            $user->save(false);
-            //var dump user errors
-            Yii::$app->session->setFlash('success','You have successfully changed your password.');
-            return $this->refresh();
-
-        }
-        return $this->render('changepassword',['user' => $user]);
-    }
-    // public function actionDelete($ID) {
-    //     $record = Records::findOne($ID)->delete();
-    //     if($record) {
-    //         Yii::$app->getSession()->setFlash('message','Record Deleted Successfully');
-    //         return $this->redirect(['home']);
-    //     }
-    // }
+   
 }

@@ -48,7 +48,6 @@ AppAsset::register($this);
                     'class' => 'my-navbar navbar-fixed-top',
                 ],
             ]);
-            $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
             $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
 
             echo Nav::widget([

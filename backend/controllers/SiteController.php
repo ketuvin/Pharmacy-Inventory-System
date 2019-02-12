@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use backend\models\SignupForm;
+use backend\models\AdduserForm;
 use common\models\User;
 use yii\data\Pagination;
 /**
@@ -82,10 +83,10 @@ class SiteController extends Controller
     }
 
     public function actionAdduser() {
-        $model = new SignupForm();
+        $model = new AdduserForm();
         if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                Yii::$app->session->setFlash('success', 'User Added Successfully');
+            if ($user = $model->signup() && $model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'User Added Successfully. Confirmation link sent via email.');
                 return $this->redirect(['viewadmin']);
             }
             else {

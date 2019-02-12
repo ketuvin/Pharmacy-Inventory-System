@@ -12,6 +12,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\ConfirmationForm;
+/**
 /**
  * Site controller
  */
@@ -25,10 +27,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login','logout', 'signup'],
+                'only' => ['login','logout'],
                 'rules' => [
                     [
-                        'actions' => ['login','signup'],
+                        'actions' => ['login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -208,6 +210,25 @@ class SiteController extends Controller
         }
 
         return $this->render('resetPassword', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionConfirmation($token)
+    {
+        try {
+            $model = new ConfirmationForm($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->confirmAccount()) {
+            Yii::$app->session->setFlash('success', 'New password saved. Your account has been confirmed successfully.');
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('confirmation', [
             'model' => $model,
         ]);
     }

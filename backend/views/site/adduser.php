@@ -33,10 +33,6 @@ $this->title = 'YII2 CRUD Application';
 
                             <?= $form->field($model, 'email') ?>
 
-                            <?= $form->field($model, 'password')->passwordInput() ?>
-
-                            <?= $form->field($model, 'password_repeat')->passwordInput() ?>
-
                             <?= $form->field($model, 'mobile')->widget(PhoneInput::className(), 
                             ['jsOptions' => ['preferredCountries' => ['ph', 'us', 'sg'],]]); ?>
 
@@ -63,14 +59,4 @@ $this->title = 'YII2 CRUD Application';
     </div>
 
 </div>
-    <!-- <script type="text/javascript">
-        $(function() {
-            var href = window.location.href;
-            $('div a').each(function(e,i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script> -->
 </div>

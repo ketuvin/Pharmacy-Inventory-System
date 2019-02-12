@@ -68,6 +68,12 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function attributeLabels() {
+        return [
+            'newPasswordConfirm' => 'Confirm New Password',
+        ];
+    }
+
     public function validateCurrentPassword() {
 
         if (!$this->verifyPassword($this->currentPassword)) {
@@ -126,6 +132,18 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
     }
 
+    public static function findByConfirmationToken($token)
+    {
+        if (!static::isConfirmationTokenValid($token)) {
+            return null;
+        }
+
+        return static::findOne([
+            'confirmation_token' => $token,
+            'status' => self::STATUS_ACTIVE,
+        ]);
+    }
+
     //matching the old password with your existing password.
     public function findPasswords($attribute, $params)
     {
@@ -149,6 +167,17 @@ class User extends ActiveRecord implements IdentityInterface
 
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        return $timestamp + $expire >= time();
+    }
+
+    public static function isConfirmationTokenValid($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = Yii::$app->params['user.confirmationTokenExpire'];
         return $timestamp + $expire >= time();
     }
 
@@ -230,6 +259,25 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
+    /**
+     * Generates confirmation token
+     */
+    public function generateConfirmationToken()
+    {
+        $this->confirmation_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
 
+     /**
+     * Removes confirmation token
+     */
+    public function removeConfirmationToken()
+    {
+        $this->confirmation_token = null;
+    }
+
+    public function confirmUser() {
+
+        $this->confirm_status = 10;
+    }
 
 }

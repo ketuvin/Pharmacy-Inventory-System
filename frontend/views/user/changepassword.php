@@ -49,7 +49,7 @@ $this->title = 'YII2 CRUD Application';
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/pharmacy/changepassword']],
+                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/user/changepassword']],
                                 ],
                             ],
                         ],
