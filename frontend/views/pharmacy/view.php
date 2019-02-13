@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-view">
 
@@ -16,10 +16,16 @@ $this->title = 'YII2 CRUD Application';
                 <span><strong>CATEGORY: </strong></span><i><?php echo $record->Category;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>CATEGORY DESCRIPTION: </strong></span><i><?php echo $record1->Description;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>PRODUCT NAME: </strong></span><i><?php echo $record->Name;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>BRAND NAME: </strong></span><i><?php echo $record->Brand;?></i>
+                <span><strong>MANUFACTURER: </strong></span><i><?php echo $record->Manufacturer;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>UNIT PRICE: </strong></span><i><?php echo $record->Unit_price;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>QUANTITY: </strong></span><i><?php echo $record->Quantity;?></i>

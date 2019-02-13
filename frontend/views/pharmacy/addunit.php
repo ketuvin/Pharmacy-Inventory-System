@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 $this->title = 'Pharmacy Inventory System';
 ?>
-<div class="pharmacy-deposit">
+<div class="pharmacy-unit">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -18,7 +18,7 @@ $this->title = 'Pharmacy Inventory System';
         </div>
     <?php endif;?>
 
-    <div class="body-deposit">
+    <div class="body-unit">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -49,11 +49,6 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'minus-sign'
                             ],
                             [
-                                'url' => ['/pharmacy/unit'],
-                                'label' => 'Unit',
-                                'icon' => 'scale'
-                            ],
-                            [
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
@@ -75,9 +70,9 @@ $this->title = 'Pharmacy Inventory System';
                     ?>
                 </div>
                 <div class="col-md-8">
-                    <div class="deposit-container">
+                    <div class="unit-container">
                         <div class="row">
-                            <h1 style="margin-bottom: 10px;">DEPOSIT</h1>
+                            <h1 style="margin-bottom: 10px;">Add Unit</h1>
                         </div>
                         <?php
                         $form = ActiveForm::begin(); 
@@ -85,7 +80,7 @@ $this->title = 'Pharmacy Inventory System';
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-lg-6">
-
+                                    <?= $form ->field($unit, 'Unit_name');?>
                                 </div>
                             </div>
                         </div>
@@ -93,19 +88,11 @@ $this->title = 'Pharmacy Inventory System';
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-lg-6">
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6">
-                                    <div class="col-lg-3">
-                                        <span><?= Html::submitbutton('Deposit Stock', ['class'=>'btn btn-primary']);?></span>
+                                    <div class="col-lg-2">
+                                        <span><?= Html::submitbutton('Add Unit', ['class'=>'btn btn-primary']);?></span>
                                     </div>
-                                    <div class="col-lg-2" style="padding-left: 3px;">
-                                        <span><?= Html::a('Cancel', ['/pharmacy/deposit'], ['class' => 'btn btn-primary'])?></span>
+                                    <div class="col-lg-2" style="padding-left: 10px;">
+                                        <span><?= Html::a('Cancel', ['/pharmacy/unit'], ['class' => 'btn btn-primary'])?></span>
                                     </div>
                                 </div>
                             </div>

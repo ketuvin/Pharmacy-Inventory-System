@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use borales\extensions\phoneInput\PhoneInput;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-admin">
     <?php if(Yii::$app->session->hasFlash('message')): ?>

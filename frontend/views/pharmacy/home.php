@@ -6,7 +6,7 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-home">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
@@ -18,7 +18,7 @@ $this->title = 'YII2 CRUD Application';
 
     <div class="body-home">
         <div class="container">
-            <div class="row">
+            <div class="row" id="medicine-home">
                 <div class="col-md-4">
                     <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
                     <?php
@@ -47,10 +47,25 @@ $this->title = 'YII2 CRUD Application';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/unit'],
+                                'label' => 'Unit',
+                                'icon' => 'scale'
+                            ],
+                            [
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/user/changepassword']],
+                                    [
+                                        'label' => 'Change Password',
+                                        'icon' => 'check', 
+                                        'url' => ['/user/changepassword']
+                                    ],
+                                    [
+                                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                        'icon'=> 'log-out',
+                                        'url' => Url::to(['/site/logout']), 
+                                        'template' => '<a href="{url}" data-method="post">{icon}{label}</a>'
+                                    ],
                                 ],
                             ],
                         ],
@@ -71,10 +86,12 @@ $this->title = 'YII2 CRUD Application';
                               <thead>
                                 <tr>
                                     <th scope="col">Category</th>
-                                    <th scope="col">Category Description</th>
+                                    <th scope="col" style="width: 35%;">Category Description</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Manufacturer</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Unit</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -93,10 +110,12 @@ $this->title = 'YII2 CRUD Application';
                                             ?>
                                             </td>
                                             <td><?php echo $record->Name; ?></td>
-                                            <td><?php echo $record->Brand; ?></td>
+                                            <td><?php echo $record->Manufacturer; ?></td>
+                                            <td><?php echo $record->Unit_price; ?></td>
                                             <td><?php echo $record->Quantity; ?></td>
+                                            <td><?php echo $record->Unit; ?></td>
                                             <td>
-                                                <span><?= Html::a('View', ['view', 'ID' => $record->ID], ['class' => 'label label-primary']) ?></span>
+                                                <span><?= Html::a('View', ['view', 'ID' => $record->ID, 'Category' => $record->Category], ['class' => 'label label-primary']) ?></span>
                                                 <span><?= Html::a('Update', ['update', 'ID' => $record->ID, 'Category' => $record->Category], ['class' => 'label label-default']) ?></span>
                                                 <span><?= Html::a('Add Stock', ['addstock', 'ID' => $record->ID], ['class' => 'label label-success']) ?></span>
                                                

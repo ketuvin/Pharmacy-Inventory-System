@@ -2,7 +2,7 @@
 return [
 
     'id' => 'advanced',
-    'name' => 'Pharmacy Inventory System',
+    'name' => 'Farmako Inventus',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

@@ -5,9 +5,10 @@ use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
 use yii\widgets\ActiveForm;
 use app\models\Records;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-withdraw">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
@@ -48,10 +49,25 @@ $this->title = 'YII2 CRUD Application';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/unit'],
+                                'label' => 'Unit',
+                                'icon' => 'scale'
+                            ],
+                            [
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/user/changepassword']],
+                                    [
+                                        'label' => 'Change Password',
+                                        'icon' => 'check', 
+                                        'url' => ['/user/changepassword']
+                                    ],
+                                    [
+                                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                        'icon'=> 'log-out',
+                                        'url' => Url::to(['/site/logout']), 
+                                        'template' => '<a href="{url}" data-method="post">{icon}{label}</a>'
+                                    ],
                                 ],
                             ],
                         ],
@@ -91,7 +107,7 @@ $this->title = 'YII2 CRUD Application';
                                     <div class="col-lg-3">
                                         <span><?= Html::submitbutton('Withdraw Stock', ['class'=>'btn btn-primary']);?></span>
                                     </div>
-                                    <div class="col-lg-2" style="padding-left: 35px;">
+                                    <div class="col-lg-2" style="padding-left: 13px;">
                                         <span><?= Html::a('Cancel', ['/pharmacy/withdraw'], ['class' => 'btn btn-primary'])?></span>
                                     </div>
                                 </div>

@@ -6,13 +6,15 @@
 
 		private $Category;
 		private $Name;
-		private $Brand;
+		private $Manufacturer;
 		private $Quantity;
+		private $Unit_price;
+		private $Unit;
 
 		public function rules() {
 
 			return[
-				[['Category', 'Name', 'Brand', 'Quantity'], 'required']
+				[['Category', 'Name', 'Manufacturer', 'Quantity', 'Unit_price','Unit'], 'required']
 			];
 		}
 
@@ -23,7 +25,8 @@
 		public function attributeLabels() {
         
         	return [
-            	'ID' => 'Product'
+            	'ID' => 'Product',
+            	'Unit_price' => 'Unit Price'
         	];
     	} 
 	}

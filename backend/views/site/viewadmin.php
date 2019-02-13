@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-admin">
     <?php if(Yii::$app->session->hasFlash('message')): ?>

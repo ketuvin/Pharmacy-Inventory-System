@@ -2,13 +2,13 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
         <h1><i><strong>Farmako Inventus</strong></i></h1>
-        <p>Improve your hospital or health system pharmacy’s inventory.</p>
+        <p>Improve your pharmacy’s inventory system.</p>
     </div>
 
     <div class="body-content">

@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-update">
 
@@ -41,7 +41,15 @@ $this->title = 'YII2 CRUD Application';
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <?= $form ->field($record, 'Brand');?>
+                    <?= $form ->field($record, 'Manufacturer');?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-6">
+                    <?= $form ->field($record, 'Unit_price');?>
                 </div>
             </div>
         </div>
@@ -57,10 +65,10 @@ $this->title = 'YII2 CRUD Application';
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <span><?= Html::submitbutton('Update Product', ['class'=>'btn btn-primary']);?></span>
                     </div>
-                    <div class="col-lg-2" style="padding-left: 20px;">
+                    <div class="col-lg-2" style="padding-left: 25px;">
                         <span><?= Html::a('Back', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>

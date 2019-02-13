@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\Records;
 use app\models\Category;
+use app\models\Units;
 use yii\data\Pagination;
 /**
  * Pharmacy controller
@@ -87,25 +88,31 @@ class PharmacyController extends Controller
     public function actionCreate() {
         $record = new Records();
         $record1 = new Category();
+        $record2 = new Units();
         $formData = Yii::$app->request->post();
         if($record->load($formData)){
             if($record->save()){
-                Yii::$app->getSession()->setFlash('message','Product has been stored Successfully');
+                Yii::$app->getSession()->setFlash('message','Product has been added Successfully');
                 return $this->redirect(['home']);
             }
             else{
-                Yii::$app->getSession()->setFlash('message','Failed to post record.');
+                Yii::$app->getSession()->setFlash('message','Failed to add product.');
             }
         }
         return $this->render('create', [
             'record' => $record,
             'record1' => $record1,
+            'record2' => $record2,
         ]);
     }
 
-    public function actionView($ID) {
+    public function actionView($ID, $Category) {
         $record = Records::findOne($ID);
-        return $this->render('view', ['record' => $record]);
+        $record1 = Category::findOne(['Name' => $Category]);
+        return $this->render('view', [
+            'record' => $record,
+            'record1' => $record1,
+        ]);
     }
 
     public function actionUpdate($ID,$Category) {
@@ -134,6 +141,36 @@ class PharmacyController extends Controller
             Yii::$app->getSession()->setFlash('message','Failed to add stock.');
             return $this->render('addstock',['record' => $record]);
         }
+    }
+
+    public function actionAddunit() {
+        $unit = new Units();
+        $formData = Yii::$app->request->post();
+        if($unit->load($formData)){
+            if($unit->save()){
+                Yii::$app->getSession()->setFlash('message','Unit has been added Successfully');
+                return $this->redirect(['unit']);
+            }
+            else{
+                Yii::$app->getSession()->setFlash('message','Failed to add unit.');
+            }
+        }
+        return $this->render('addunit', [
+            'unit' => $unit,
+        ]);
+    }
+
+    public function actionUnit() {
+        $query = Units::find();
+        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
+        $units = $query->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+
+        return $this->render('unit', [
+           'units' => $units,
+           'pages' => $pages,
+       ]);
     }
 
     public function actionWithdraw() {

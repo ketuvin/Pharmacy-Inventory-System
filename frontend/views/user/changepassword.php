@@ -3,9 +3,10 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
-$this->title = 'YII2 CRUD Application';
+$this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-changePassword">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
@@ -46,10 +47,25 @@ $this->title = 'YII2 CRUD Application';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/unit'],
+                                'label' => 'Unit',
+                                'icon' => 'scale'
+                            ],
+                            [
                                 'label' => 'User Management',
                                 'icon' => 'user',
                                 'items' => [
-                                    ['label' => 'Change Password', 'icon'=>'check', 'url'=>['/user/changepassword']],
+                                    [
+                                        'label' => 'Change Password',
+                                        'icon' => 'check', 
+                                        'url' => ['/user/changepassword']
+                                    ],
+                                    [
+                                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                        'icon'=> 'log-out',
+                                        'url' => Url::to(['/site/logout']), 
+                                        'template' => '<a href="{url}" data-method="post">{icon}{label}</a>'
+                                    ],
                                 ],
                             ],
                         ],
@@ -90,8 +106,11 @@ $this->title = 'YII2 CRUD Application';
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-lg-6">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-1">
                                         <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+                                    </div>
+                                     <div class="col-lg-2" style="padding-left: 28px;">
+                                        <span><?= Html::a('Cancel', ['/user/changepassword'], ['class' => 'btn btn-primary'])?></span>
                                     </div>
                                 </div>
                             </div>
