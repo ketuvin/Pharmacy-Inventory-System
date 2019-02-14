@@ -90,13 +90,22 @@ class PharmacyController extends Controller
         $record1 = new Category();
         $record2 = new Units();
         $formData = Yii::$app->request->post();
-        if($record->load($formData)){
-            if($record->save()){
+        if($record->load($formData) && $record1->load($formData) && $record2->load($formData)){
+
+            $postGetValue = Yii::$app->request->post('Category')['categID'];
+            $postGetValue1 = Yii::$app->request->post('Units')['unitID'];
+            $query = Category::findOne(['categID' => $postGetValue]);
+            $query1 = Units::findOne(['unitID' => $postGetValue1]);
+            $record->Category = $query->Name;
+            $record->Unit = $query1->Unit_name;
+
+            if($record->save(false)){
                 Yii::$app->getSession()->setFlash('message','Product has been added Successfully');
                 return $this->redirect(['home']);
             }
             else{
                 Yii::$app->getSession()->setFlash('message','Failed to add product.');
+                return $this->redirect(['create']);
             }
         }
         return $this->render('create', [
@@ -117,16 +126,14 @@ class PharmacyController extends Controller
 
     public function actionUpdate($ID,$Category) {
         $record = Records::findOne($ID);
-        $record1 = Category::findOne(['Name' => $Category]);
         $formData = Yii::$app->request->post();
-        if(($record->load($formData) && $record->save()) && ($record1->load($formData) && $record1->save())) {
+        if(($record->load($formData) && $record->save())) {
             Yii::$app->getSession()->setFlash('message','Product Updated Successfully');
             return $this->redirect(['home']);
         }
          else{
             return $this->render('update', [
                 'record' => $record,
-                'record1' => $record1,
             ]);
         }
     }
@@ -169,6 +176,33 @@ class PharmacyController extends Controller
 
         return $this->render('unit', [
            'units' => $units,
+           'pages' => $pages,
+       ]);
+    }
+
+    public function actionEdit($categID) {
+        $category = Category::findOne($categID);
+        $formData = Yii::$app->request->post();
+        if(($category->load($formData) && $category->save())) {
+            Yii::$app->getSession()->setFlash('message','Product Updated Successfully');
+            return $this->redirect(['home']);
+        }
+         else{
+            return $this->render('edit', [
+                'category' => $category,
+            ]);
+        }
+    }
+
+    public function actionCategory() {
+        $query = Category::find();
+        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
+        $category = $query->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+
+        return $this->render('category', [
+           'category' => $category,
            'pages' => $pages,
        ]);
     }

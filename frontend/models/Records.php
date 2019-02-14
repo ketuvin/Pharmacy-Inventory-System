@@ -14,7 +14,9 @@
 		public function rules() {
 
 			return[
-				[['Category', 'Name', 'Manufacturer', 'Quantity', 'Unit_price','Unit'], 'required']
+				[['Category', 'Name', 'Manufacturer', 'Quantity', 'Unit_price','Unit'], 'required'],
+				['Name', 'unique','targetClass' => '\app\models\Records', 'message' => 'This product already exist.']
+
 			];
 		}
 

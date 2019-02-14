@@ -10,7 +10,7 @@
 		public function rules() {
 
 			return [
-            	[['Description'], 'required']
+            	[['Name','Description'], 'required']
         	];
 		}
 

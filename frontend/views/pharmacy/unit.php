@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 $this->title = 'Pharmacy Inventory System';
 ?>
-<div class="pharmacy-home">
+<div class="pharmacy-unit">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -15,7 +15,7 @@ $this->title = 'Pharmacy Inventory System';
         </div>
     <?php endif;?>
 
-    <div class="body-home">
+    <div class="body-unit">
         <div class="container">
             <div class="row" id="medicine-home">
                 <div class="col-md-4">
@@ -46,6 +46,11 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/category'],
+                                'label' => 'Category',
+                                'icon' => 'tags'
+                            ],
+                            [
                                 'url' => ['/pharmacy/unit'],
                                 'label' => 'Unit',
                                 'icon' => 'scale'
@@ -56,7 +61,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'items' => [
                                     [
                                         'label' => 'Change Password',
-                                        'icon' => 'check', 
+                                        'icon' => 'edit', 
                                         'url' => ['/user/changepassword']
                                     ],
                                     [
@@ -72,7 +77,7 @@ $this->title = 'Pharmacy Inventory System';
                     ?>
                 </div>
                 <div class="col-md-8">
-                    <div class="home-container">
+                    <div class="unit-container">
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Units</h1>
                             <span style="margin-bottom: 20px;"><?= Html::a('Add Unit', ['/pharmacy/addunit'], ['class' => 'btn btn-success'])?></span>

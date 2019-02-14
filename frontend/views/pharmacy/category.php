@@ -1,16 +1,13 @@
 <?php
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
-use yii\widgets\ActiveForm;
-use app\models\Records;
 use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
 ?>
-<div class="pharmacy-deposit">
+<div class="pharmacy-home">
     <?php if(Yii::$app->session->hasFlash('message')): ?>
         <div class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -18,9 +15,9 @@ $this->title = 'Pharmacy Inventory System';
         </div>
     <?php endif;?>
 
-    <div class="body-deposit">
+    <div class="body-home">
         <div class="container">
-            <div class="row">
+            <div class="row" id="medicine-home">
                 <div class="col-md-4">
                     <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
                     <?php
@@ -48,7 +45,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
-                           [
+                            [
                                 'url' => ['/pharmacy/category'],
                                 'label' => 'Category',
                                 'icon' => 'tags'
@@ -80,46 +77,57 @@ $this->title = 'Pharmacy Inventory System';
                     ?>
                 </div>
                 <div class="col-md-8">
-                    <div class="deposit-container">
+                    <div class="home-container">
                         <div class="row">
-                            <h1 style="margin-bottom: 10px;">DEPOSIT</h1>
+                            <h1 style="margin-bottom: 10px;">Category</h1>
                         </div>
-                        <?php
-                        $form = ActiveForm::begin(); 
-                        ?>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6">
 
-                                </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                   <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(count($category) > 0): ?>
+                                        <?php foreach($category as $categ): ?>
+                                        <tr class="table-active">
+                                            <th scope="row"><?php echo $categ->Name; ?></th>
+                                            <td><?php echo $categ->Description; ?></td>
+                                            <td>
+                                                <span><?= Html::a('Edit', ['edit', 'categID' => $categ->categID], ['class' => 'label label-primary']) ?></span>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td>No Records Found!</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table> 
+                            <div style="text-align: center;">
+                                <?php echo LinkPager::widget(['pagination' => $pages,]);?>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6">
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6">
-                                    <div class="col-lg-3">
-                                        <span><?= Html::submitbutton('Deposit Stock', ['class'=>'btn btn-primary']);?></span>
-                                    </div>
-                                    <div class="col-lg-2" style="padding-left: 3px;">
-                                        <span><?= Html::a('Cancel', ['/pharmacy/deposit'], ['class' => 'btn btn-primary'])?></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
+    <!-- <script type="text/javascript">
+        $(function() {
+            var href = window.location.href;
+            $('div a').each(function(e,i) {
+                if (href.indexOf($(this).attr('href')) >= 0) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script> -->
 </div>

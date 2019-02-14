@@ -49,6 +49,11 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/category'],
+                                'label' => 'Category',
+                                'icon' => 'tags'
+                            ],
+                            [
                                 'url' => ['/pharmacy/unit'],
                                 'label' => 'Unit',
                                 'icon' => 'scale'
@@ -59,7 +64,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'items' => [
                                     [
                                         'label' => 'Change Password',
-                                        'icon' => 'check', 
+                                        'icon' => 'edit', 
                                         'url' => ['/user/changepassword']
                                     ],
                                     [

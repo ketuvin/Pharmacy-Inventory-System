@@ -91,7 +91,6 @@ class SiteController extends Controller
             }
             else {
                 Yii::$app->session->setFlash('error', 'Failed to add user.');
-                return $this->redirect(['adduser']);
             }
         }
         
@@ -138,7 +137,6 @@ class SiteController extends Controller
             }
             else {
                 Yii::$app->session->setFlash('error', 'Sign Up Failed.');
-                return $this->redirect(['signup']);
             }
         }
         

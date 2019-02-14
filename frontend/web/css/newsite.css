@@ -249,10 +249,10 @@ h2.title {
     padding-bottom: 5%;
 }
 p.text-span {
-    padding-top: 30%;
+    padding-top: 27%;
 }
 p.text-span1 {
-    padding-top: 40%;
+    padding-top: 27%;
 }
 p.text-span2 {
     padding-top: 10%;
@@ -287,7 +287,7 @@ div.changePassword-container {
     padding-right: 2%;
     padding-left: 2%;
 }
-div.withdraw-container, .unit-container {
+div.withdraw-container, .unit-container, .category-container {
     padding-top: 2%;
     padding-bottom: 5%;
     padding-right: 2%;

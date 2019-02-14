@@ -22,14 +22,6 @@ $this->title = 'Pharmacy Inventory System';
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form ->field($record1, 'Description')->textarea(['rows' => '5']);?>
-                </div>
-            </div>
-        </div>
-
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">

@@ -47,6 +47,11 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/category'],
+                                'label' => 'Category',
+                                'icon' => 'tags'
+                            ],
+                            [
                                 'url' => ['/pharmacy/unit'],
                                 'label' => 'Unit',
                                 'icon' => 'scale'
@@ -57,7 +62,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'items' => [
                                     [
                                         'label' => 'Change Password',
-                                        'icon' => 'check', 
+                                        'icon' => 'edit', 
                                         'url' => ['/user/changepassword']
                                     ],
                                     [
@@ -116,7 +121,7 @@ $this->title = 'Pharmacy Inventory System';
                                             <td><?php echo $record->Unit; ?></td>
                                             <td>
                                                 <span><?= Html::a('View', ['view', 'ID' => $record->ID, 'Category' => $record->Category], ['class' => 'label label-primary']) ?></span>
-                                                <span><?= Html::a('Update', ['update', 'ID' => $record->ID, 'Category' => $record->Category], ['class' => 'label label-default']) ?></span>
+                                                <span><?= Html::a('Update', ['update', 'ID' => $record->ID], ['class' => 'label label-default']) ?></span>
                                                 <span><?= Html::a('Add Stock', ['addstock', 'ID' => $record->ID], ['class' => 'label label-success']) ?></span>
                                                
                                             </td>

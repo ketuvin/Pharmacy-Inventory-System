@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
 use yii\helpers\Url;
+use miloschuman\highcharts\Highcharts;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -46,6 +47,11 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/pharmacy/category'],
+                                'label' => 'Category',
+                                'icon' => 'tags'
+                            ],
+                            [
                                 'url' => ['/pharmacy/unit'],
                                 'label' => 'Unit',
                                 'icon' => 'scale'
@@ -56,7 +62,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'items' => [
                                     [
                                         'label' => 'Change Password',
-                                        'icon' => 'check', 
+                                        'icon' => 'edit', 
                                         'url' => ['/user/changepassword']
                                     ],
                                     [
@@ -76,12 +82,36 @@ $this->title = 'Pharmacy Inventory System';
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Overview</h1>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div class="row">
+                            <?php
+                                echo Highcharts::widget([
+                                    'scripts' => [
+                                       'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
+                                       'modules/exporting', // adds Exporting button/menu to chart
+                                       // 'themes/grid-light'        // applies global 'grid' theme to all charts
+                                    ],
+                                    'options' => [
+                                        'title' => ['text' => 'Inventory'],
+                                        'yAxis' => [
+                                            'title' => ['text' => 'Units']
+                                        ],
+                                        'chart' => [
+                                            'type' => 'column'
+                                        ],
+                                        'series' => [
+                                            ['name' => 'Capsule', 'data' => [7]],
+                                            ['name' => 'Tablet', 'data' => [5]]
+                                        ]
+                                   ]
+                               ]);
+                            ?>
+                        </div>
+           </div>
+       </div>
+   </div>
+</div>
 
-    </div>
+</div>
    <!--  <script type="text/javascript">
         $(function() {
             var href = window.location.href;

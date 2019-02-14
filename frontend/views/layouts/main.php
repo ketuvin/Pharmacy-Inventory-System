@@ -10,6 +10,9 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\base\Component;
+use kartik\icons\Icon;
+
+Icon::map($this);  
 
 AppAsset::register($this);
 ?>
@@ -42,7 +45,7 @@ AppAsset::register($this);
         ];
         if (Yii::$app->user->isGuest) {
             NavBar::begin([
-                'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name . '',
+                'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name,
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'my-navbar navbar-fixed-top',
@@ -57,15 +60,31 @@ AppAsset::register($this);
             NavBar::end();
         } else {
             NavBar::begin([
-                'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name . '',
+                'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name,
                 'brandUrl' => ['/pharmacy/dashboard'],
                 'options' => [
                     'class' => 'my-navbar navbar-fixed-top',
                 ],
             ]);
+            $menuItemsLogged[] = [
+                'label' => Icon::show('cog'),
+                'items' => [
+                    [
+                        'label' => Icon::show('edit') . 'Change Password',
+                        'url' => ['/user/changepassword']
+                    ],
+                    [
+                        'label' => Icon::show('log-out') . 'Logout (' . Yii::$app->user->identity->username . ')',
+                        'url' => ['/site/logout'],
+                        'linkOptions' => ['data-method' => 'post'],
+                    ], 
+                ],
+            ];
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItemsLogged,
+                'encodeLabels' => false,
             ]);
             NavBar::end();
         }

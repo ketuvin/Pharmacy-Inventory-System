@@ -3,10 +3,19 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Units;
+use app\models\Category;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
 ?>
+
+<?php if(Yii::$app->session->hasFlash('message')): ?>
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php echo Yii::$app->session->getFlash('message');?>
+    </div>
+<?php endif;?>
+
 <div class="pharmacy-create">
 
     <h1>ADD PRODUCT</h1>
@@ -18,8 +27,10 @@ $this->title = 'Pharmacy Inventory System';
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>
-                    <?= $form ->field($record, 'Category')->dropDownList($items, ['prompt' => 'Select']);?>
+                     <?= $form ->field($record1, 'categID')->dropDownList(
+                        ArrayHelper::map(Category::find()->all(),'categID','Name'),
+                        ['prompt'=> 'Select Category']
+                    );?>
                 </div>
             </div>
         </div>
@@ -74,7 +85,7 @@ $this->title = 'Pharmacy Inventory System';
             <div class="form-group">
                 <div class="col-lg-6">
                     <div class="col-lg-2">
-                        <span><?= Html::submitbutton('Add Product', ['class'=>'btn btn-primary']);?></span>
+                        <span><?= Html::submitbutton('Add Product', ['class'=>'btn btn-primary'])?></span>
                     </div>
                     <div class="col-lg-2" style="padding-left: 5px;">
                         <span><?= Html::a('Back', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>

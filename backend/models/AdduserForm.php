@@ -4,11 +4,12 @@ namespace backend\models;
 use yii\base\Model;
 use common\models\User;
 use borales\extensions\phoneInput\PhoneInputValidator;
+use yii\db\ActiveRecord;
 use Yii;
 /**
  * Signup form
  */
-class AdduserForm extends Model
+class AdduserForm extends ActiveRecord
 {
     public $fullname;
     public $username;
@@ -63,9 +64,9 @@ class AdduserForm extends Model
      */
     public function signup()
     {
-        // if (!$this->validate()) {
-        //     return null;
-        // }
+        if (!$this->validate()) {
+            return null;
+        }
         
         $user = new User();
         $user->fullname = $this->fullname;
