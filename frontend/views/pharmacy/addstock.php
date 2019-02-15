@@ -6,8 +6,6 @@ use yii\widgets\ActiveForm;
 $this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-addStock">
-
-    <h1>ADD STOCK</h1>
    
     <div class="body-addStock">
         <?php
@@ -33,7 +31,7 @@ $this->title = 'Pharmacy Inventory System';
             <div class="form-group">
                 <div class="col-lg-6">
                     <div class="col-lg-2">
-                        <span><?= Html::submitbutton('Add New Stock', ['class'=>'btn btn-primary']);?></span>
+                        <span><?= Html::submitbutton('Add Stock', ['class'=>'btn btn-primary']);?></span>
                     </div>
                     <div class="col-lg-2" style="padding-left: 20px;">
                         <span><?= Html::a('Cancel', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>

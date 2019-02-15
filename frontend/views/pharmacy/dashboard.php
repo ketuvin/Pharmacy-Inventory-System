@@ -42,7 +42,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'plus-sign'
                             ],
                             [
-                                'url' => ['/pharmacy/withdraw'],
+                                'url' => ['/pharmacy/withdrawals'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],

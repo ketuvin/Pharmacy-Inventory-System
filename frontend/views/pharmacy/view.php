@@ -10,8 +10,8 @@ $this->title = 'Pharmacy Inventory System';
     <h1>VIEW PRODUCT</h1>
    
     <div class="body-view">
-        <div class="row">
-            <ul class="list-group" style="color: #000">
+        <div class="row" style="text-align: center;">
+            <ul class="list-group" style="color: #000; width: 90%; display: inline-block; text-align: left;">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CATEGORY: </strong></span><i><?php echo $record->Category;?></i>
             </li>
@@ -28,7 +28,10 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>UNIT PRICE: </strong></span><i><?php echo $record->Unit_price;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>QUANTITY: </strong></span><i><?php echo $record->Quantity;?></i>
+                <span><strong>STOCK: </strong></span><i><?php echo $record->Quantity;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>UNIT: </strong></span><i><?php echo $record->Unit;?></i>
             </li>
         </ul>
         </div>

@@ -18,8 +18,6 @@ $this->title = 'Pharmacy Inventory System';
 
 <div class="pharmacy-create">
 
-    <h1>ADD PRODUCT</h1>
-   
     <div class="body-create">
         <?php
             $form = ActiveForm::begin(); 
@@ -55,7 +53,7 @@ $this->title = 'Pharmacy Inventory System';
         <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <p>If the unit you want to use is not in the list of options, please click Unit button to add new unit. After saving the new unit, click on Medicines tab.</p>
+                    <p style="color: #4d4d4d;">If the unit you want to use is not in the list of options, please click Unit button to add new unit. After saving the new unit, click on Medicines tab.</p>
                     <?= Html::a('Unit', ['/pharmacy/addunit'], ['class' => 'btn btn-primary', 'style' => 'float: right; display: inline-block; margin-bottom: 5px;'])?>
                     <?= $form ->field($record2, 'unitID')->dropDownList(
                         ArrayHelper::map(Units::find()->all(),'unitID','Unit_name'),
@@ -84,10 +82,10 @@ $this->title = 'Pharmacy Inventory System';
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <span><?= Html::submitbutton('Add Product', ['class'=>'btn btn-primary'])?></span>
                     </div>
-                    <div class="col-lg-2" style="padding-left: 5px;">
+                    <div class="col-lg-2">
                         <span><?= Html::a('Back', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>

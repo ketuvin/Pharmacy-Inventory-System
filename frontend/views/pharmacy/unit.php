@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
 use yii\helpers\Url;
+use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -41,7 +42,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'plus-sign'
                             ],
                             [
-                                'url' => ['/pharmacy/withdraw'],
+                                'url' => ['/pharmacy/withdrawals'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
@@ -80,7 +81,18 @@ $this->title = 'Pharmacy Inventory System';
                     <div class="unit-container">
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Units</h1>
-                            <span style="margin-bottom: 20px;"><?= Html::a('Add Unit', ['/pharmacy/addunit'], ['class' => 'btn btn-success'])?></span>
+                            <span style="margin-bottom: 20px;"><?= Html::button('Add Unit', ['value' => Url::to(['/pharmacy/addunit']), 'class' => 'btn btn-success', 'id' => 'modalButtonUnit'])?></span>
+                            <?php
+                                Modal::begin([
+                                    'header' => '<h3 style="text-align:center;">ADD UNIT</h3>',
+                                    'id' => 'modalUnit',
+                                    'size' => 'modal-md',
+                                ]);
+
+                                echo "<div id='addUnit'></div>";
+                                
+                                Modal::end();
+                            ?>
                         </div>
 
                         <div class="row" style="margin-top: 30px;">

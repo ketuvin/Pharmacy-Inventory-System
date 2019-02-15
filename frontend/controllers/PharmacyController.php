@@ -10,6 +10,7 @@ use yii\filters\AccessControl;
 use app\models\Records;
 use app\models\Category;
 use app\models\Units;
+use app\models\Withdrawals;
 use yii\data\Pagination;
 /**
  * Pharmacy controller
@@ -85,7 +86,7 @@ class PharmacyController extends Controller
         return $this->render('dashboard');
     }
 
-    public function actionCreate() {
+    public function actionAddproduct() {
         $record = new Records();
         $record1 = new Category();
         $record2 = new Units();
@@ -105,10 +106,10 @@ class PharmacyController extends Controller
             }
             else{
                 Yii::$app->getSession()->setFlash('message','Failed to add product.');
-                return $this->redirect(['create']);
+                return $this->redirect(['addproduct']);
             }
         }
-        return $this->render('create', [
+        return $this->renderAjax('addproduct', [
             'record' => $record,
             'record1' => $record1,
             'record2' => $record2,
@@ -124,7 +125,7 @@ class PharmacyController extends Controller
         ]);
     }
 
-    public function actionUpdate($ID,$Category) {
+    public function actionUpdate($ID) {
         $record = Records::findOne($ID);
         $formData = Yii::$app->request->post();
         if(($record->load($formData) && $record->save())) {
@@ -140,14 +141,16 @@ class PharmacyController extends Controller
 
     public function actionAddstock($ID) {
         $record = Records::findOne($ID);
-        if($record->load(Yii::$app->request->post()) && $record -> save()) {
-            Yii::$app->getSession()->setFlash('message','Added Stock Successfully');
-            return $this->redirect(['home']);
+        if($record->load(Yii::$app->request->post())){
+            if ($record -> save()) {
+                Yii::$app->getSession()->setFlash('message','Added Stock Successfully');
+                return $this->redirect(['home']);
+            }
+            else{
+                Yii::$app->getSession()->setFlash('message','Failed to add stock.');
+            }
         }
-        else{
-            Yii::$app->getSession()->setFlash('message','Failed to add stock.');
-            return $this->render('addstock',['record' => $record]);
-        }
+        return $this->renderAjax('addstock',['record' => $record]);
     }
 
     public function actionAddunit() {
@@ -162,7 +165,7 @@ class PharmacyController extends Controller
                 Yii::$app->getSession()->setFlash('message','Failed to add unit.');
             }
         }
-        return $this->render('addunit', [
+        return $this->renderAjax('addunit', [
             'unit' => $unit,
         ]);
     }
@@ -207,8 +210,22 @@ class PharmacyController extends Controller
        ]);
     }
 
-    public function actionWithdraw() {
+    public function actionWithdrawals() {
+        $query = Withdrawals::find();
+        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
+        $withdrawals = $query->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+
+        return $this->render('withdrawals', [
+           'withdrawals' => $withdrawals,
+           'pages' => $pages,
+       ]);
+    }
+
+    public function actionWithdrawproduct() {
         $record = new Records();
+        $record1 = new Withdrawals();
         $formData = Yii::$app->request->post();
         if($record->load($formData)){
             if($record->save()){
@@ -219,7 +236,10 @@ class PharmacyController extends Controller
                 Yii::$app->getSession()->setFlash('message','Failed to withdraw stock.');
             }
         }
-        return $this->render('withdraw', ['record' => $record]);
+        return $this->renderAjax('withdrawproduct', [
+            'record' => $record,
+            'record1' => $record1
+        ]);
     }
 
     public function actionDeposit() {

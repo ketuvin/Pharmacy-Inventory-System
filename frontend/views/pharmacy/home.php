@@ -42,7 +42,7 @@ $this->title = 'Pharmacy Inventory System';
                                 'icon' => 'plus-sign'
                             ],
                             [
-                                'url' => ['/pharmacy/withdraw'],
+                                'url' => ['/pharmacy/withdrawals'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
@@ -81,9 +81,33 @@ $this->title = 'Pharmacy Inventory System';
                     <div class="home-container">
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Medicines</h1>
-                            <span style="margin-bottom: 20px;"><?= Html::a('Add Product', ['/pharmacy/create'], ['class' => 'btn btn-success'])?></span>
+                            <span style="margin-bottom: 20px;"><?= Html::button('Add Product', ['value' => Url::to(['/pharmacy/addproduct']), 'class' => 'btn btn-success', 'id' => 'modalButton'])?></span>
                             <span><?= Html::a('Deposit', ['/pharmacy/deposit'], ['class' => 'btn btn-success'])?></span>
-                            <span><?= Html::a('Withdraw', ['/pharmacy/withdraw'], ['class' => 'btn btn-success'])?></span>
+
+                            <?php
+                                Modal::begin([
+                                    'header' => '<h3 style="text-align:center;">ADD PRODUCT</h3>',
+                                    'id' => 'modal',
+                                    'size' => 'modal-md',
+                                ]);
+
+                                echo "<div id='modalContent'></div>";
+
+                                Modal::end();
+                            ?>
+
+                            <?php
+                                Modal::begin([
+                                    'header' => '<h3 style="text-align:center;">ADD STOCK</h3>',
+                                    'id' => 'modalStock',
+                                    'size' => 'modal-md',
+                                ]);
+
+                                echo "<div id='addStock'></div>";
+
+                                Modal::end();
+                            ?>
+
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
@@ -94,9 +118,6 @@ $this->title = 'Pharmacy Inventory System';
                                     <th scope="col" style="width: 35%;">Category Description</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Manufacturer</th>
-                                    <th scope="col">Unit Price</th>
-                                    <th scope="col">Stock</th>
-                                    <th scope="col">Unit</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -116,14 +137,10 @@ $this->title = 'Pharmacy Inventory System';
                                             </td>
                                             <td><?php echo $record->Name; ?></td>
                                             <td><?php echo $record->Manufacturer; ?></td>
-                                            <td><?php echo $record->Unit_price; ?></td>
-                                            <td><?php echo $record->Quantity; ?></td>
-                                            <td><?php echo $record->Unit; ?></td>
                                             <td>
                                                 <span><?= Html::a('View', ['view', 'ID' => $record->ID, 'Category' => $record->Category], ['class' => 'label label-primary']) ?></span>
                                                 <span><?= Html::a('Update', ['update', 'ID' => $record->ID], ['class' => 'label label-default']) ?></span>
-                                                <span><?= Html::a('Add Stock', ['addstock', 'ID' => $record->ID], ['class' => 'label label-success']) ?></span>
-                                               
+                                                <span><?= Html::button('Add Stock', ['value' => Url::to(['pharmacy/addstock', 'ID' => $record->ID]), 'class' => 'label label-success modalButtonStock']) ?></span>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -133,7 +150,7 @@ $this->title = 'Pharmacy Inventory System';
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>
-                            </table> 
+                            </table>           
                             <div style="text-align: center;">
                                 <?php echo LinkPager::widget(['pagination' => $pages,]);?>
                             </div>

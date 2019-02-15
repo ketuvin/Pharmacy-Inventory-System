@@ -21,69 +21,8 @@ $this->title = 'Pharmacy Inventory System';
     <div class="body-unit">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
-                    <?php
-                    echo SideNav::widget([
-                        'type' => SideNav::TYPE_DEFAULT,
-                        'heading' => '<i class="glyphicon glyphicon-cog"></i> Main Navigation',
-                        'items' => [
-                            [
-                                'url' => ['/pharmacy/dashboard'],
-                                'label' => 'Overview',
-                                'icon' => 'dashboard'
-                            ],
-                            [
-                                'url' => ['/pharmacy/home'],
-                                'label' => 'Medicines',
-                                'icon' => 'list-alt'
-                            ],
-                            [
-                                'url' => ['/pharmacy/deposit'],
-                                'label' => 'Deposit',
-                                'icon' => 'plus-sign'
-                            ],
-                            [
-                                'url' => ['/pharmacy/withdraw'],
-                                'label' => 'Withdraw',
-                                'icon' => 'minus-sign'
-                            ],
-                            [
-                                'url' => ['/pharmacy/category'],
-                                'label' => 'Category',
-                                'icon' => 'tags'
-                            ],
-                            [
-                                'url' => ['/pharmacy/unit'],
-                                'label' => 'Units',
-                                'icon' => 'scale'
-                            ],
-                            [
-                                'label' => 'User Management',
-                                'icon' => 'user',
-                                'items' => [
-                                    [
-                                        'label' => 'Change Password',
-                                        'icon' => 'edit', 
-                                        'url' => ['/user/changepassword']
-                                    ],
-                                    [
-                                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                                        'icon'=> 'log-out',
-                                        'url' => Url::to(['/site/logout']), 
-                                        'template' => '<a href="{url}" data-method="post">{icon}{label}</a>'
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ]);
-                    ?>
-                </div>
-                <div class="col-md-8">
+                <div class="col-md-8" style="background-color: transparent; padding-left: 10px; width: 200%;">
                     <div class="unit-container">
-                        <div class="row">
-                            <h1 style="margin-bottom: 10px;">Add Unit</h1>
-                        </div>
                         <?php
                         $form = ActiveForm::begin(); 
                         ?>
