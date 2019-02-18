@@ -74,7 +74,12 @@ class SiteController extends Controller
     {
         // $records = Records::find()->all();
         // return $this->render('home', ['records' => $records]);
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            return $this->render('index');
+        } else {
+            return $this->redirect(['/pharmacy/dashboard']);
+        }
+        
     }
     /**
      * Logs in a user.

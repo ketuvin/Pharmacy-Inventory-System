@@ -24,11 +24,6 @@ class UserController extends Controller
                 'only' => ['changepassword'],
                 'rules' => [
                     [
-                        'actions' => [''],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
                         'actions' => ['changepassword'],
                         'allow' => true,
                         'roles' => ['@'],

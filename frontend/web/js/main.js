@@ -30,3 +30,30 @@ $(function(){
 			.load($(this).attr('value'));
 	});
 });
+
+$(function(){
+	$('.modalButtonCategory').click(function(e){
+		e.preventDefault();
+		$('#modalCategory').modal('show')
+			.find('#editCategory')
+			.load($(this).attr('value'));
+	});
+});
+
+$(function(){
+	$('.modalButtonViewProduct').click(function(e){
+		e.preventDefault();
+		$('#modalViewProduct').modal('show')
+			.find('#viewProduct')
+			.load($(this).attr('value'));
+	});
+});
+
+$(function(){
+	$('.modalButtonUpdateProduct').click(function(e){
+		e.preventDefault();
+		$('#modalUpdateProduct').modal('show')
+			.find('#updateProduct')
+			.load($(this).attr('value'));
+	});
+});

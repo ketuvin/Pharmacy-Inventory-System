@@ -28,11 +28,6 @@ class PharmacyController extends Controller
                 'only' => ['dashboard','home','withdraw','deposit','update','view','create','addstock'],
                 'rules' => [
                     [
-                        'actions' => [''],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
                         'actions' => ['dashboard','home','withdraw','deposit','update','view','create','addstock'],
                         'allow' => true,
                         'roles' => ['@'],
@@ -119,7 +114,7 @@ class PharmacyController extends Controller
     public function actionView($ID, $Category) {
         $record = Records::findOne($ID);
         $record1 = Category::findOne(['Name' => $Category]);
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'record' => $record,
             'record1' => $record1,
         ]);
@@ -133,7 +128,7 @@ class PharmacyController extends Controller
             return $this->redirect(['home']);
         }
          else{
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'record' => $record,
             ]);
         }
@@ -191,7 +186,7 @@ class PharmacyController extends Controller
             return $this->redirect(['home']);
         }
          else{
-            return $this->render('edit', [
+            return $this->renderAjax('edit', [
                 'category' => $category,
             ]);
         }

@@ -6,12 +6,9 @@ use yii\widgets\ActiveForm;
 $this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-view">
-
-    <h1>VIEW PRODUCT</h1>
    
     <div class="body-view">
-        <div class="row" style="text-align: center;">
-            <ul class="list-group" style="color: #000; width: 90%; display: inline-block; text-align: left;">
+            <ul class="list-group" style="width: 50%;">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CATEGORY: </strong></span><i><?php echo $record->Category;?></i>
             </li>
@@ -34,10 +31,6 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>UNIT: </strong></span><i><?php echo $record->Unit;?></i>
             </li>
         </ul>
-        </div>
 
-        <div class="row">
-            <span><?= Html::a('Back', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
-        </div>
     </div>
 </div>
