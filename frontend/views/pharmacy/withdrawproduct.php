@@ -31,13 +31,15 @@ $this->title = 'Pharmacy Inventory System';
 
                             <?= $form->field($record, 'Re_stock');?>
 
-                            <div class="col-lg-2" style="margin-right: 10px;">
-                                <span><?= Html::submitbutton('Withdraw', ['class'=>'btn btn-primary']);?></span>
+                            <div class="form-group">
+                                <div class="col-lg-2" style="margin-right: 10px;">
+                                    <span><?= Html::submitbutton('Withdraw', ['class'=>'btn btn-primary']);?></span>
+                                </div>
+                                <div class="col-lg-2">
+                                    <span><?= Html::a('Cancel', ['/pharmacy/withdrawals'], ['class' => 'btn btn-primary'])?></span>
+                                </div>
                             </div>
-                            <div class="col-lg-2">
-                                <span><?= Html::a('Cancel', ['/pharmacy/withdrawals'], ['class' => 'btn btn-primary'])?></span>
-                            </div>
-
+                            
                             <?php ActiveForm::end(); ?>
                         </div>
                     </div>

@@ -22,20 +22,15 @@ $this->title = 'Pharmacy Inventory System';
             <div class="row">
                 <div class="col-md-8" style="background-color: transparent; padding-left: 10px; width: 200%;">
                     <div class="unit-container">
-                        <?php
-                        $form = ActiveForm::begin(); 
-                        ?>
                         <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6">
-                                    <?= $form ->field($unit, 'Unit_name');?>
-                                </div>
-                            </div>
-                        </div>
+                            <div class="col-lg-6">
+                                <?php
+                                    $form = ActiveForm::begin(['id' => 'addunit-form']); 
+                                ?>
 
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-lg-6">
+                                <?= $form ->field($unit, 'Unit_name'); ?>
+
+                                <div class="form-group">
                                     <div class="col-lg-2">
                                         <span><?= Html::submitbutton('Add Unit', ['class'=>'btn btn-primary']);?></span>
                                     </div>
@@ -43,13 +38,13 @@ $this->title = 'Pharmacy Inventory System';
                                         <span><?= Html::a('Cancel', ['/pharmacy/unit'], ['class' => 'btn btn-primary'])?></span>
                                     </div>
                                 </div>
+                                
+                                <?php ActiveForm::end(); ?>
                             </div>
                         </div>
-                        <?php ActiveForm::end(); ?>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
-
     </div>
 </div>

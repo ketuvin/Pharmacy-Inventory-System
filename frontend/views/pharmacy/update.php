@@ -8,53 +8,22 @@ $this->title = 'Pharmacy Inventory System';
 <div class="pharmacy-update">
    
     <div class="body-update">
-        <?php
-            $form = ActiveForm::begin(['id' => 'update-form']); 
-        ?>
          <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>
-                    <?= $form ->field($record, 'Category')->dropDownList($items, ['prompt' => 'Select']);?>
-                </div>
-            </div>
-        </div>
+            <div class="col-lg-6">
+                <?php
+                    $form = ActiveForm::begin(['id' => 'update-form']); 
+                ?>
 
-         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form ->field($record, 'Name');?>
-                </div>
-            </div>
-        </div>
+                <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>
+                <?= $form ->field($record, 'Category')->dropDownList($items, ['prompt' => 'Select']);?>
 
-         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form ->field($record, 'Manufacturer');?>
-                </div>
-            </div>
-        </div>
+                <?= $form ->field($record, 'Name');?>
 
-        <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form ->field($record, 'Unit_price');?>
-                </div>
-            </div>
-        </div>
-        
-         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form->field($record, 'Quantity');?>
-                </div>
-            </div>
-        </div>
+                <?= $form ->field($record, 'Manufacturer');?>
 
-         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
+                <?= $form ->field($record, 'Unit_price');?>
+
+                <div class="form-group">
                     <div class="col-lg-2">
                         <span><?= Html::submitbutton('Save', ['class'=>'btn btn-primary']);?></span>
                     </div>
@@ -62,8 +31,9 @@ $this->title = 'Pharmacy Inventory System';
                         <span><?= Html::a('Cancel', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>
+                
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
-        <?php ActiveForm::end(); ?>
     </div>
 </div>

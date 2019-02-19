@@ -8,28 +8,17 @@ $this->title = 'Pharmacy Inventory System';
 <div class="pharmacy-addStock">
    
     <div class="body-addStock">
-        <?php
-            $form = ActiveForm::begin(); 
-        ?>
          <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form ->field($record, 'Name');?>
-                </div>
-            </div>
-        </div>
-        
-         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <?= $form->field($record, 'Re_stock');?>
-                </div>
-            </div>
-        </div>
+            <div class="col-lg-6">
+                <?php
+                    $form = ActiveForm::begin(['id' => 'addstock-form']); 
+                ?>
 
-         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6">
+                <?= $form ->field($record, 'Name');?>
+
+                <?= $form->field($record, 'Re_stock');?>
+
+                <div class="form-group">
                     <div class="col-lg-2">
                         <span><?= Html::submitbutton('Add Stock', ['class'=>'btn btn-primary']);?></span>
                     </div>
@@ -37,8 +26,8 @@ $this->title = 'Pharmacy Inventory System';
                         <span><?= Html::a('Cancel', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
-        <?php ActiveForm::end(); ?>
     </div>
 </div>
