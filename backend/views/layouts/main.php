@@ -29,7 +29,10 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/viewadmin']],
+        ['label' => 'Home', 'url' => ['/site/dashboard']],
+        ['label' => 'Users', 'url' => ['/site/viewadmin']],
+        ['label' => 'Withdrawals', 'url' => ['/site/withdrawals']]
+
     ];
     if (Yii::$app->user->isGuest) {
         NavBar::begin([
@@ -50,7 +53,7 @@ AppAsset::register($this);
     } else {
         NavBar::begin([
             'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name . '',
-            'brandUrl' => ['/site/viewadmin'],
+            'brandUrl' => ['/site/dashboard'],
             'options' => [
                 'class' => 'my-navbar navbar-fixed-top',
             ],

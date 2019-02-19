@@ -1,5 +1,5 @@
 <?php
-	namespace app\models;
+	namespace common\models;
 	use yii\db\ActiveRecord;
 
 	class Withdrawals extends ActiveRecord {
@@ -8,6 +8,7 @@
 		private $Remarks;
 		private $Created_Date;
 		private $Product_name;
+		private $withdrawby_user;
 
 		public function rules() {
 
@@ -24,7 +25,8 @@
         
         	return [
             	'Pull_outNo' => 'Pull-out No.',
-            	'Created_Date' => 'Created Date'
+            	'Created_Date' => 'Created Date',
+            	'withdrawby_user' => 'Withdrawn By'
         	];
     	} 
 	}

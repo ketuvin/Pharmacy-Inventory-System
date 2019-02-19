@@ -10,7 +10,7 @@ use yii\filters\AccessControl;
 use app\models\Records;
 use app\models\Category;
 use app\models\Units;
-use app\models\Withdrawals;
+use common\models\Withdrawals;
 use yii\data\Pagination;
 /**
  * Pharmacy controller
@@ -246,6 +246,7 @@ class PharmacyController extends Controller
             $record1->Product_name = $record->Name;
             date_default_timezone_set("Asia/Singapore");
             $record1->Created_Date = date('M d, Y h:i:s A');
+            $record1->withdrawby_user = Yii::$app->user->identity->fullname . '(' . Yii::$app->user->identity->username . ')';
 
             if($record->Quantity >= $restock) {
                 $stock = $record->Quantity;

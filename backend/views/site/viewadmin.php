@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -13,6 +15,18 @@ $this->title = 'Pharmacy Inventory System';
         </div>
     <?php endif;?>
 
+    <?php
+        Modal::begin([
+            'header' => '<h3 style="text-align:center;">ADD USER</h3>',
+            'id' => 'modalUser',
+            'size' => 'modal-md',
+        ]);
+
+        echo "<div id='modalContent'></div>";
+
+        Modal::end();
+    ?>
+
     <div class="body-admin">
         <div class="container">
             <div class="row">
@@ -20,7 +34,9 @@ $this->title = 'Pharmacy Inventory System';
                     <div class="admin-container">
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">View Users</h1>
-                            <span style="margin-bottom: 20px;"><?= Html::a('Add Users', ['/site/adduser'], ['class' => 'btn btn-success'])?></span>
+                            <span style="margin-bottom: 20px;">
+                                <?= Html::button('Add User', ['value' => Url::to(['/site/adduser']), 'class' => 'btn btn-success', 'id' => 'modalButton'])?>
+                            </span>
                         </div>
 
                         <div class="row" style="margin-top: 30px;">

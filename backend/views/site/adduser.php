@@ -7,22 +7,11 @@ use borales\extensions\phoneInput\PhoneInput;
 $this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-admin">
-    <?php if(Yii::$app->session->hasFlash('message')): ?>
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo Yii::$app->session->getFlash('message');?>
-        </div>
-    <?php endif;?>
-
     <div class="body-admin">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="admin-container">
-                        <div class="row">
-                            <h1 style="margin-bottom: 10px;">Add Users</h1>
-                        </div>
-
+                <div class="col-md-8" style="background-color: transparent;">
+                    <div class="admin-container" style="padding-left: 7%;">
                         <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-5">
                             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>

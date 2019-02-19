@@ -9,6 +9,7 @@ use common\models\LoginForm;
 use backend\models\SignupForm;
 use backend\models\AdduserForm;
 use common\models\User;
+use common\models\Withdrawals;
 use yii\data\Pagination;
 /**
  * Site controller
@@ -29,7 +30,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'viewadmin','adduser'],
+                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -63,7 +64,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            return $this->render('index');
+        } else {
+            return $this->redirect('dashboard');
+        }
     }
 
     public function actionViewadmin() {
@@ -82,6 +87,23 @@ class SiteController extends Controller
 
     }
 
+    public function actionDashboard() {
+        return $this->render('dashboard');
+    }
+
+    public function actionWithdrawals() {
+        $query = Withdrawals::find();
+        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
+        $withdrawals = $query->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+
+        return $this->render('withdrawals', [
+           'withdrawals' => $withdrawals,
+           'pages' => $pages,
+       ]);
+    }
+
     public function actionAdduser() {
         $model = new AdduserForm();
         if ($model->load(Yii::$app->request->post())) {
@@ -94,7 +116,7 @@ class SiteController extends Controller
             }
         }
         
-        return $this->render('adduser', ['model' => $model]);
+        return $this->renderAjax('adduser', ['model' => $model]);
     }
 
     /**
