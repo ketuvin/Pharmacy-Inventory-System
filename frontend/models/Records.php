@@ -14,9 +14,13 @@
 		public function rules() {
 
 			return[
-				[['Category', 'Name', 'Manufacturer', 'Quantity', 'Unit_price','Unit'], 'required'],
-				['Name', 'unique','targetClass' => '\app\models\Records', 'message' => 'This product already exist.']
-
+				['Category', 'required'],
+				['Name', 'required'],
+				['Name', 'unique', 'targetClass' => '\app\models\Records', 'message' => 'This product already exist.'],
+				['Manufacturer', 'required'],
+				['Quantity', 'required'],
+				['Unit_price', 'required'],
+				['Unit', 'required'],
 			];
 		}
 
@@ -30,6 +34,10 @@
             	'ID' => 'Product',
             	'Unit_price' => 'Unit Price'
         	];
+    	}
+
+    	public function removeRestock() {
+    		$this->Re_stock = 0;
     	} 
 	}
 ?>

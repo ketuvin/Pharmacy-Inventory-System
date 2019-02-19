@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -9,6 +10,7 @@ $this->title = 'Pharmacy Inventory System';
    
     <div class="body-view">
             <ul class="list-group" style="width: 50%;">
+            <?php Pjax::begin(); ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CATEGORY: </strong></span><i><?php echo $record->Category;?></i>
             </li>
@@ -30,6 +32,7 @@ $this->title = 'Pharmacy Inventory System';
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>UNIT: </strong></span><i><?php echo $record->Unit;?></i>
             </li>
+            <?php Pjax::end(); ?>
         </ul>
 
     </div>

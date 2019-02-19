@@ -9,18 +9,17 @@ use miloschuman\highcharts\Highcharts;
 $this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-dashboard">
-    <?php if(Yii::$app->session->hasFlash('message')): ?>
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo Yii::$app->session->getFlash('message');?>
-        </div>
-    <?php endif;?>
-
     <div class="body-dashboard">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="dash-container">
+                        <?php if(Yii::$app->session->hasFlash('message')): ?>
+                            <div class="alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('message');?>
+                            </div>
+                        <?php endif;?>
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Overview</h1>
                         </div>

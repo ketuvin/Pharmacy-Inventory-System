@@ -96,7 +96,64 @@ AppAsset::register($this);
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= Alert::widget() ?>
-            
+
+            <div class="col-md-4" style="padding-left:80px; width:25%;">
+                <?php 
+                    echo SideNav::widget([
+                        'type' => SideNav::TYPE_DEFAULT,
+                        'heading' => '<i class="glyphicon glyphicon-cog"></i> Main Navigation',
+                        'items' => [
+                            [
+                                'url' => ['/pharmacy/dashboard'],
+                                'label' => 'Overview',
+                                'icon' => 'dashboard'
+                            ],
+                            [
+                                'url' => ['/pharmacy/home'],
+                                'label' => 'Medicines',
+                                'icon' => 'list-alt'
+                            ],
+                            [
+                                'url' => ['/pharmacy/deposit'],
+                                'label' => 'Deposit',
+                                'icon' => 'plus-sign'
+                            ],
+                            [
+                                'url' => ['/pharmacy/withdrawals'],
+                                'label' => 'Withdraw',
+                                'icon' => 'minus-sign'
+                            ],
+                            [
+                                'url' => ['/pharmacy/category'],
+                                'label' => 'Category',
+                                'icon' => 'tags'
+                            ],
+                            [
+                                'url' => ['/pharmacy/unit'],
+                                'label' => 'Unit',
+                                'icon' => 'scale'
+                            ],
+                            [
+                                'label' => 'User Management',
+                                'icon' => 'user',
+                                'items' => [
+                                    [
+                                        'label' => 'Change Password',
+                                        'icon' => 'edit', 
+                                        'url' => ['/user/changepassword']
+                                    ],
+                                    [
+                                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                        'icon'=> 'log-out',
+                                        'url' => Url::to(['/site/logout']), 
+                                        'template' => '<a href="{url}" data-method="post">{icon}{label}</a>'
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ]);
+                ?>
+            </div>
             <?= $content ?>
         </div>
     </div>

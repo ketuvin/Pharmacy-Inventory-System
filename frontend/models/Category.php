@@ -4,13 +4,13 @@
 
 	class Category extends ActiveRecord {
 
-		private $Name;
+		private $Category;
 		private $Description;
 
 		public function rules() {
 
 			return [
-            	[['Name','Description'], 'required']
+            	[['Category','Description'], 'required'],
         	];
 		}
 

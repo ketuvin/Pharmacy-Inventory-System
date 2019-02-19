@@ -4,23 +4,23 @@ use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-withdrawals">
-    <?php if(Yii::$app->session->hasFlash('message')): ?>
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo Yii::$app->session->getFlash('message');?>
-        </div>
-    <?php endif;?>
-
     <div class="body-withdrawals">
         <div class="container">
             <div class="row" id="medicine-home">
                 <div class="col-md-8">
                     <div class="withdrawals-container">
+                        <?php if(Yii::$app->session->hasFlash('message')): ?>
+                            <div class="alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('message');?>
+                            </div>
+                        <?php endif;?>
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Withdrawals</h1>
                             <span><?= Html::button('Withdraw', ['value' => Url::to(['/pharmacy/withdrawproduct']), 'class' => 'btn btn-success', 'id' => 'modalButtonWithdraw'])?></span>
@@ -36,7 +36,7 @@ $this->title = 'Pharmacy Inventory System';
                                 Modal::end();
                             ?>
                         </div>
-
+                        <?php Pjax::begin(); ?>
                         <div class="row" style="margin-top: 30px;">
                             <table class="table table-hover">
                               <thead>
@@ -50,7 +50,7 @@ $this->title = 'Pharmacy Inventory System';
                                 <?php if(count($withdrawals) > 0): ?>
                                         <?php foreach($withdrawals as $withdraw): ?>
                                         <tr class="table-active">
-                                            <th scope="row"><?php echo $withdraw->Pull_outNo; ?></th>
+                                            <th scope="row">PN.000<?php echo $withdraw->Pull_outNo; ?></th>
                                             <td><?php echo $withdraw->Remarks; ?></td>
                                             <td><?php echo $withdraw->Created_Date; ?></td>
                                         </tr>
@@ -66,7 +66,7 @@ $this->title = 'Pharmacy Inventory System';
                                 <?php echo LinkPager::widget(['pagination' => $pages,]);?>
                             </div>
                         </div>
-
+                        <?php Pjax::end(); ?>
                     </div>
                 </div>
             </div>

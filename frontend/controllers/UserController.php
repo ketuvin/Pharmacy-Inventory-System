@@ -59,6 +59,7 @@ class UserController extends Controller
      * @return mixed
      */
     public function actionChangepassword() {
+        $this->layout = 'loggedin';
         //set up user and load post data
         $user = Yii::$app->user->identity;
         $loadPost = $user->load(Yii::$app->request->post());

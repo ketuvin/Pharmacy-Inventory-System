@@ -9,18 +9,17 @@ use yii\helpers\Url;
 $this->title = 'Pharmacy Inventory System';
 ?>
 <div class="pharmacy-changePassword">
-    <?php if(Yii::$app->session->hasFlash('message')): ?>
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo Yii::$app->session->getFlash('message');?>
-        </div>
-    <?php endif;?>
-
     <div class="body-changePassword">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="changePassword-container">
+                        <?php if(Yii::$app->session->hasFlash('message')): ?>
+                            <div class="alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('message');?>
+                            </div>
+                        <?php endif;?>
                         <div class="row">
                             <h1 style="margin-bottom: 10px;">Change Password</h1>
                         </div>

@@ -9,7 +9,7 @@ $this->title = 'Pharmacy Inventory System';
    
     <div class="body-update">
         <?php
-            $form = ActiveForm::begin(); 
+            $form = ActiveForm::begin(['id' => 'update-form']); 
         ?>
          <div class="row">
             <div class="form-group">

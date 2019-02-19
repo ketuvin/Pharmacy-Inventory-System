@@ -7,6 +7,7 @@
 		private $Pull_outNo;
 		private $Remarks;
 		private $Created_Date;
+		private $Product_name;
 
 		public function rules() {
 

@@ -10,14 +10,13 @@ use yii\helpers\Url;
 
 $this->title = 'Pharmacy Inventory System';
 ?>
+<?php if(Yii::$app->session->hasFlash('message')): ?>
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <?php echo Yii::$app->session->getFlash('message');?>
+    </div>
+<?php endif;?>
 <div class="pharmacy-unit">
-    <?php if(Yii::$app->session->hasFlash('message')): ?>
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo Yii::$app->session->getFlash('message');?>
-        </div>
-    <?php endif;?>
-
     <div class="body-unit">
         <div class="container">
             <div class="row">

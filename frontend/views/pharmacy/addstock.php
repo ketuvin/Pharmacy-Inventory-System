@@ -22,7 +22,7 @@ $this->title = 'Pharmacy Inventory System';
          <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <?= $form->field($record, 'Quantity');?>
+                    <?= $form->field($record, 'Re_stock');?>
                 </div>
             </div>
         </div>
