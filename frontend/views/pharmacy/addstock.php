@@ -16,6 +16,8 @@ $this->title = 'Pharmacy Inventory System';
 
                 <?= $form ->field($record, 'Name');?>
 
+                <?= $form ->field($record, 'Quantity')->textInput()->label('Stock Available');?>
+
                 <?= $form->field($record, 'Re_stock');?>
 
                 <div class="form-group">

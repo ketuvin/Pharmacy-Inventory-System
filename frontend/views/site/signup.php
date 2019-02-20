@@ -37,9 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'gender')->radio(['label' => 'Male', 'value' => 'Male', 'unchecked' => null]) ?>
                 <?= $form->field($model, 'gender')->radio(['label' => 'Female', 'value' => 'Female', 'unchecked' => null]) ?>
 
-                <?php $items = ['Filipino' => 'Filipino', 'Chinese' => 'Chinese', 'American' => 'American']; ?>
-                <?= $form->field($model, 'nationality')->dropDownList($items,['prompt'=>'Select']); ?>
-
                  <?= $form->field($model, 'address')->textarea(['rows'=>'6']); ?>
 
 

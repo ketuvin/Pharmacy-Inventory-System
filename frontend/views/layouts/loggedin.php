@@ -95,7 +95,6 @@ AppAsset::register($this);
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
-            <?= Alert::widget() ?>
 
             <div class="col-md-4" style="padding-left:80px; width:25%;">
                 <?php 

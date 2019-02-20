@@ -14,7 +14,7 @@ $this->title = 'Pharmacy Inventory System';
                     <div class="admin-container" style="padding-left: 7%;">
                         <div class="row" style="margin-top: 30px;">
                          <div class="col-lg-5">
-                            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+                            <?php $form = ActiveForm::begin(['id' => 'form-adduser']); ?>
 
                             <?= $form->field($model, 'fullname')->textInput(['autofocus' => true]) ?>
 
@@ -28,9 +28,6 @@ $this->title = 'Pharmacy Inventory System';
                             <?= '<label class="control-label">Gender</label>' ?>
                             <?= $form->field($model, 'gender')->radio(['label' => 'Male', 'value' => 'Male', 'unchecked' => null]) ?>
                             <?= $form->field($model, 'gender')->radio(['label' => 'Female', 'value' => 'Female', 'unchecked' => null]) ?>
-
-                            <?php $items = ['Filipino' => 'Filipino', 'Chinese' => 'Chinese', 'American' => 'American']; ?>
-                            <?= $form->field($model, 'nationality')->dropDownList($items,['prompt'=>'Select']); ?>
 
                             <?= $form->field($model, 'address')->textarea(['rows'=>'6']); ?>
 

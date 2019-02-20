@@ -5,6 +5,7 @@ use kartik\sidenav\SideNav;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
+use yii\grid\GridView;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -19,6 +20,18 @@ $this->title = 'Pharmacy Inventory System';
                             <div class="alert alert-dismissible alert-success">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <?php echo Yii::$app->session->getFlash('message');?>
+                            </div>
+                        <?php endif;?>
+                        <?php if(Yii::$app->session->hasFlash('success')): ?>
+                            <div class="alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('success');?>
+                            </div>
+                        <?php endif;?>
+                        <?php if(Yii::$app->session->hasFlash('error')): ?>
+                            <div class="alert alert-dismissible alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('error');?>
                             </div>
                         <?php endif;?>
                         <div class="row">
@@ -36,51 +49,40 @@ $this->title = 'Pharmacy Inventory System';
                                 Modal::end();
                             ?>
                         </div>
-                        <?php Pjax::begin(); ?>
                         <div class="row" style="margin-top: 30px;">
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                    <th scope="col">Pull-out No.</th>
-                                    <th scope="col">Remarks</th>
-                                    <th scope="col">Created Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if(count($withdrawals) > 0): ?>
-                                        <?php foreach($withdrawals as $withdraw): ?>
-                                        <tr class="table-active">
-                                            <th scope="row">PN.000<?php echo $withdraw->Pull_outNo; ?></th>
-                                            <td><?php echo $withdraw->Remarks; ?></td>
-                                            <td><?php echo $withdraw->Created_Date; ?></td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td>No Records Found!</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table> 
-                            <div style="text-align: center;">
-                                <?php echo LinkPager::widget(['pagination' => $pages,]);?>
-                            </div>
-                        </div>
+                           <?php
+                                Modal::begin([
+                                    'header' => '<h3 style="text-align:center;">WITHDRAW DETAILS</h3>',
+                                    'id' => 'modalView',
+                                    'size' => 'modal-lg',
+                                ]);
+
+                                echo "<div id='viewContent'></div>";
+
+                                Modal::end();
+                            ?>
+                        <?php Pjax::begin(); ?>
+                            <?= GridView::widget([
+                                'dataProvider' => $dataProvider,
+                                'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
+                                'columns' => [
+                                    [
+                                        'attribute' => 'Pull_outNo',
+                                        'format' => 'raw',
+                                        'value' => function ($model) {
+                                            return Html::a($model->Pull_outNo, ['/pharmacy/viewwithdraw', 'Pull_outNo' => $model->Pull_outNo], ['class' => 'modalButtonView']);
+                                         }
+                                    ],
+                                    'Remarks:ntext',
+                                    'Product_name',
+                                    'Created_Date',
+                                ],
+                            ]); ?>
                         <?php Pjax::end(); ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- <script type="text/javascript">
-        $(function() {
-            var href = window.location.href;
-            $('div a').each(function(e,i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script> -->
 </div>

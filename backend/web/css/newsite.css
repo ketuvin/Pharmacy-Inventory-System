@@ -163,15 +163,14 @@ body {
 }
 .pharmacy-view {
     color: #fff;
-    background-color: rgb(0, 18, 26,.8);
-    padding-top: 2%;
-    padding-bottom: 5%;
     padding-right: 5%;
-    padding-left: 5%;
+    padding-right: 7%;
+    width: 200%;
 }
 .body-view {
-    color: #fff;
-    padding-top: 2%;
+    color: #000;
+    padding-right: 5%;
+    padding-left: 3%;
 }
 .pharmacy-update {
     color: #fff;

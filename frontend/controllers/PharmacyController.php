@@ -76,13 +76,18 @@ class PharmacyController extends Controller
 
     }
 
+    public function actionViewwithdraw($Pull_outNo) {
+        $model = Withdrawals::findOne($Pull_outNo);
+
+        return $this->renderAjax('viewwithdraw', ['model' => $model]);
+    }
+
     public function actionDashboard() {
         $this->layout = 'loggedin';
         return $this->render('dashboard');
     }
 
     public function actionAddproduct() {
-        $this->layout = 'loggedin';
         $record = new Records();
         $record1 = new Category();
         $record2 = new Units();
@@ -101,7 +106,7 @@ class PharmacyController extends Controller
                 return $this->redirect(['home']);
             }
             else{
-                Yii::$app->getSession()->setFlash('message','Failed to add product.');
+                Yii::$app->getSession()->setFlash('error','Failed to add product.');
                 return $this->redirect(['home']);
             }
         }
@@ -113,7 +118,6 @@ class PharmacyController extends Controller
     }
 
     public function actionView($ID, $Category) {
-        $this->layout = 'loggedin';
         $record = Records::findOne($ID);
         $record1 = Category::findOne(['Category' => $Category]);
         return $this->renderAjax('view', [
@@ -123,7 +127,6 @@ class PharmacyController extends Controller
     }
 
     public function actionUpdate($ID) {
-        $this->layout = 'loggedin';
         $record = Records::findOne($ID);
         $formData = Yii::$app->request->post();
         if(($record->load($formData) && $record->save())) {
@@ -138,7 +141,6 @@ class PharmacyController extends Controller
     }
 
     public function actionAddstock($ID) {
-        $this->layout = 'loggedin';
         $record = Records::findOne($ID);
         if($record->load(Yii::$app->request->post())){
             $restock = Yii::$app->request->post('Records')['Re_stock'];
@@ -146,18 +148,17 @@ class PharmacyController extends Controller
             $record->Quantity = $stock + $restock;
             $record->removeRestock();
             if ($record -> save()) {
-                Yii::$app->getSession()->setFlash('message','Added Stock Successfully');
+                Yii::$app->getSession()->setFlash('success','Added Stock Successfully');
                 return $this->redirect(['home']);
             }
             else{
-                Yii::$app->getSession()->setFlash('message','Failed to add stock.');
+                Yii::$app->getSession()->setFlash('error','Failed to add stock.');
             }
         }
         return $this->renderAjax('addstock',['record' => $record]);
     }
 
     public function actionAddunit() {
-        $this->layout = 'loggedin';
         $unit = new Units();
         $formData = Yii::$app->request->post();
         if($unit->load($formData)){
@@ -166,7 +167,7 @@ class PharmacyController extends Controller
                 return $this->redirect(['unit']);
             }
             else{
-                Yii::$app->getSession()->setFlash('message','Failed to add unit.');
+                Yii::$app->getSession()->setFlash('error','Failed to add unit.');
                 return $this->redirect(['unit']);
             }
         }
@@ -190,7 +191,6 @@ class PharmacyController extends Controller
     }
 
     public function actionEdit($categID) {
-        $this->layout = 'loggedin';
         $category = Category::findOne($categID);
         $formData = Yii::$app->request->post();
         if(($category->load($formData) && $category->save())) {
@@ -220,20 +220,17 @@ class PharmacyController extends Controller
 
     public function actionWithdrawals() {
         $this->layout = 'loggedin';
-        $query = Withdrawals::find();
-        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
-        $withdrawals = $query->offset($pages->offset)
-        ->limit($pages->limit)
-        ->all();
+        $model = new Withdrawals();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+
+        $dataProvider->pagination->pageSize = 5;
 
         return $this->render('withdrawals', [
-           'withdrawals' => $withdrawals,
-           'pages' => $pages,
+           'dataProvider' => $dataProvider,
        ]);
     }
 
     public function actionWithdrawproduct() {
-        $this->layout = 'loggedin';
         $record = new Records();
         $record1 = new Withdrawals();
         $formData = Yii::$app->request->post();
@@ -244,25 +241,37 @@ class PharmacyController extends Controller
             $record = Records::findOne(['ID' => $postGetValue]);
 
             $record1->Product_name = $record->Name;
-            date_default_timezone_set("Asia/Singapore");
+            date_default_timezone_set("Asia/Manila");
             $record1->Created_Date = date('M d, Y h:i:s A');
-            $record1->withdrawby_user = Yii::$app->user->identity->fullname . '(' . Yii::$app->user->identity->username . ')';
+            $record1->withdrawby_user = Yii::$app->user->identity->fullname . ' (' . Yii::$app->user->identity->username . ')';
+
+            $withdraw = Withdrawals::find()->orderBy(['Pull_outNo' => SORT_DESC])->one();
+
+            if($withdraw == null){
+                $record1->Pull_outNo = 'PN.00001';
+            } else {
+                // for ($n=0; $n<1; $n++) {
+                    $ID = $withdraw->Pull_outNo;
+                    $record1->Pull_outNo = ++$ID;
+                // }
+            }
 
             if($record->Quantity >= $restock) {
                 $stock = $record->Quantity;
                 $record->Quantity = $stock - $restock;
+                $record1->stock_withdrawn = $restock;
                 $record->removeRestock();
 
                 if($record->save() && $record1->save()){
-                    Yii::$app->getSession()->setFlash('message','Withdraw Stock Successfully');
+                    Yii::$app->getSession()->setFlash('success','Withdraw Stock Successfully');
                     return $this->redirect(['withdrawals']);
                 }
                 else{
-                    Yii::$app->getSession()->setFlash('message','Failed to withdraw stock.');
+                    Yii::$app->getSession()->setFlash('error','Failed to withdraw stock.');
                     return $this->redirect(['withdrawals']);
                 }
             } else {
-                Yii::$app->getSession()->setFlash('message','Cannot withdraw stock. Withdraw exceeded the available stock.');
+                Yii::$app->getSession()->setFlash('error','Cannot withdraw stock. Withdraw exceeded the available stock.');
                 return $this->redirect(['withdrawals']);
             }
             

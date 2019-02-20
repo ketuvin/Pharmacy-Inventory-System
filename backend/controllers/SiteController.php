@@ -30,7 +30,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals'],
+                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals','view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -92,22 +92,24 @@ class SiteController extends Controller
     }
 
     public function actionWithdrawals() {
-        $query = Withdrawals::find();
-        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
-        $withdrawals = $query->offset($pages->offset)
-        ->limit($pages->limit)
-        ->all();
+        $model = new Withdrawals();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
 
         return $this->render('withdrawals', [
-           'withdrawals' => $withdrawals,
-           'pages' => $pages,
+           'dataProvider' => $dataProvider,
        ]);
+    }
+
+    public function actionView($Pull_outNo) {
+        $model = Withdrawals::findOne($Pull_outNo);
+
+        return $this->renderAjax('view', ['model' => $model]);
     }
 
     public function actionAdduser() {
         $model = new AdduserForm();
         if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup() && $model->sendEmail()) {
+            if ($model->signup() && $model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'User Added Successfully. Confirmation link sent via email.');
                 return $this->redirect(['viewadmin']);
             }
