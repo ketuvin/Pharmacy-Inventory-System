@@ -27,7 +27,7 @@ $(function(){
 		e.preventDefault();
 		$('#modalStock').modal('show')
 			.find('#addStock')
-			.load($(this).attr('value'));
+			.load($(this).attr('href'));
 	});
 });
 
@@ -45,7 +45,7 @@ $(function(){
 		e.preventDefault();
 		$('#modalViewProduct').modal('show')
 			.find('#viewProduct')
-			.load($(this).attr('value'));
+			.load($(this).attr('href'));
 	});
 });
 
@@ -54,7 +54,7 @@ $(function(){
 		e.preventDefault();
 		$('#modalUpdateProduct').modal('show')
 			.find('#updateProduct')
-			.load($(this).attr('value'));
+			.load($(this).attr('href'));
 	});
 });
 

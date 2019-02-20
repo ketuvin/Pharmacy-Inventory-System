@@ -61,17 +61,13 @@ class PharmacyController extends Controller
 
     public function actionHome() {
         $this->layout = 'loggedin';
-        $query = Records::find();
-        $query2 = Category::find();
-        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 5]);
-        $records = $query->offset($pages->offset)
-        ->limit($pages->limit)
-        ->all();
-        $category = $query2->all();
+        $model = new Records();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+
+        $dataProvider->pagination->pageSize = 5;
+
         return $this->render('home', [
-           'records' => $records,
-           'pages' => $pages,
-           'category' => $category,
+           'dataProvider' => $dataProvider,
        ]);
 
     }

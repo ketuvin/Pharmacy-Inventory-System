@@ -1,11 +1,11 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
 use kartik\sidenav\SideNav;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use kartik\icons\Icon;
 use yii\widgets\Pjax;
+use yii\grid\GridView;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -87,53 +87,38 @@ $this->title = 'Pharmacy Inventory System';
                             ?>
 
                         </div>
-                        <?php Pjax::begin(); ?>
                         <div class="row" style="margin-top: 30px;">
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                    <th scope="col" style="width: 10%;">Category</th>
-                                    <th scope="col" style="width: 40%;">Category Description</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Manufacturer</th>
-                                    <th scope="col" style="width: 11%;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if(count($records) > 0): ?>
-                                        <?php foreach($records as $record): ?>
-                                        <tr class="table-active">
-                                            <th scope="row"><?php echo $record->Category; ?></th>
-                                            <td>
-                                            <?php 
-                                            foreach($category as $categ):
-                                                if($record->Category==$categ->Category){
-                                                    echo $categ->Description;
-                                                }
-                                            endforeach;   
-                                            ?>
-                                            </td>
-                                            <td><?php echo $record->Name; ?></td>
-                                            <td><?php echo $record->Manufacturer; ?></td>
-                                            <td>
-                                                <span><?= Html::button(Icon::show('eye-open'), ['value' => Url::to(['pharmacy/view', 'ID' => $record->ID, 'Category' => $record->Category]), 'class' => 'label label-primary modalButtonViewProduct']) ?></span>
-                                                <span><?= Html::button(Icon::show('edit'), ['value' => Url::to(['pharmacy/update', 'ID' => $record->ID]), 'class' => 'label label-default modalButtonUpdateProduct']) ?></span>
-                                                <span><?= Html::button(Icon::show('plus'), ['value' => Url::to(['pharmacy/addstock', 'ID' => $record->ID]), 'class' => 'label label-success modalButtonStock']) ?></span>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td>No Records Found!</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>           
-                            <div style="text-align: center;">
-                                <?php echo LinkPager::widget(['pagination' => $pages,]);?>
-                            </div>
+                            <?php Pjax::begin(); ?>
+                            <?= GridView::widget([
+                                'dataProvider' => $dataProvider,
+                                'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
+                                'columns' => [
+                                    'Category',
+                                    'Name',
+                                    'Manufacturer',
+                                    'Unit_price',
+                                    [
+                                        'class' => 'yii\grid\ActionColumn',
+                                        'contentOptions' => ['style' => 'text-align:center;'],
+                                        'headerOptions' => ['style' => 'text-align:center;'],
+                                        'template' => '{view} {update} {addstock}',
+                                        'header' => 'Actions',
+                                        'buttons' => [
+                                        'view' => function ($url,$model) {
+                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/pharmacy/view', 'ID' => $model->ID, 'Category' => $model->Category], ['class' => 'modalButtonViewProduct']);
+                                            },
+                                        'update' => function ($url, $model) {
+                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/pharmacy/update', 'ID' => $model->ID], ['class' => 'modalButtonUpdateProduct']);
+                                            },
+                                        'addstock' => function ($url, $model) {
+                                            return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['/pharmacy/addstock', 'ID' => $model->ID], ['class' => 'modalButtonStock']);
+                                            },
+                                        ],
+                                    ],
+                                ],
+                            ]); ?>
+                            <?php Pjax::end(); ?>
                         </div>
-                        <?php Pjax::end(); ?>
                     </div>
                 </div>
             </div>
