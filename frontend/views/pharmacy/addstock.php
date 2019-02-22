@@ -14,18 +14,15 @@ $this->title = 'Pharmacy Inventory System';
                     $form = ActiveForm::begin(['id' => 'addstock-form']); 
                 ?>
 
-                <?= $form ->field($record, 'Name');?>
+                <?= $form ->field($record, 'name');?>
 
-                <?= $form ->field($record, 'Quantity')->textInput()->label('Stock Available');?>
+                <?= $form ->field($record, 'quantity')->textInput(['readonly' => true])->label('Stock Available');?>
 
-                <?= $form->field($record, 'Re_stock');?>
+                <?= $form->field($record, 're_stock');?>
 
                 <div class="form-group">
                     <div class="col-lg-2">
                         <span><?= Html::submitbutton('Add Stock', ['class'=>'btn btn-primary']);?></span>
-                    </div>
-                    <div class="col-lg-2" style="padding-left: 20px;">
-                        <span><?= Html::a('Cancel', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>
                 <?php ActiveForm::end(); ?>

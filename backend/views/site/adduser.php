@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use borales\extensions\phoneInput\PhoneInput;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -22,9 +21,6 @@ $this->title = 'Pharmacy Inventory System';
 
                             <?= $form->field($model, 'email') ?>
 
-                            <?= $form->field($model, 'mobile')->widget(PhoneInput::className(), 
-                            ['jsOptions' => ['preferredCountries' => ['ph', 'us', 'sg'],]]); ?>
-
                             <?= '<label class="control-label">Gender</label>' ?>
                             <?= $form->field($model, 'gender')->radio(['label' => 'Male', 'value' => 'Male', 'unchecked' => null]) ?>
                             <?= $form->field($model, 'gender')->radio(['label' => 'Female', 'value' => 'Female', 'unchecked' => null]) ?>
@@ -33,7 +29,6 @@ $this->title = 'Pharmacy Inventory System';
 
                             <div class="form-group">
                                 <?= Html::submitButton('Add User', ['class' => 'btn btn-primary', 'name' => 'signup-button'])?>
-                                <span style="padding-left: 20px;"><?= Html::a('Cancel', ['/site/viewadmin'], ['class' => 'btn btn-primary'])?></span>
                             </div>
                             <?php ActiveForm::end(); ?>
                         </div>

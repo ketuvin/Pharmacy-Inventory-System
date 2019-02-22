@@ -1,30 +1,18 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-use kartik\sidenav\SideNav;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
 ?>
-<div class="pharmacy-home">
-    <div class="body-home">
+<div class="pharmacy-unit">
+    <div class="body-unit">
         <div class="container">
             <div class="row" id="medicine-home">
-                    <?php
-                        Modal::begin([
-                            'header' => '<h3 style="text-align:center;">EDIT CATEGORY</h3>',
-                            'id' => 'modalCategory',
-                            'size' => 'modal-md',
-                        ]);
-
-                        echo "<div id='editCategory'></div>";
-
-                        Modal::end();
-                    ?>
                 <div class="col-md-8">
-                    <div class="home-container">
+                    <div class="unit-container">
                         <?php if(Yii::$app->session->hasFlash('message')): ?>
                             <div class="alert alert-dismissible alert-success">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -44,27 +32,33 @@ $this->title = 'Pharmacy Inventory System';
                             </div>
                         <?php endif;?>
                         <div class="row">
-                            <h1 style="margin-bottom: 10px;">Category</h1>
+                            <h1 style="margin-bottom: 10px;">Units</h1>
+                            <span style="margin-bottom: 20px;"><?= Html::button('Add Unit', ['value' => Url::to(['/unit/addunit']), 'class' => 'btn btn-success', 'id' => 'modalButtonUnit'])?></span>
+                            <?php
+                                Modal::begin([
+                                    'header' => '<h3 style="text-align:center;">ADD UNIT</h3>',
+                                    'id' => 'modalUnit',
+                                    'size' => 'modal-md',
+                                ]);
+
+                                echo "<div id='addUnit'></div>";
+                                
+                                Modal::end();
+                            ?>
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
                             <table class="table table-hover">
                               <thead>
                                 <tr>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Description</th>
-                                   <th scope="col">Action</th>
+                                    <th scope="col">Unit Name</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if(count($category) > 0): ?>
-                                        <?php foreach($category as $categ): ?>
+                                <?php if(count($units) > 0): ?>
+                                        <?php foreach($units as $unit): ?>
                                         <tr class="table-active">
-                                            <th scope="row"><?php echo $categ->Category; ?></th>
-                                            <td><?php echo $categ->Description; ?></td>
-                                            <td>
-                                                <span><?= Html::button('Edit', ['value' => Url::to(['pharmacy/edit', 'categID' => $categ->categID]), 'class' => 'label label-primary modalButtonCategory']) ?></span>
-                                            </td>
+                                            <th scope="row"><?php echo $unit->unit_name; ?></th>
                                         </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>

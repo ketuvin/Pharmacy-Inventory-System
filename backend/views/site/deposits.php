@@ -13,22 +13,22 @@ $this->title = 'Pharmacy Inventory System';
         <div class="container">
             <div class="row" id="medicine-home">
                 <div class="col-md-8">
-                    <div class="withdrawals-container">
+                    <div class="deposits-container">
                         <div class="row">
-                            <h1>Withdrawals</h1>
+                            <h1>Deposits</h1>
 
-                            <h4 style="color:red">List of all the withdrawal transactions.</h4>
+                            <h4 style="color:red">List of all the deposit transactions.</h4>
                         </div>
                         <div class="row">
                         <?php Pjax::begin(); ?>
                         <?php
                             Modal::begin([
-                                'header' => '<h3 style="text-align:center;">WITHDRAW DETAILS</h3>',
-                                'id' => 'modalView',
+                                'header' => '<h3 style="text-align:center;">DEPOSIT DETAILS</h3>',
+                                'id' => 'modalViewDeposit',
                                 'size' => 'modal-lg',
                             ]);
 
-                            echo "<div id='viewContent'></div>";
+                            echo "<div id='viewContentDeposit'></div>";
 
                             Modal::end();
                         ?>
@@ -37,13 +37,12 @@ $this->title = 'Pharmacy Inventory System';
                             'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
                             'columns' => [
                                 [
-                                    'attribute' => 'pull_outno',
+                                    'attribute' => 'depositno',
                                     'format' => 'raw',
                                     'value' => function ($model) {
-                                        return Html::a($model->pull_outno, ['/site/view', 'pull_outno' => $model->pull_outno], ['class' => 'modalButtonView']);
+                                        return Html::a($model->depositno, ['/site/viewdeposits', 'depositno' => $model->depositno], ['class' => 'modalButtonViewDeposit']);
                                      }
                                 ],
-                                'remarks:ntext',
                                 'product_name',
                                 'created_date',
                             ],

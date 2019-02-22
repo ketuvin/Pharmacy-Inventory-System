@@ -4,33 +4,34 @@ use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
 use Yii;
 
-class Withdrawals extends ActiveRecord {
+class Deposits extends ActiveRecord {
 
 	public function rules() {
 
 		return [
-			[['remarks'], 'required']
 		];
 	}
 
 	public static function tableName() {
-		return '{{%withdrawals}}';
+		return '{{%deposits}}';
 	}
 
 	public function attributeLabels() {
 
 		return [
-			'pull_outno' => 'Pull-out No.',
+			'depositno' => 'Deposit No.',
 			'created_date' => 'Created Date',
-			'withdrawby_user' => 'Withdrawn By',
-			'stock_withdrawn' => 'Amount of Stock Withdrawn'
+			'depositedby_user' => 'Deposited By',
+			'stock_deposited' => 'Amount of Stock Deposited',
+			'product_name' => 'Product Name',
+			'current_stock' => 'Current Stock'
 		];
 	}
 
 	public function search($params)
 	{
 		if (Yii::$app->user->identity->role == 20) {
-			$query = Withdrawals::find();
+			$query = Deposits::find();
 
 			// add conditions that should always apply here
 
@@ -50,7 +51,7 @@ class Withdrawals extends ActiveRecord {
 
 		} else {
 			$user = Yii::$app->user->identity->fullname . ' (' . Yii::$app->user->identity->username . ')';
-			$query = Withdrawals::find()->where(['withdrawby_user' => $user]);
+			$query = Deposits::find()->where(['depositedby_user' => $user]);
 
 			// add conditions that should always apply here
 

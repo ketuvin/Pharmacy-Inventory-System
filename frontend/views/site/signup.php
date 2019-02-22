@@ -6,7 +6,6 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use borales\extensions\phoneInput\PhoneInput;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,9 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <?= $form->field($model, 'password_repeat')->passwordInput() ?>
-
-                <?= $form->field($model, 'mobile')->widget(PhoneInput::className(), 
-                ['jsOptions' => ['preferredCountries' => ['ph', 'us', 'sg'],]]); ?>
 
                 <?= '<label class="control-label">Gender</label>' ?>
                 <?= $form->field($model, 'gender')->radio(['label' => 'Male', 'value' => 'Male', 'unchecked' => null]) ?>

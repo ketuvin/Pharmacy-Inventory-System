@@ -1,10 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use yii\widgets\LinkPager;
-use kartik\sidenav\SideNav;
 use yii\widgets\ActiveForm;
-use app\models\Records;
+use frontend\models\Records;
 use yii\helpers\Url;
 /* @var $this yii\web\View */
 
@@ -28,14 +26,11 @@ $this->title = 'Pharmacy Inventory System';
                                     $form = ActiveForm::begin(['id' => 'addunit-form']); 
                                 ?>
 
-                                <?= $form ->field($unit, 'Unit_name'); ?>
+                                <?= $form ->field($unit, 'unit_name')->textInput(['autofocus' => true]); ?>
 
                                 <div class="form-group">
                                     <div class="col-lg-2">
                                         <span><?= Html::submitbutton('Add Unit', ['class'=>'btn btn-primary']);?></span>
-                                    </div>
-                                    <div class="col-lg-2" style="padding-left: 10px;">
-                                        <span><?= Html::a('Cancel', ['/pharmacy/unit'], ['class' => 'btn btn-primary'])?></span>
                                     </div>
                                 </div>
                                 

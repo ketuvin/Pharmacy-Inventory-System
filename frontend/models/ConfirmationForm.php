@@ -12,7 +12,7 @@ class ConfirmationForm extends Model
 {
     public $password;
     public $password_repeat;
-
+    
     /**
      * @var \common\models\User
      */

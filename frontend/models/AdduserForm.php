@@ -3,23 +3,19 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
-use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
-    public $fullname;
-    public $username;
-    public $email;
-    public $password;
-    public $password_repeat;
-    public $mobile;
-    public $gender;
-    public $nationality;
-    public $address;
-
+    private $fullname;
+    private $username;
+    private $password;
+    private $password_repeat;
+    private $email;
+    private $gender;
+    private $address;
     /**
      * {@inheritdoc}
      */
@@ -38,12 +34,7 @@ class SignupForm extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
-            ['mobile', 'string'],
-            [['mobile'], PhoneInputValidator::className()],
-            ['mobile', 'required'],
             ['gender', 'required'],
-            ['nationality', 'required'],
             ['address', 'required'],
         ];
     }
@@ -71,9 +62,7 @@ class SignupForm extends Model
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
-        $user->mobile = $this->mobile;
         $user->gender = $this->gender;
-        $user->nationality = $this->nationality;
         $user->address = $this->address;
         $user->generateAuthKey();
         

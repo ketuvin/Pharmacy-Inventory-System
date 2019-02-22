@@ -1,9 +1,11 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
-use kartik\sidenav\SideNav;
 use yii\helpers\Url;
 use miloschuman\highcharts\Highcharts;
+use yii\bootstrap\Tabs;
+use kartik\icons\Icon;
+
+Icon::map($this);
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -37,42 +39,30 @@ $this->title = 'Pharmacy Inventory System';
                         </div>
                         <div class="row">
                             <?php
-                                echo Highcharts::widget([
-                                    'scripts' => [
-                                       'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
-                                       'modules/exporting', // adds Exporting button/menu to chart
-                                       // 'themes/grid-light'        // applies global 'grid' theme to all charts
+                                echo Tabs::widget([
+                                    'encodeLabels' => false,
+                                    'items' => [
+                                        [
+                                            'label' => Icon::show('arrow-down'). 'Least Amount',
+                                            'content' => $this->render('_chart1', ['diagram' => $diagram]),
+                                            'active' => true
+                                        ],
+                                        [
+                                            'label' => Icon::show('arrow-up'). 'Recently Replenished',
+                                            'content' => $this->render('_chart2', [
+                                                'diagram1' => $diagram1,
+                                                'products' => $products
+                                            ]),
+                                            'headerOptions' => [],
+                                            'options' => ['id' => 'myveryownID'],
+                                        ],
                                     ],
-                                    'options' => [
-                                        'title' => ['text' => 'Inventory'],
-                                        'yAxis' => [
-                                            'title' => ['text' => 'Units']
-                                        ],
-                                        'chart' => [
-                                            'type' => 'column'
-                                        ],
-                                        'series' => [
-                                            ['name' => 'Capsule', 'data' => [7]],
-                                            ['name' => 'Tablet', 'data' => [5]]
-                                        ]
-                                   ]
-                               ]);
+                                ]);
                             ?>
                         </div>
-           </div>
-       </div>
-   </div>
-</div>
-
-</div>
-   <!--  <script type="text/javascript">
-        $(function() {
-            var href = window.location.href;
-            $('div a').each(function(e,i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

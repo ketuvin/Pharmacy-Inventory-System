@@ -1,7 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
-use kartik\sidenav\SideNav;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
@@ -10,12 +8,12 @@ use yii\grid\GridView;
 
 $this->title = 'Pharmacy Inventory System';
 ?>
-<div class="pharmacy-withdrawals">
-    <div class="body-withdrawals">
+<div class="pharmacy-home">
+    <div class="body-home">
         <div class="container">
             <div class="row" id="medicine-home">
                 <div class="col-md-8">
-                    <div class="withdrawals-container">
+                    <div class="home-container">
                         <?php if(Yii::$app->session->hasFlash('message')): ?>
                             <div class="alert alert-dismissible alert-success">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -35,50 +33,47 @@ $this->title = 'Pharmacy Inventory System';
                             </div>
                         <?php endif;?>
                         <div class="row">
-                            <h1 style="margin-bottom: 10px;">Withdrawals</h1>
-                            <span><?= Html::button('Withdraw', ['value' => Url::to(['/pharmacy/withdrawproduct']), 'class' => 'btn btn-success', 'id' => 'modalButtonWithdraw'])?></span>
+                            <h1 style="margin-bottom: 10px;">Category</h1>
+                        </div>
+
+                        <div class="row" style="margin-top: 30px;">
+                            <?php Pjax::begin(); ?>
                             <?php
                                 Modal::begin([
-                                    'header' => '<h3 style="text-align:center;">WITHDRAW</h3>',
-                                    'id' => 'modalWithdraw',
+                                    'header' => '<h3 style="text-align:center;">EDIT CATEGORY</h3>',
+                                    'id' => 'modalCategory',
                                     'size' => 'modal-md',
                                 ]);
 
-                                echo "<div id='contentWithdraw'></div>";
-                                
-                                Modal::end();
-                            ?>
-                        </div>
-                        <div class="row" style="margin-top: 30px;">
-                           <?php
-                                Modal::begin([
-                                    'header' => '<h3 style="text-align:center;">WITHDRAW DETAILS</h3>',
-                                    'id' => 'modalView',
-                                    'size' => 'modal-lg',
-                                ]);
-
-                                echo "<div id='viewContent'></div>";
+                                echo "<div id='editCategory'></div>";
 
                                 Modal::end();
                             ?>
-                        <?php Pjax::begin(); ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
                                 'columns' => [
+                                    'category',
                                     [
-                                        'attribute' => 'Pull_outNo',
-                                        'format' => 'raw',
-                                        'value' => function ($model) {
-                                            return Html::a($model->Pull_outNo, ['/pharmacy/viewwithdraw', 'Pull_outNo' => $model->Pull_outNo], ['class' => 'modalButtonView']);
-                                         }
+                                        'attribute' => 'description',
+                                        'format' => 'ntext',
+                                        'contentOptions' => ['id' => 'desc-text-wrap'],
                                     ],
-                                    'Remarks:ntext',
-                                    'Product_name',
-                                    'Created_Date',
+                                    [
+                                        'class' => 'yii\grid\ActionColumn',
+                                        'contentOptions' => ['style' => 'text-align:center;'],
+                                        'headerOptions' => ['style' => 'text-align:center;'],
+                                        'template' => '{edit}',
+                                        'header' => 'Actions',
+                                        'buttons' => [
+                                        'edit' => function ($url,$model) {
+                                            return Html::a('<span class="glyphicon glyphicon-edit"></span>', ['/category/edit', 'categ_id' => $model->categ_id], ['class' => 'modalButtonCategory']);
+                                            },
+                                        ],
+                                    ],
                                 ],
                             ]); ?>
-                        <?php Pjax::end(); ?>
+                            <?php Pjax::end(); ?>
                         </div>
                     </div>
                 </div>

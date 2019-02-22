@@ -10,6 +10,7 @@ use backend\models\SignupForm;
 use backend\models\AdduserForm;
 use common\models\User;
 use common\models\Withdrawals;
+use common\models\Deposits;
 use yii\data\Pagination;
 /**
  * Site controller
@@ -30,7 +31,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals','view'],
+                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals','view','deposits','viewdeposits'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -95,22 +96,41 @@ class SiteController extends Controller
         $model = new Withdrawals();
         $dataProvider = $model->search(Yii::$app->request->queryParams);
 
+        $dataProvider->pagination->pageSize = 10;
+
         return $this->render('withdrawals', [
            'dataProvider' => $dataProvider,
        ]);
     }
 
-    public function actionView($Pull_outNo) {
-        $model = Withdrawals::findOne($Pull_outNo);
+    public function actionDeposits() {
+        $model = new Deposits();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+
+        $dataProvider->pagination->pageSize = 10;
+
+        return $this->render('deposits', [
+           'dataProvider' => $dataProvider,
+       ]);
+    }
+
+    public function actionView($pull_outno) {
+        $model = Withdrawals::findOne($pull_outno);
 
         return $this->renderAjax('view', ['model' => $model]);
+    }
+
+    public function actionViewdeposits($depositno) {
+        $model = Deposits::findOne($depositno);
+
+        return $this->renderAjax('viewdeposits', ['model' => $model]);
     }
 
     public function actionAdduser() {
         $model = new AdduserForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->signup() && $model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'User Added Successfully. Confirmation link sent via email.');
+                Yii::$app->session->setFlash('success', 'User Added Successfully. Confirmation link sent via email. You only have 24 hours to activate your account.');
                 return $this->redirect(['viewadmin']);
             }
             else {

@@ -36,7 +36,7 @@ $(function(){
 		e.preventDefault();
 		$('#modalCategory').modal('show')
 			.find('#editCategory')
-			.load($(this).attr('value'));
+			.load($(this).attr('href'));
 	});
 });
 

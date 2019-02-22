@@ -30,8 +30,12 @@ AppAsset::register($this);
     <?php
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/dashboard']],
+    ];
+    $menuItemsLogged = [
+        ['label' => 'Home', 'url' => ['/site/dashboard']],
         ['label' => 'Users', 'url' => ['/site/viewadmin']],
-        ['label' => 'Withdrawals', 'url' => ['/site/withdrawals']]
+        ['label' => 'Withdrawals', 'url' => ['/site/withdrawals']],
+        ['label' => 'Deposits', 'url' => ['/site/deposits']]
 
     ];
     if (Yii::$app->user->isGuest) {
@@ -58,7 +62,7 @@ AppAsset::register($this);
                 'class' => 'my-navbar navbar-fixed-top',
             ],
         ]);
-        $menuItems[] = '<li>'
+        $menuItemsLogged[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -68,7 +72,7 @@ AppAsset::register($this);
             . '</li>';
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => $menuItems,
+            'items' => $menuItemsLogged,
         ]);
         NavBar::end();
     }

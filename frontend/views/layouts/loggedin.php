@@ -108,29 +108,29 @@ AppAsset::register($this);
                                 'icon' => 'dashboard'
                             ],
                             [
-                                'url' => ['/pharmacy/home'],
+                                'url' => ['/pharmacy/product'],
                                 'label' => 'Medicines',
                                 'icon' => 'list-alt'
                             ],
                             [
-                                'url' => ['/pharmacy/deposit'],
-                                'label' => 'Deposit',
-                                'icon' => 'plus-sign'
-                            ],
-                            [
-                                'url' => ['/pharmacy/withdrawals'],
+                                'url' => ['/withdraw/withdrawals'],
                                 'label' => 'Withdraw',
                                 'icon' => 'minus-sign'
                             ],
                             [
-                                'url' => ['/pharmacy/category'],
+                                'url' => ['/category/category'],
                                 'label' => 'Category',
                                 'icon' => 'tags'
                             ],
                             [
-                                'url' => ['/pharmacy/unit'],
+                                'url' => ['/unit/unit'],
                                 'label' => 'Unit',
                                 'icon' => 'scale'
+                            ],
+                            [
+                                'url' => ['/pharmacy/reports'],
+                                'label' => 'Reports',
+                                'icon' => 'th-list'
                             ],
                             [
                                 'label' => 'User Management',

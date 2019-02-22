@@ -46,6 +46,7 @@ $this->title = 'Pharmacy Inventory System';
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Full Name</th>
+                                    <th scope="col">Confirmation Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,6 +56,13 @@ $this->title = 'Pharmacy Inventory System';
                                             <th scope="row"><?php echo $user->username; ?></th>
                                             <td><?php echo $user->email; ?></td>
                                             <td><?php echo $user->fullname; ?></td>
+                                            <td><?php 
+                                                if($user->confirm_status == 10) {
+                                                    echo '<p style="color:green">Confirmed</p>';
+                                                }else{
+                                                    echo '<p style="color:red">Not Confirmed</p>';
+                                                }
+                                            ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>

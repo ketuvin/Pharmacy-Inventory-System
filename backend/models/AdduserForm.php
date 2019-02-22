@@ -3,24 +3,21 @@ namespace backend\models;
 
 use yii\base\Model;
 use common\models\User;
-use borales\extensions\phoneInput\PhoneInputValidator;
-use yii\db\ActiveRecord;
 use Yii;
 /**
- * Signup form
+ * Adduser form
  */
-class AdduserForm extends ActiveRecord
+class AdduserForm extends Model
 {
     public $fullname;
     public $username;
     public $email;
     public $password;
     public $password_repeat;
-    public $role = 10;
-    public $mobile;
     public $gender;
-    public $nationality;
     public $address;
+    public $role = 10;
+    public $confirm_status = 10;
 
     /**
      * {@inheritdoc}
@@ -40,12 +37,7 @@ class AdduserForm extends ActiveRecord
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
-            ['mobile', 'string'],
-            [['mobile'], PhoneInputValidator::className()],
-            ['mobile', 'required'],
             ['gender', 'required'],
-            ['nationality', 'required'],
             ['address', 'required'],
         ];
     }
@@ -74,9 +66,7 @@ class AdduserForm extends ActiveRecord
         $user->email = $this->email;
         $user->setPassword(Yii::$app->security->generateRandomString());
         $user->role = $this->role;
-        $user->mobile = $this->mobile;
         $user->gender = $this->gender;
-        $user->nationality = $this->nationality;
         $user->address = $this->address;
         $user->generateAuthKey();
         $user->generateConfirmationToken();
@@ -95,7 +85,7 @@ class AdduserForm extends ActiveRecord
             return false;
         }
         
-        if (!User::isPasswordResetTokenValid($user->confirmation_token)) {
+        if (!User::isConfirmationTokenValid($user->confirmation_token)) {
             $user->generateConfirmationToken();
             if (!$user->save()) {
                 return false;

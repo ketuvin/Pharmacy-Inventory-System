@@ -22,13 +22,7 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>AMOUNT OF STOCK WITHDRAWN: </strong></span><i><?php echo $model->stock_withdrawn;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>CURRENT STOCK AFTER WITHDRAW: </strong></span><i><?php echo $model->current_stock;?></i>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CREATED DATE: </strong></span><i><?php echo $model->created_date;?></i>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>WITHDRAWN BY: </strong></span><i><?php echo $model->withdrawby_user;?></i>
             </li>
             <?php Pjax::end(); ?>
         </ul>

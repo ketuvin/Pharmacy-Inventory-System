@@ -45,8 +45,5 @@ return [
         ],
         */
     ],
-    'params' => [
-        $params,
-        'icon-framework' => 'bsg',  // Font Awesome Icon framework
-    ]
+    'params' => $params
 ];

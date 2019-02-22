@@ -14,3 +14,12 @@ $(function(){
 			.load($(this).attr('href'));
 	});
 });
+
+$(function(){
+	$('.modalButtonViewDeposit').click(function(e){
+		e.preventDefault();
+		$('#modalViewDeposit').modal('show')
+			.find('#viewContentDeposit')
+			.load($(this).attr('href'));
+	});
+});

@@ -15,20 +15,17 @@ $this->title = 'Pharmacy Inventory System';
                 ?>
 
                 <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>
-                <?= $form ->field($record, 'Category')->dropDownList($items, ['prompt' => 'Select']);?>
+                <?= $form ->field($record, 'category')->dropDownList($items, ['prompt' => 'Select']);?>
 
-                <?= $form ->field($record, 'Name');?>
+                <?= $form ->field($record, 'name');?>
 
-                <?= $form ->field($record, 'Manufacturer');?>
+                <?= $form ->field($record, 'manufacturer');?>
 
-                <?= $form ->field($record, 'Unit_price');?>
+                <?= $form ->field($record, 'unit_price');?>
 
                 <div class="form-group">
                     <div class="col-lg-2">
                         <span><?= Html::submitbutton('Save', ['class'=>'btn btn-primary']);?></span>
-                    </div>
-                    <div class="col-lg-2">
-                        <span><?= Html::a('Cancel', ['/pharmacy/home'], ['class' => 'btn btn-primary'])?></span>
                     </div>
                 </div>
                 

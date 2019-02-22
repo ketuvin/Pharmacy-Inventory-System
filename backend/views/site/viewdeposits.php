@@ -10,22 +10,22 @@ $this->title = 'Pharmacy Inventory System';
         <ul class="list-group" style="width: 50%;">
             <?php Pjax::begin(); ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>PULL-OUT NO.: </strong></span><i><?php echo $model->Pull_outNo;?></i>
+                <span><strong>DEPOSIT NO.: </strong></span><i><?php echo $model->depositno;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>REMARKS: </strong></span><i><?php echo $model->Remarks;?></i>
+                <span><strong>PRODUCT NAME: </strong></span><i><?php echo $model->product_name;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>PRODUCT NAME: </strong></span><i><?php echo $model->Product_name;?></i>
+                <span><strong>AMOUNT OF STOCK DEPOSITED: </strong></span><i><?php echo $model->stock_deposited;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>AMOUNT OF STOCK WITHDRAWN: </strong></span><i><?php echo $model->stock_withdrawn;?></i>
+                <span><strong>CURRENT STOCK AFTER DEPOSIT: </strong></span><i><?php echo $model->current_stock;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>CREATED DATE: </strong></span><i><?php echo $model->Created_Date;?></i>
+                <span><strong>CREATED DATE: </strong></span><i><?php echo $model->created_date;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>WITHDRAWN BY: </strong></span><i><?php echo $model->withdrawby_user;?></i>
+                <span><strong>DEPOSITED BY: </strong></span><i><?php echo $model->depositedby_user;?></i>
             </li>
             <?php Pjax::end(); ?>
         </ul>

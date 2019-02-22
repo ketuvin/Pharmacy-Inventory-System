@@ -1,7 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
-use kartik\sidenav\SideNav;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 /* @var $this yii\web\View */
@@ -18,6 +16,18 @@ $this->title = 'Pharmacy Inventory System';
                             <div class="alert alert-dismissible alert-success">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <?php echo Yii::$app->session->getFlash('message');?>
+                            </div>
+                        <?php endif;?>
+                         <?php if(Yii::$app->session->hasFlash('success')): ?>
+                            <div class="alert alert-dismissible alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('success');?>
+                            </div>
+                        <?php endif;?>
+                         <?php if(Yii::$app->session->hasFlash('error')): ?>
+                            <div class="alert alert-dismissible alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo Yii::$app->session->getFlash('error');?>
                             </div>
                         <?php endif;?>
                         <div class="row">

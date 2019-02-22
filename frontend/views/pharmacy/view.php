@@ -12,25 +12,25 @@ $this->title = 'Pharmacy Inventory System';
             <ul class="list-group" style="width: 50%;">
             <?php Pjax::begin(); ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>CATEGORY: </strong></span><i><?php echo $record->Category;?></i>
+                <span><strong>CATEGORY: </strong></span><i><?php echo $record->category;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>CATEGORY DESCRIPTION: </strong></span><i><?php echo $record1->Description;?></i>
+                <span><strong>CATEGORY DESCRIPTION: </strong></span><i><?php echo $record1->description;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>PRODUCT NAME: </strong></span><i><?php echo $record->Name;?></i>
+                <span><strong>PRODUCT NAME: </strong></span><i><?php echo $record->name;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>MANUFACTURER: </strong></span><i><?php echo $record->Manufacturer;?></i>
+                <span><strong>MANUFACTURER: </strong></span><i><?php echo $record->manufacturer;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>UNIT PRICE: </strong></span><i><?php echo $record->Unit_price;?></i>
+                <span><strong>UNIT PRICE: </strong></span><i><?php echo $record->unit_price;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>STOCK: </strong></span><i><?php echo $record->Quantity;?></i>
+                <span><strong>STOCK: </strong></span><i><?php echo $record->quantity;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>UNIT: </strong></span><i><?php echo $record->Unit;?></i>
+                <span><strong>UNIT: </strong></span><i><?php echo $record->unit;?></i>
             </li>
             <?php Pjax::end(); ?>
         </ul>
