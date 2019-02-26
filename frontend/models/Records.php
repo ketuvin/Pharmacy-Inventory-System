@@ -2,6 +2,8 @@
 namespace frontend\models;
 use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
+use common\models\User;
+use Yii;
 
 class Records extends ActiveRecord {
 
@@ -56,5 +58,35 @@ class Records extends ActiveRecord {
 
 		return $dataProvider;
 	}
+
+	/**
+    * Sends an email with a link, for inventory notification.
+    *
+    * @return bool whether the email was send
+    */
+	public function sendEmail($email, $record)
+	{
+		/* @var $user User */
+		$user = User::findOne([
+			'status' => User::STATUS_ACTIVE,
+			'email' => $email,
+		]);
+
+		if (!$user) {
+			return false;
+		}
+
+		return Yii::$app
+		->mailer
+		->compose(
+			['html' => 'notification-html', 'text' => 'notification-text'],
+			['user' => $user, 'record' => $record]
+		)
+		->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+		->setTo($email)
+		->setSubject('Inventory Notification for ' . Yii::$app->name)
+		->send();
+	}
+
 }
 ?>

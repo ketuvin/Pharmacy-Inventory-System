@@ -77,22 +77,19 @@ class PharmacyController extends Controller
         $this->layout = 'loggedin';
         // return $this->render('dashboard');
 
-        $products = Records::find()->all();
-
         $data = Yii::$app->db->createCommand('select 
              name,quantity,category
              from records 
              order by quantity ASC LIMIT 5')->queryAll();
 
         $data1 = Yii::$app->db->createCommand('select 
-             product_name,current_stock
+             product_name,current_stock,category
              from deposits 
              order by depositno DESC LIMIT 5')->queryAll();
 
              return $this->render('dashboard', [
              'diagram' => $data,
-             'diagram1' => $data1,
-             'products' => $products
+             'diagram1' => $data1
         ]);
 
     }
@@ -113,7 +110,7 @@ class PharmacyController extends Controller
 
             if($record->save(false)){
                 Yii::$app->getSession()->setFlash('message','Product has been added Successfully');
-                return $this->redirect(['']);
+                return $this->redirect(['product']);
             }
             else{
                 Yii::$app->getSession()->setFlash('error','Failed to add product.');
@@ -130,6 +127,7 @@ class PharmacyController extends Controller
     public function actionView($id, $category) {
         $record = Records::findOne($id);
         $record1 = Category::findOne(['category' => $category]);
+        
         return $this->renderAjax('view', [
             'record' => $record,
             'record1' => $record1,
@@ -167,6 +165,7 @@ class PharmacyController extends Controller
             $record = Records::findOne(['name' => $postGetValue]);
 
             $record1->product_name = $record->name;
+            $record1->category = $record->category;
             date_default_timezone_set("Asia/Manila");
             $record1->created_date = date('M d, Y h:i:s A');
             $record1->depositedby_user = Yii::$app->user->identity->fullname . ' (' . Yii::$app->user->identity->username . ')';

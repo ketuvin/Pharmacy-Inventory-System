@@ -69,7 +69,6 @@ $(function(){
 
 $(function(){
 	$('#modalButtonVoid').click(function(e){
-		e.preventDefault();
 		$('#modalVoid').modal('show')
 			.find('#contentVoid')
 			.load($(this).attr('value'));

@@ -107,6 +107,10 @@ class WithdrawController extends Controller
                 $record1->stock_withdrawn = $restock;
                 $record->removeRestock();
 
+                if($record->quantity < 10) {
+                    $record->sendEmail(Yii::$app->user->identity->email,$record);
+                }
+
                 if($record->save() && $record1->save()){
                     Yii::$app->getSession()->setFlash('success','Withdraw Stock Successfully');
                     return $this->redirect(['withdrawals']);

@@ -31,7 +31,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals','view','deposits','viewdeposits'],
+                        'actions' => ['logout', 'viewadmin','adduser', 'dashboard','withdrawals','viewwithdraw','deposits','viewdeposits'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

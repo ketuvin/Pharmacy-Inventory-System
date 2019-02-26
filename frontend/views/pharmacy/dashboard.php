@@ -49,10 +49,7 @@ $this->title = 'Pharmacy Inventory System';
                                         ],
                                         [
                                             'label' => Icon::show('arrow-up'). 'Recently Replenished',
-                                            'content' => $this->render('_chart2', [
-                                                'diagram1' => $diagram1,
-                                                'products' => $products
-                                            ]),
+                                            'content' => $this->render('_chart2', ['diagram1' => $diagram1]),
                                             'headerOptions' => [],
                                             'options' => ['id' => 'myveryownID'],
                                         ],
