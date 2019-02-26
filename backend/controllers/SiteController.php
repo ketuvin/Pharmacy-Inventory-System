@@ -114,10 +114,10 @@ class SiteController extends Controller
        ]);
     }
 
-    public function actionView($pull_outno) {
+    public function actionViewwithdraw($pull_outno) {
         $model = Withdrawals::findOne($pull_outno);
 
-        return $this->renderAjax('view', ['model' => $model]);
+        return $this->renderAjax('viewwithdraw', ['model' => $model]);
     }
 
     public function actionViewdeposits($depositno) {

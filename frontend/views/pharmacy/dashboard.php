@@ -59,6 +59,7 @@ $this->title = 'Pharmacy Inventory System';
                                     ],
                                 ]);
                             ?>
+                            <p style="color: #4d4d4d; font-size: 15px;"><strong>NOTE:</strong> Refresh site every after change to update graph.</p>
                         </div>
                     </div>
                 </div>

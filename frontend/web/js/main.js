@@ -66,3 +66,21 @@ $(function(){
 			.load($(this).attr('href'));
 	});
 });
+
+$(function(){
+	$('#modalButtonVoid').click(function(e){
+		e.preventDefault();
+		$('#modalVoid').modal('show')
+			.find('#contentVoid')
+			.load($(this).attr('value'));
+	});
+});
+
+$(function(){
+	$('.modalButtonViewVoid').click(function(e){
+		e.preventDefault();
+		$('#modalViewVoid').modal('show')
+			.find('#viewVoidContent')
+			.load($(this).attr('href'));
+	});
+});

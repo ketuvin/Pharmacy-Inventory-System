@@ -40,7 +40,7 @@ $this->title = 'Pharmacy Inventory System';
                                     'attribute' => 'pull_outno',
                                     'format' => 'raw',
                                     'value' => function ($model) {
-                                        return Html::a($model->pull_outno, ['/site/view', 'pull_outno' => $model->pull_outno], ['class' => 'modalButtonView']);
+                                        return Html::a($model->pull_outno, ['/site/viewwithdraw', 'pull_outno' => $model->pull_outno], ['class' => 'modalButtonView']);
                                      }
                                 ],
                                 'remarks:ntext',

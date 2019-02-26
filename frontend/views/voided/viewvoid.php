@@ -10,7 +10,7 @@ $this->title = 'Pharmacy Inventory System';
         <ul class="list-group" style="width: 50%;">
             <?php Pjax::begin(); ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>PULL-OUT NO.: </strong></span><i><?php echo $model->pull_outno;?></i>
+                <span><strong>VOID NO.: </strong></span><i><?php echo $model->voidno;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>REMARKS: </strong></span><i><?php echo $model->remarks;?></i>
@@ -18,11 +18,20 @@ $this->title = 'Pharmacy Inventory System';
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>PRODUCT NAME: </strong></span><i><?php echo $model->product_name;?></i>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>AMOUNT OF STOCK WITHDRAWN: </strong></span><i><?php echo $model->stock_withdrawn;?></i>
+             <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>MANUFACTURER: </strong></span><i><?php echo $model->manufacturer;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>CURRENT STOCK AFTER WITHDRAW: </strong></span><i><?php echo $model->current_stock;?></i>
+                <span><strong>CATEGORY: </strong></span><i><?php echo $model->category;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>STOCK: </strong></span><i><?php echo $model->stock;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>UNIT: </strong></span><i><?php echo $model->unit;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>UNIT PRICE: </strong></span><i><?php echo $model->unit_price;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CREATED DATE: </strong></span><i><?php echo $model->created_date;?></i>

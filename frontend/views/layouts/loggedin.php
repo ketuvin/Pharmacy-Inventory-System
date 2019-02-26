@@ -118,6 +118,11 @@ AppAsset::register($this);
                                 'icon' => 'minus-sign'
                             ],
                             [
+                                'url' => ['/voided/void'],
+                                'label' => 'Void',
+                                'icon' => 'remove'
+                            ],
+                            [
                                 'url' => ['/category/category'],
                                 'label' => 'Category',
                                 'icon' => 'tags'
