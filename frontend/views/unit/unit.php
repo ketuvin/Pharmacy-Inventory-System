@@ -1,8 +1,9 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
+use yii\grid\GridView;
 /* @var $this yii\web\View */
 
 $this->title = 'Pharmacy Inventory System';
@@ -48,29 +49,32 @@ $this->title = 'Pharmacy Inventory System';
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                    <th scope="col">Unit Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if(count($units) > 0): ?>
-                                        <?php foreach($units as $unit): ?>
-                                        <tr class="table-active">
-                                            <th scope="row"><?php echo $unit->unit_name; ?></th>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td>No Records Found!</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table> 
-                            <div style="text-align: center;">
-                                <?php echo LinkPager::widget(['pagination' => $pages,]);?>
-                            </div>
+                        <?php Pjax::begin(); ?>
+                            <?php
+                                Modal::begin([
+                                    'header' => '<h3 style="text-align:center;">EDIT UNIT</h3>',
+                                    'id' => 'modalEditUnit',
+                                    'size' => 'modal-md',
+                                ]);
+
+                                echo "<div id='editUnit'></div>";
+
+                                Modal::end();
+                            ?>
+                            <?= GridView::widget([
+                                'dataProvider' => $dataProvider,
+                                'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
+                                'columns' => [
+                                    [
+                                        'attribute' => 'unit_name',
+                                        'format' => 'raw',
+                                        'value' => function ($model) {
+                                            return Html::a($model->unit_name, ['/unit/editunit', 'unit_name' => $model->unit_name], ['class' => 'modalButtonEditUnit']);
+                                         }
+                                    ],
+                                ],
+                            ]); ?>
+                            <?php Pjax::end(); ?>
                         </div>
 
                     </div>

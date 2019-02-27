@@ -20,10 +20,10 @@ class UnitController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['unit','addunit'],
+                'only' => ['unit','addunit','editunit'],
                 'rules' => [
                     [
-                        'actions' => ['unit','addunit'],
+                        'actions' => ['unit','addunit','editunit'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -56,16 +56,33 @@ class UnitController extends Controller
 
     public function actionUnit() {
         $this->layout = 'loggedin';
-        $query = Units::find();
-        $pages = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
-        $units = $query->offset($pages->offset)
-        ->limit($pages->limit)
-        ->all();
+        $model = new Units();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+
+        $dataProvider->pagination->pageSize = 5;
 
         return $this->render('unit', [
-           'units' => $units,
-           'pages' => $pages,
+           'dataProvider' => $dataProvider,
        ]);
+    }
+
+    public function actionEditunit($unit_name) {
+        $unit = Units::findOne(['unit_name' => $unit_name]);
+        $formData = Yii::$app->request->post();
+        if($unit->load($formData)) {
+
+            if($unit->save()) {
+                Yii::$app->getSession()->setFlash('message','Unit Updated Successfully');
+                return $this->redirect(['unit']);
+            }
+            Yii::$app->getSession()->setFlash('error','Update Failed. Unit already Exist.');
+            return $this->redirect(['unit']);
+        }
+        else{
+            return $this->renderAjax('editunit', [
+                'unit' => $unit,
+            ]);
+        }
     }
 
     public function actionAddunit() {

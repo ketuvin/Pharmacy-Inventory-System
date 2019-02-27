@@ -26,10 +26,10 @@ class PharmacyController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['dashboard','product','deposit','update','view','addproduct','addstock'],
+                'only' => ['dashboard','product','updateproduct','viewproduct','addproduct','addstock'],
                 'rules' => [
                     [
-                        'actions' => ['dashboard','product','deposit','update','view','addproduct','addstock'],
+                        'actions' => ['dashboard','product','updateproduct','viewproduct','addproduct','addstock'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -124,17 +124,17 @@ class PharmacyController extends Controller
         ]);
     }
 
-    public function actionView($id, $category) {
+    public function actionViewproduct($id, $category) {
         $record = Records::findOne($id);
         $record1 = Category::findOne(['category' => $category]);
         
-        return $this->renderAjax('view', [
+        return $this->renderAjax('viewproduct', [
             'record' => $record,
             'record1' => $record1,
         ]);
     }
 
-    public function actionUpdate($id) {
+    public function actionUpdateproduct($id) {
         $record = Records::findOne($id);
         $formData = Yii::$app->request->post();
         if(($record->load($formData) && $record->save())) {
@@ -142,7 +142,7 @@ class PharmacyController extends Controller
             return $this->redirect(['product']);
         }
          else{
-            return $this->renderAjax('update', [
+            return $this->renderAjax('updateproduct', [
                 'record' => $record,
             ]);
         }

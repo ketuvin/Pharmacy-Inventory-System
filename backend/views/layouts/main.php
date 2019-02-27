@@ -40,7 +40,7 @@ AppAsset::register($this);
     ];
     if (Yii::$app->user->isGuest) {
         NavBar::begin([
-            'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name . '',
+            'brandLabel' => Html::img('@web/pharmacy.png', ['style' => 'display:inline;']) . ' ' . Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'my-navbar navbar-fixed-top',
@@ -56,7 +56,7 @@ AppAsset::register($this);
         NavBar::end();
     } else {
         NavBar::begin([
-            'brandLabel' => '<img src= "pharmacy.png" style="display:inline;"> ' . Yii::$app->name . '',
+            'brandLabel' => Html::img('@web/pharmacy.png', ['style' => 'display:inline;']) . ' ' . Yii::$app->name,
             'brandUrl' => ['/site/dashboard'],
             'options' => [
                 'class' => 'my-navbar navbar-fixed-top',

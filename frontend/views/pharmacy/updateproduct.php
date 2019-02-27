@@ -11,7 +11,7 @@ $this->title = 'Pharmacy Inventory System';
          <div class="row">
             <div class="col-lg-6">
                 <?php
-                    $form = ActiveForm::begin(['id' => 'update-form']); 
+                    $form = ActiveForm::begin(['id' => 'updateproduct-form']); 
                 ?>
 
                 <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>

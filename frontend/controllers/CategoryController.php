@@ -17,10 +17,10 @@ class CategoryController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['category','edit'],
+                'only' => ['category','editcategory'],
                 'rules' => [
                     [
-                        'actions' => ['category','edit'],
+                        'actions' => ['category','editcategory'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -51,15 +51,15 @@ class CategoryController extends Controller
         ];
     }
 
-    public function actionEdit($categ_id) {
-        $category = Category::findOne($categ_id);
+    public function actionEditcategory($category) {
+        $category = Category::findOne(['category' => $category]);
         $formData = Yii::$app->request->post();
         if(($category->load($formData) && $category->save())) {
             Yii::$app->getSession()->setFlash('message','Category Updated Successfully');
             return $this->redirect(['category']);
         }
          else{
-            return $this->renderAjax('edit', [
+            return $this->renderAjax('editcategory', [
                 'category' => $category,
             ]);
         }

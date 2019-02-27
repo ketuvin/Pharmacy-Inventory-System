@@ -53,23 +53,17 @@ $this->title = 'Pharmacy Inventory System';
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
                                 'columns' => [
-                                    'category',
+                                    [
+                                        'attribute' => 'category',
+                                        'format' => 'raw',
+                                        'value' => function ($model) {
+                                            return Html::a($model->category, ['/category/editcategory', 'category' => $model->category], ['class' => 'modalButtonCategory']);
+                                         }
+                                    ],
                                     [
                                         'attribute' => 'description',
                                         'format' => 'ntext',
                                         'contentOptions' => ['id' => 'desc-text-wrap'],
-                                    ],
-                                    [
-                                        'class' => 'yii\grid\ActionColumn',
-                                        'contentOptions' => ['style' => 'text-align:center;'],
-                                        'headerOptions' => ['style' => 'text-align:center;'],
-                                        'template' => '{edit}',
-                                        'header' => 'Actions',
-                                        'buttons' => [
-                                        'edit' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-edit"></span>', ['/category/edit', 'categ_id' => $model->categ_id], ['class' => 'modalButtonCategory']);
-                                            },
-                                        ],
                                     ],
                                 ],
                             ]); ?>

@@ -83,3 +83,12 @@ $(function(){
 			.load($(this).attr('href'));
 	});
 });
+
+$(function(){
+	$('.modalButtonEditUnit').click(function(e){
+		e.preventDefault();
+		$('#modalEditUnit').modal('show')
+			.find('#editUnit')
+			.load($(this).attr('href'));
+	});
+});

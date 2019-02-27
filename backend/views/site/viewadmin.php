@@ -58,9 +58,10 @@ $this->title = 'Pharmacy Inventory System';
                                             <td><?php echo $user->fullname; ?></td>
                                             <td><?php 
                                                 if($user->confirm_status == 10) {
-                                                    echo '<p style="color:green">Confirmed</p>';
+                                                    echo '<p style="color:green"><strong>Confirmed</strong></p>';
                                                 }else{
-                                                    echo '<p style="color:red">Not Confirmed</p>';
+                                                    echo '<p style="color:red"><strong>Not Confirmed
+</strong></p>';
                                                 }
                                             ?></td>
                                         </tr>

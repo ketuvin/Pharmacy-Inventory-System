@@ -94,14 +94,14 @@ $this->title = 'Pharmacy Inventory System';
                                         'class' => 'yii\grid\ActionColumn',
                                         'contentOptions' => ['style' => 'text-align:center;'],
                                         'headerOptions' => ['style' => 'text-align:center;'],
-                                        'template' => '{view} {update} {addstock}',
+                                        'template' => '{viewproduct} {updateproduct} {addstock}',
                                         'header' => 'Actions',
                                         'buttons' => [
-                                        'view' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/pharmacy/view', 'id' => $model->id, 'category' => $model->category], ['class' => 'modalButtonViewProduct']);
+                                        'viewproduct' => function ($url,$model) {
+                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/pharmacy/viewproduct', 'id' => $model->id, 'category' => $model->category], ['class' => 'modalButtonViewProduct']);
                                             },
-                                        'update' => function ($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/pharmacy/update', 'id' => $model->id], ['class' => 'modalButtonUpdateProduct']);
+                                        'updateproduct' => function ($url, $model) {
+                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/pharmacy/updateproduct', 'id' => $model->id], ['class' => 'modalButtonUpdateProduct']);
                                             },
                                         'addstock' => function ($url, $model) {
                                             return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['/pharmacy/addstock', 'id' => $model->id], ['class' => 'modalButtonStock']);

@@ -11,7 +11,7 @@ $this->title = 'Pharmacy Inventory System';
         <div class="row">
             <div class="col-lg-6">
                 <?php
-                    $form = ActiveForm::begin(['id' => 'edit-form']); 
+                    $form = ActiveForm::begin(['id' => 'editcategory-form']); 
                 ?>
 
                 <?= $form ->field($category, 'category');?>
