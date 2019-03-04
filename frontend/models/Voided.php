@@ -8,7 +8,7 @@
 		public function rules() {
 
 			return [
-            	[['product_name','category','remarks'], 'required'],
+            	[['product_name','category','remarks','manufacturer'], 'required'],
         	];
 		}
 
@@ -20,7 +20,7 @@
         
         	return [
             	'voidno' => 'Void No.',
-            	'product_name' => 'Product Name',
+            	'product_name' => 'Generic Name',
             	'unit_price' => 'Unit Price'
         	];
     	}

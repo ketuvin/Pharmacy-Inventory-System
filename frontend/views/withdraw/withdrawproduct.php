@@ -21,11 +21,15 @@ $this->title = 'Pharmacy Inventory System';
                             ?>
                             <?= $form->field($record1, 'remarks');?>
 
-                            <?= $form ->field($record, 'name')->dropDownList(
-                                ArrayHelper::map(Records::find()->all(),'id','name'),
-                                ['prompt'=> 'Select Product']
+                            <?= $form ->field($record, 'generic_name')->dropDownList(
+                                ArrayHelper::map(Records::find()->all(),'id','generic_name'),
+                                ['prompt'=> 'Select Product', 'id' => 'generic_name']
                             );
                             ?>
+
+                            <?= $form ->field($record, 'brand')->textInput(['id' => 'brand','readonly'=> true]);?>
+
+                             <?= $form ->field($record, 'manufacturer')->textInput(['id' => 'manufacturer','readonly'=> true]);?>
 
                             <?= $form ->field($record, 'quantity')->textInput(['id' => 'stock-available','readonly'=> true])->label('Stock Available');?>
 
@@ -48,11 +52,13 @@ $this->title = 'Pharmacy Inventory System';
 <?php
 $script = <<< JS
 
-$('#records-name').change(function(){
+$('#generic_name').change(function(){
    var id = $(this).val();
    $.get('/pharmacy/get-stock-available', { id : id }, function(data){
        var data = $.parseJSON(data);
 
+       $('#brand').attr('value', data.brand);
+       $('#manufacturer').attr('value', manufacturer);
        $('#stock-available').attr('value', data.quantity);
    });
 });

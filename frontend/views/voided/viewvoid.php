@@ -16,9 +16,15 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>REMARKS: </strong></span><i><?php echo $model->remarks;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>PRODUCT NAME: </strong></span><i><?php echo $model->product_name;?></i>
+                <span><strong>GENERIC NAME: </strong></span><i><?php echo $model->product_name;?></i>
             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>STRENGTH: </strong></span><i><?php echo $model->strength;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>BRAND: </strong></span><i><?php echo $model->brand;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>MANUFACTURER: </strong></span><i><?php echo $model->manufacturer;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">

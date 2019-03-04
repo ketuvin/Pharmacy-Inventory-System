@@ -37,7 +37,6 @@ $this->title = 'Pharmacy Inventory System';
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
-                            <?php Pjax::begin(); ?>
                             <?php
                                 Modal::begin([
                                     'header' => '<h3 style="text-align:center;">EDIT CATEGORY</h3>',
@@ -49,6 +48,7 @@ $this->title = 'Pharmacy Inventory System';
 
                                 Modal::end();
                             ?>
+                            <?php Pjax::begin(['id'=>'categoryID']); ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
@@ -57,7 +57,7 @@ $this->title = 'Pharmacy Inventory System';
                                         'attribute' => 'category',
                                         'format' => 'raw',
                                         'value' => function ($model) {
-                                            return Html::a($model->category, ['/category/editcategory', 'category' => $model->category], ['class' => 'modalButtonCategory']);
+                                            return Html::a($model->category, ['/category/editcategory', 'category' => $model->category], ['class' => 'modalButtonCategory', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Update Category Details']);
                                          }
                                     ],
                                     [
@@ -68,6 +68,13 @@ $this->title = 'Pharmacy Inventory System';
                                 ],
                             ]); ?>
                             <?php Pjax::end(); ?>
+                            <?php $this->registerJs(
+                            '
+                            init_click_handlers();
+                            $("#categoryID").on("pjax:success", function() {
+                              init_click_handlers();
+                            });'
+                        ); ?>
                         </div>
                     </div>
                 </div>

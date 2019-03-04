@@ -9,7 +9,7 @@ $categories = [];
 $names = [];
 
 	foreach($diagram as $values) {
-	    $name[] = $values['name'];
+	    $name[] = $values['generic_name'];
 	    $quantity[] = $values['quantity'];
 	    $category[] = $values['category'];
 	}

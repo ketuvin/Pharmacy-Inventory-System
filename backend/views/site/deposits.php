@@ -20,7 +20,6 @@ $this->title = 'Pharmacy Inventory System';
                             <h4 style="color:red">List of all the deposit transactions.</h4>
                         </div>
                         <div class="row">
-                        <?php Pjax::begin(); ?>
                         <?php
                             Modal::begin([
                                 'header' => '<h3 style="text-align:center;">DEPOSIT DETAILS</h3>',
@@ -32,6 +31,7 @@ $this->title = 'Pharmacy Inventory System';
 
                             Modal::end();
                         ?>
+                        <?php Pjax::begin(['id'=>'depositsID']); ?>
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
                             'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
@@ -44,25 +44,23 @@ $this->title = 'Pharmacy Inventory System';
                                      }
                                 ],
                                 'product_name',
+                                'brand',
+                                'manufacturer',
                                 'created_date',
                             ],
                         ]); ?>
                         <?php Pjax::end(); ?>
+                        <?php $this->registerJs(
+                            '
+                            init_click_handlers();
+                            $("#depositsID").on("pjax:success", function() {
+                              init_click_handlers();
+                            });'
+                        ); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- <script type="text/javascript">
-        $(function() {
-            var href = window.location.href;
-            $('div a').each(function(e,i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script> -->
 </div>

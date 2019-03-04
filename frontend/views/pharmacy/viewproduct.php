@@ -18,7 +18,13 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>CATEGORY DESCRIPTION: </strong></span><i><?php echo $record1->description;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>PRODUCT NAME: </strong></span><i><?php echo $record->name;?></i>
+                <span><strong>GENERIC NAME: </strong></span><i><?php echo $record->generic_name;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>STRENGTH: </strong></span><i><?php echo $record->strength;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>BRAND: </strong></span><i><?php echo $record->brand;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>MANUFACTURER: </strong></span><i><?php echo $record->manufacturer;?></i>

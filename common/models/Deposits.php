@@ -23,7 +23,7 @@ class Deposits extends ActiveRecord {
 			'created_date' => 'Created Date',
 			'depositedby_user' => 'Deposited By',
 			'stock_deposited' => 'Amount of Stock Deposited',
-			'product_name' => 'Product Name',
+			'product_name' => 'Generic Name',
 			'current_stock' => 'Current Stock'
 		];
 	}

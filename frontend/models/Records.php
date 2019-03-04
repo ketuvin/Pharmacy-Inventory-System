@@ -11,9 +11,9 @@ class Records extends ActiveRecord {
 
 		return[
 			['category', 'required'],
-			['name', 'required'],
-			['name', 'unique', 'targetClass' => '\frontend\models\Records', 'message' => 'This product already exist.'],
+			['generic_name', 'required'],
 			['manufacturer', 'required'],
+			['strength', 'required'],
 			['quantity', 'required'],
 			['unit_price', 'required'],
 			['unit', 'required'],
@@ -29,6 +29,7 @@ class Records extends ActiveRecord {
 
 		return [
 			'id' => 'Product',
+			'generic_name' => 'Generic Name',
 			'unit_price' => 'Unit Price',
 			're_stock' => 'Quantity'
 		];

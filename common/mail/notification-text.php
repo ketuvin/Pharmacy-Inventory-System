@@ -8,7 +8,7 @@ $website = Url::base('http');;
 ?>
 <?= 'Hello ', $user->username ?>,
 
-<?= $record->name,"'s quantity in ", Yii::$app->name, ' inventory is very low '?>.
+<?= $record->generic_name,"'s quantity in ", Yii::$app->name, ' inventory is very low '?>.
 <?= 'Please click the link below and check the inventory' ?>.
 
 <?= $website ?>

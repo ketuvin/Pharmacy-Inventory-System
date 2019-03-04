@@ -49,7 +49,6 @@ $this->title = 'Pharmacy Inventory System';
                         </div>
 
                         <div class="row" style="margin-top: 30px;">
-                        <?php Pjax::begin(); ?>
                             <?php
                                 Modal::begin([
                                     'header' => '<h3 style="text-align:center;">EDIT UNIT</h3>',
@@ -61,6 +60,7 @@ $this->title = 'Pharmacy Inventory System';
 
                                 Modal::end();
                             ?>
+                            <?php Pjax::begin(['id'=>'unitID']); ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
@@ -69,14 +69,20 @@ $this->title = 'Pharmacy Inventory System';
                                         'attribute' => 'unit_name',
                                         'format' => 'raw',
                                         'value' => function ($model) {
-                                            return Html::a($model->unit_name, ['/unit/editunit', 'unit_name' => $model->unit_name], ['class' => 'modalButtonEditUnit']);
+                                            return Html::a($model->unit_name, ['/unit/editunit', 'unit_name' => $model->unit_name], ['class' => 'modalButtonEditUnit', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Update Unit']);
                                          }
                                     ],
                                 ],
                             ]); ?>
                             <?php Pjax::end(); ?>
+                            <?php $this->registerJs(
+                                '
+                                init_click_handlers();
+                                $("#unitID").on("pjax:success", function() {
+                                  init_click_handlers();
+                                });'
+                            ); ?>
                         </div>
-
                     </div>
                 </div>
             </div>

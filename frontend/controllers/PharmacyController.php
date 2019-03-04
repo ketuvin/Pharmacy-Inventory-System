@@ -11,7 +11,6 @@ use frontend\models\Records;
 use frontend\models\Category;
 use frontend\models\Units;
 use common\models\Deposits;
-use yii\data\Pagination;
 use yii\helpers\Json;
 /**
  * Pharmacy controller
@@ -78,7 +77,7 @@ class PharmacyController extends Controller
         // return $this->render('dashboard');
 
         $data = Yii::$app->db->createCommand('select 
-             name,quantity,category
+             generic_name,quantity,category
              from records 
              order by quantity ASC LIMIT 5')->queryAll();
 
@@ -95,6 +94,10 @@ class PharmacyController extends Controller
     }
 
     public function actionAddproduct() {
+        $name = [];
+        $brand = [];
+        $manufacturer = [];
+        $category = [];
         $record = new Records();
         $record1 = new Category();
         $record2 = new Units();
@@ -103,18 +106,45 @@ class PharmacyController extends Controller
 
             $postGetValue = Yii::$app->request->post('Category')['category'];
             $postGetValue1 = Yii::$app->request->post('Units')['unit_name'];
-            $query = Category::findOne(['categ_id' => $postGetValue]);
+            $postGetValue2 = Yii::$app->request->post('Records')['generic_name'];
+            $postGetValue3 = Yii::$app->request->post('Records')['brand'];
+            $postGetValue4 = Yii::$app->request->post('Records')['manufacturer'];
+            $queryCat = Category::findOne(['categ_id' => $postGetValue]);
             $query1 = Units::findOne(['unit_id' => $postGetValue1]);
-            $record->category = $query->category;
+            $record->category = $queryCat->category;
             $record->unit = $query1->unit_name;
+            $record->brand = $postGetValue3;
 
-            if($record->save(false)){
-                Yii::$app->getSession()->setFlash('message','Product has been added Successfully');
-                return $this->redirect(['product']);
+            $query = Records::find(['generic_name' => $postGetValue2])->all();
+
+            if(!empty($query)) {
+
+                foreach($query as $values) {
+                    $name[] = $values['generic_name'];
+                    $brand[] = $values['brand'];
+                    $manufacturer[] = $values['manufacturer'];
+                    $category[] = $values['category']; 
+                }
+
+                for($counter = 0; $counter < sizeof($query); $counter++) {
+
+                    if(($category[$counter] == $record->category) && ($name[$counter] == $postGetValue2) && ($brand[$counter] == $postGetValue3) && ($manufacturer[$counter] == $postGetValue4)) {
+                        Yii::$app->getSession()->setFlash('error','Product already exist.');
+                        return $this->redirect(['product']);
+                    }
+                    else {
+                        if($record->save(false)) {
+                            Yii::$app->getSession()->setFlash('message','Product has been added Successfully');
+                            return $this->redirect(['product']);
+                        }
+                    }
+                }
             }
-            else{
-                Yii::$app->getSession()->setFlash('error','Failed to add product.');
-                return $this->redirect(['product']);
+            else {
+                if($record->save(false)) {
+                    Yii::$app->getSession()->setFlash('message','Product has been added Successfully');
+                    return $this->redirect(['product']);
+                }
             }
         }
         return $this->renderAjax('addproduct', [
@@ -135,11 +165,48 @@ class PharmacyController extends Controller
     }
 
     public function actionUpdateproduct($id) {
+        $name = [];
+        $brand = [];
+        $manufacturer = [];
+        $category = [];
         $record = Records::findOne($id);
         $formData = Yii::$app->request->post();
-        if(($record->load($formData) && $record->save())) {
-            Yii::$app->getSession()->setFlash('message','Product Updated Successfully');
-            return $this->redirect(['product']);
+        if($record->load($formData)) {
+
+            $postGetValue = Yii::$app->request->post('Records')['category'];
+            $postGetValue1 = Yii::$app->request->post('Records')['generic_name'];
+            $postGetValue2 = Yii::$app->request->post('Records')['brand'];
+            $postGetValue3 = Yii::$app->request->post('Records')['manufacturer'];
+
+            $query = Records::find()->where('id != :id', ['id' => $id])->all();
+
+            $record->brand = $postGetValue2;
+
+            if(!empty($query)) {
+                foreach($query as $values) {
+                    $name[] = $values['generic_name'];
+                    $brand[] = $values['brand'];
+                    $manufacturer[] = $values['manufacturer'];
+                    $category[] = $values['category']; 
+                }
+                for($counter = 0; $counter < sizeof($query); $counter++) {
+                    if(($category[$counter] == $postGetValue) && ($name[$counter] == $postGetValue1) && ($brand[$counter] == $postGetValue2) && ($manufacturer[$counter] == $postGetValue3)) {
+                        Yii::$app->getSession()->setFlash('error','Product already exist.');
+                        return $this->redirect(['product']);
+                    }
+                    else {
+                        if($record->save(false)){
+                            Yii::$app->getSession()->setFlash('message','Product Updated Successfully');
+                            return $this->redirect(['product']);
+                        }
+                    }
+                }
+            } else {
+                if($record->save(false)){
+                    Yii::$app->getSession()->setFlash('message','Product Updated Successfully');
+                    return $this->redirect(['product']);
+                }  
+            }
         }
          else{
             return $this->renderAjax('updateproduct', [
@@ -159,13 +226,16 @@ class PharmacyController extends Controller
         $record1 = new Deposits();
         $formData = Yii::$app->request->post();
         if($record->load($formData)){
-            $postGetValue = Yii::$app->request->post('Records')['name'];
+            $postGetValue = Yii::$app->request->post('Records')['generic_name'];
             $restock = Yii::$app->request->post('Records')['re_stock'];
 
-            $record = Records::findOne(['name' => $postGetValue]);
+            $record = Records::findOne(['generic_name' => $postGetValue]);
 
-            $record1->product_name = $record->name;
+            $record1->product_name = $record->generic_name;
+            $record1->brand = $record->brand;
+            $record1->manufacturer = $record->manufacturer;
             $record1->category = $record->category;
+            $record1->strength = $record->strength;
             date_default_timezone_set("Asia/Manila");
             $record1->created_date = date('M d, Y h:i:s A');
             $record1->depositedby_user = Yii::$app->user->identity->fullname . ' (' . Yii::$app->user->identity->username . ')';

@@ -20,7 +20,11 @@ $this->title = 'Pharmacy Inventory System';
                         ['prompt'=> 'Select Category']
                     ) ?>
 
-                    <?= $form->field($record, 'name') ?>
+                    <?= $form->field($record, 'generic_name') ?>
+
+                    <?= $form->field($record, 'strength') ?>
+
+                    <?= $form->field($record, 'brand') ?>
 
                     <?= $form->field($record, 'manufacturer') ?>
 

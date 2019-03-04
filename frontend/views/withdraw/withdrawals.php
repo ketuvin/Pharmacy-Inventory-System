@@ -48,7 +48,6 @@ $this->title = 'Pharmacy Inventory System';
                             ?>
                         </div>
                         <div class="row" style="margin-top: 30px;">
-                        <?php Pjax::begin(); ?>
                         <?php
                             Modal::begin([
                                 'header' => '<h3 style="text-align:center;">WITHDRAW DETAILS</h3>',
@@ -60,6 +59,7 @@ $this->title = 'Pharmacy Inventory System';
 
                             Modal::end();
                         ?>
+                        <?php Pjax::begin(['id'=>'withdrawalsID']); ?>
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
                             'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
@@ -68,15 +68,24 @@ $this->title = 'Pharmacy Inventory System';
                                     'attribute' => 'pull_outno',
                                     'format' => 'raw',
                                     'value' => function ($model) {
-                                        return Html::a($model->pull_outno, ['/withdraw/viewwithdraw', 'pull_outno' => $model->pull_outno], ['class' => 'modalButtonView']);
+                                        return Html::a($model->pull_outno, ['/withdraw/viewwithdraw', 'pull_outno' => $model->pull_outno], ['class' => 'modalButtonView', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Show Withdrawal Details']);
                                      }
                                 ],
                                 'remarks:ntext',
                                 'product_name',
+                                'brand',
+                                'manufacturer',
                                 'created_date',
                             ],
                         ]); ?>
                         <?php Pjax::end(); ?>
+                        <?php $this->registerJs(
+                            '
+                            init_click_handlers();
+                            $("#withdrawalsID").on("pjax:success", function() {
+                              init_click_handlers();
+                            });'
+                        ); ?>
                         </div>
                     </div>
                 </div>

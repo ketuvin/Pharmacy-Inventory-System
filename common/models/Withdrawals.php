@@ -23,7 +23,8 @@ class Withdrawals extends ActiveRecord {
 			'pull_outno' => 'Pull-out No.',
 			'created_date' => 'Created Date',
 			'withdrawby_user' => 'Withdrawn By',
-			'stock_withdrawn' => 'Amount of Stock Withdrawn'
+			'stock_withdrawn' => 'Amount of Stock Withdrawn',
+			'product_name' => 'Generic Name'
 		];
 	}
 

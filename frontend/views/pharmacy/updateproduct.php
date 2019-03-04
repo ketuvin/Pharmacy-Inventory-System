@@ -17,7 +17,11 @@ $this->title = 'Pharmacy Inventory System';
                 <?php $items = ['Liquid'=>'Liquid','Tablet'=>'Tablet', 'Capsules'=>'Capsules', 'Topical'=>'Topical', 'Suppositories'=>'Suppositories', 'Drops'=>'Drops', 'Inhalers'=>'Inhalers', 'Injections'=>'Injections'];?>
                 <?= $form ->field($record, 'category')->dropDownList($items, ['prompt' => 'Select']);?>
 
-                <?= $form ->field($record, 'name');?>
+                <?= $form ->field($record, 'generic_name');?>
+
+                <?= $form ->field($record, 'strength');?>
+
+                <?= $form ->field($record, 'brand');?>
 
                 <?= $form ->field($record, 'manufacturer');?>
 

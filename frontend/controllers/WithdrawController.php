@@ -81,14 +81,17 @@ class WithdrawController extends Controller
         $record1 = new Withdrawals();
         $formData = Yii::$app->request->post();
         if($record->load($formData) && $record1->load($formData)){
-            $postGetValue = Yii::$app->request->post('Records')['name'];
+            $postGetValue = Yii::$app->request->post('Records')['generic_name'];
             $restock = Yii::$app->request->post('Records')['re_stock'];
 
             $record = Records::findOne(['id' => $postGetValue]);
 
-            $record1->product_name = $record->name;
+            $record1->product_name = $record->generic_name;
+            $record1->brand = $record->brand;
+            $record1->manufacturer = $record->manufacturer;
+            $record1->strength = $record->strength;
             date_default_timezone_set("Asia/Manila");
-            $record1->created_date = date('M d, Y h:i:s A');
+            $record1->created_date = date('F d, Y h:i:s A');
             $record1->withdrawby_user = Yii::$app->user->identity->fullname . ' (' . Yii::$app->user->identity->username . ')';
 
             $withdraw = Withdrawals::find()->orderBy(['pull_outno' => SORT_DESC])->one();

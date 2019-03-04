@@ -21,7 +21,12 @@
         "borales/yii2-phone-input": "*",
         "kartik-v/yii2-widget-sidenav": "*",
         "kartik-v/yii2-icons": "@dev",
-        "miloschuman/yii2-highcharts-widget": "*"
+        "miloschuman/yii2-highcharts-widget": "*",
+	"kossmoss/yii2-postgresql-array-field": "^0.2",
+        "kartik-v/yii2-mpdf": "dev-master",
+        "kartik-v/yii2-widget-select2": "dev-master",
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-field-range": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

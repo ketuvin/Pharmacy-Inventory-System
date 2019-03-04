@@ -48,7 +48,6 @@ $this->title = 'Pharmacy Inventory System';
                             ?>
                         </div>
                         <div class="row" style="margin-top: 30px;">
-                            <?php Pjax::begin(); ?>
                             <?php
                                 Modal::begin([
                                     'header' => '<h3 style="text-align:center;">ADD STOCK</h3>',
@@ -82,12 +81,14 @@ $this->title = 'Pharmacy Inventory System';
 
                                 Modal::end();
                             ?>
+                            <?php Pjax::begin(['id'=>'productID']); ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
                                 'columns' => [
                                     'category',
-                                    'name',
+                                    'generic_name',
+                                    'brand',
                                     'manufacturer',
                                     'unit_price',
                                     [
@@ -98,19 +99,26 @@ $this->title = 'Pharmacy Inventory System';
                                         'header' => 'Actions',
                                         'buttons' => [
                                         'viewproduct' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/pharmacy/viewproduct', 'id' => $model->id, 'category' => $model->category], ['class' => 'modalButtonViewProduct']);
+                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/pharmacy/viewproduct', 'id' => $model->id, 'category' => $model->category], ['class' => 'modalButtonViewProduct', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'View Product']);
                                             },
                                         'updateproduct' => function ($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/pharmacy/updateproduct', 'id' => $model->id], ['class' => 'modalButtonUpdateProduct']);
+                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/pharmacy/updateproduct', 'id' => $model->id], ['class' => 'modalButtonUpdateProduct', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Update Product']);
                                             },
                                         'addstock' => function ($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['/pharmacy/addstock', 'id' => $model->id], ['class' => 'modalButtonStock']);
+                                            return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['/pharmacy/addstock', 'id' => $model->id], ['class' => 'modalButtonStock', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Add Stock']);
                                             },
                                         ],
                                     ],
                                 ],
                             ]); ?>
                             <?php Pjax::end(); ?>
+                            <?php $this->registerJs(
+                                '
+                                init_click_handlers();
+                                $("#productID").on("pjax:success", function() {
+                                  init_click_handlers();
+                                });'
+                            ); ?>
                         </div>
                     </div>
                 </div>

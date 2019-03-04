@@ -11,7 +11,7 @@ $website = Url::base('http');;
     <?= 'Hello ', Html::encode($user->fullname) ?>,
 </p>
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;">
-    <?= $record->name,"'s quantity in ", Yii::$app->name, ' inventory is very low ' ?>.
+    <?= $record->generic_name,"'s quantity in ", Yii::$app->name, ' inventory is very low ' ?>.
     <?= 'Please click the link below and check the inventory' ?>.
 </p>
 <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0; text-align: center;">

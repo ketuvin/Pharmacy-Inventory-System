@@ -60,8 +60,7 @@ $this->title = 'Pharmacy Inventory System';
                                                 if($user->confirm_status == 10) {
                                                     echo '<p style="color:green"><strong>Confirmed</strong></p>';
                                                 }else{
-                                                    echo '<p style="color:red"><strong>Not Confirmed
-</strong></p>';
+                                                    echo '<p style="color:red"><strong>Not Confirmed</strong></p>';
                                                 }
                                             ?></td>
                                         </tr>
@@ -77,21 +76,9 @@ $this->title = 'Pharmacy Inventory System';
                                 <?php echo LinkPager::widget(['pagination' => $pages,]);?>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- <script type="text/javascript">
-        $(function() {
-            var href = window.location.href;
-            $('div a').each(function(e,i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script> -->
 </div>

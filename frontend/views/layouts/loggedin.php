@@ -133,7 +133,7 @@ AppAsset::register($this);
                                 'icon' => 'scale'
                             ],
                             [
-                                'url' => ['/pharmacy/reports'],
+                                'url' => ['/reports/reports'],
                                 'label' => 'Reports',
                                 'icon' => 'th-list'
                             ],

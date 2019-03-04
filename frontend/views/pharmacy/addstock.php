@@ -14,7 +14,11 @@ $this->title = 'Pharmacy Inventory System';
                     $form = ActiveForm::begin(['id' => 'addstock-form']); 
                 ?>
 
-                <?= $form ->field($record, 'name');?>
+                <?= $form ->field($record, 'generic_name');?>
+
+                <?= $form ->field($record, 'brand')->textInput(['readonly' => true]);?>
+
+                <?= $form ->field($record, 'manufacturer')->textInput(['readonly' => true]);?>
 
                 <?= $form ->field($record, 'quantity')->textInput(['readonly' => true])->label('Stock Available');?>
 

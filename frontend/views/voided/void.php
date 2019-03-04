@@ -48,7 +48,6 @@ $this->title = 'Pharmacy Inventory System';
                             ?>
                         </div>
                         <div class="row" style="margin-top: 30px;">
-                        <?php Pjax::begin(); ?>
                         <?php
                             Modal::begin([
                                 'header' => '<h3 style="text-align:center;">VOIDED PRODUCT DETAILS</h3>',
@@ -60,6 +59,7 @@ $this->title = 'Pharmacy Inventory System';
 
                             Modal::end();
                         ?>
+                        <?php Pjax::begin(['id'=>'voidID']); ?>
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
                             'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
@@ -68,16 +68,24 @@ $this->title = 'Pharmacy Inventory System';
                                     'attribute' => 'voidno',
                                     'format' => 'raw',
                                     'value' => function ($model) {
-                                        return Html::a($model->voidno, ['/voided/viewvoid', 'voidno' => $model->voidno], ['class' => 'modalButtonViewVoid']);
+                                        return Html::a($model->voidno, ['/voided/viewvoid', 'voidno' => $model->voidno], ['class' => 'modalButtonViewVoid', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Show Voided Product Details']);
                                      }
                                 ],
                                 'remarks:ntext',
                                 'product_name',
+                                'brand',
                                 'manufacturer',
                                 'created_date',
                             ],
                         ]); ?>
                         <?php Pjax::end(); ?>
+                        <?php $this->registerJs(
+                            '
+                            init_click_handlers();
+                            $("#voidID").on("pjax:success", function() {
+                              init_click_handlers();
+                            });'
+                        ); ?>
                         </div>
                     </div>
                 </div>
