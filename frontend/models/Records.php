@@ -18,6 +18,7 @@ class Records extends ActiveRecord {
 			['unit_price', 'required'],
 			['unit', 'required'],
 			['re_stock', 'required'],
+			['re_orderqty', 'required']
 		];
 	}
 
@@ -31,7 +32,9 @@ class Records extends ActiveRecord {
 			'id' => 'Product',
 			'generic_name' => 'Generic Name',
 			'unit_price' => 'Unit Price',
-			're_stock' => 'Quantity'
+			're_stock' => 'Quantity',
+			'sku' => 'SKU',
+			're_orderqty' => 'Re-Order Quantity'
 		];
 	}
 

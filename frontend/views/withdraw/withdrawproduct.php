@@ -22,7 +22,10 @@ $this->title = 'Pharmacy Inventory System';
                             <?= $form->field($record1, 'remarks');?>
 
                             <?= $form ->field($record, 'generic_name')->dropDownList(
-                                ArrayHelper::map(Records::find()->all(),'id','generic_name'),
+                                ArrayHelper::map(Records::find()->asArray()->all(),'id',
+                                    function($model) {
+                                        return $model['sku'].': '.$model['generic_name'].' - '.$model['strength'];
+                                    },'category'),
                                 ['prompt'=> 'Select Product', 'id' => 'generic_name']
                             );
                             ?>
@@ -58,7 +61,8 @@ $('#generic_name').change(function(){
        var data = $.parseJSON(data);
 
        $('#brand').attr('value', data.brand);
-       $('#manufacturer').attr('value', manufacturer);
+       $('#manufacturer').attr('value', data.manufacturer);
+       $('#category').attr('value', data.category);
        $('#stock-available').attr('value', data.quantity);
    });
 });

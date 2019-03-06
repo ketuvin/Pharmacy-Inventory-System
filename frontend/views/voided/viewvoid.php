@@ -13,6 +13,9 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>VOID NO.: </strong></span><i><?php echo $model->voidno;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>SKU: </strong></span><i><?php echo $model->sku;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>REMARKS: </strong></span><i><?php echo $model->remarks;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">

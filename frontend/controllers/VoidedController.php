@@ -84,24 +84,23 @@ class VoidedController extends Controller
         $formData = Yii::$app->request->post();
         if($record->load($formData) && $record1->load($formData)){
 
-            $postGetValue = Yii::$app->request->post('Records')['category'];
             $postGetValue1 = Yii::$app->request->post('Records')['unit'];
             $postGetValue2 = Yii::$app->request->post('Records')['unit_price'];
             $postGetValue3 = Yii::$app->request->post('Records')['manufacturer'];
             $postGetValue4 = Yii::$app->request->post('Records')['generic_name'];
             $postGetValue5 = Yii::$app->request->post('Records')['quantity'];
-            $postGetValue6 = Yii::$app->request->post('Records')['strength'];
             $postGetValue7 = Yii::$app->request->post('Records')['brand'];
 
             $record = Records::findOne(['id' => $postGetValue4]);
             
             $record1->product_name = $record->generic_name;
-            $record1->category = $postGetValue;
+            $record1->category = $record->category;
+            $record1->sku = $record->sku;
             $record1->unit = $postGetValue1;
             $record1->unit_price = $postGetValue2;
             $record1->manufacturer = $postGetValue3;
             $record1->stock = $postGetValue5;
-            $record1->strength = $postGetValue6;
+            $record1->strength = $record->strength;
             $record1->brand = $postGetValue7;
             date_default_timezone_set("Asia/Manila");
             $record1->created_date = date('M d, Y h:i:s A');

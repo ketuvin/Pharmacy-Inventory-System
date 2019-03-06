@@ -43,6 +43,7 @@ $this->title = 'Pharmacy Inventory System';
                                         return Html::a($model->depositno, ['/site/viewdeposits', 'depositno' => $model->depositno], ['class' => 'modalButtonViewDeposit']);
                                      }
                                 ],
+                                'sku',
                                 'product_name',
                                 'brand',
                                 'manufacturer',

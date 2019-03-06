@@ -43,10 +43,11 @@ $this->title = 'Pharmacy Inventory System';
                                         return Html::a($model->pull_outno, ['/site/viewwithdraw', 'pull_outno' => $model->pull_outno], ['class' => 'modalButtonView']);
                                      }
                                 ],
-                                'remarks:ntext',
+                                'sku',
                                 'product_name',
                                 'brand',
                                 'manufacturer',
+                                'remarks:ntext',
                                 'created_date',
                             ],
                         ]); ?>

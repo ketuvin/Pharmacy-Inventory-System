@@ -13,16 +13,21 @@ $this->title = 'Pharmacy Inventory System';
                 <?php
                     $form = ActiveForm::begin(['id' => 'addstock-form']); 
                 ?>
+                <?= $form ->field($record, 'sku')->textInput(['readonly' => true]);?>
 
-                <?= $form ->field($record, 'generic_name');?>
+                <?= $form ->field($record, 'generic_name')->textInput(['readonly' => true]);?>
+
+                <?= $form ->field($record, 'strength')->textInput(['readonly' => true]);?>
 
                 <?= $form ->field($record, 'brand')->textInput(['readonly' => true]);?>
 
                 <?= $form ->field($record, 'manufacturer')->textInput(['readonly' => true]);?>
 
+                <?= $form ->field($record, 'category')->textInput(['readonly' => true]);?>
+
                 <?= $form ->field($record, 'quantity')->textInput(['readonly' => true])->label('Stock Available');?>
 
-                <?= $form->field($record, 're_stock');?>
+                <?= $form->field($record, 're_stock')->textInput(['autofocus' => true]);?>
 
                 <div class="form-group">
                     <div class="col-lg-2">

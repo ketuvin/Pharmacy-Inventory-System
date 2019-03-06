@@ -12,6 +12,9 @@ $this->title = 'Pharmacy Inventory System';
             <ul class="list-group" style="width: 50%;">
             <?php Pjax::begin(); ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h4><strong>SKU: </strong></span><?php echo $record->sku;?></h4>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CATEGORY: </strong></span><i><?php echo $record->category;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">

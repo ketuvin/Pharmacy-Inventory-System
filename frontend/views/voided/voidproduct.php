@@ -20,15 +20,14 @@ $this->title = 'Pharmacy Inventory System';
                             $form = ActiveForm::begin(['id' => 'voidproduct-form']); 
                             ?>
 
-                            <?= $form ->field($record, 'generic_name')->dropDownList(
-                                ArrayHelper::map(Records::find()->all(),'id','generic_name'),
+                           <?= $form ->field($record, 'generic_name')->dropDownList(
+                                ArrayHelper::map(Records::find()->asArray()->all(),'id',
+                                    function($model) {
+                                        return $model['sku'].': '.$model['generic_name'].' - '.$model['strength'];
+                                    },'category'),
                                 ['prompt'=> 'Select Product', 'id' => 'generic_name']
                             );
                             ?>
-
-                            <?= $form->field($record, 'strength')->textInput(['id' => 'strength','readonly'=> true]); ?>
-
-                            <?= $form->field($record, 'category')->textInput(['id' => 'category','readonly'=> true]);?>
 
                             <?= $form->field($record, 'brand')->textInput(['id' => 'brand','readonly'=> true]); ?>
 
@@ -64,8 +63,7 @@ $('#generic_name').change(function(){
    $.get('/voided/get-product-details', { id : id }, function(data){
        var data = $.parseJSON(data);
 
-       $('#strength').attr('value', data.strength);
-       $('#category').attr('value', data.category);
+       $('#sku').attr('value', data.sku);
        $('#brand').attr('value', data.brand);
        $('#manufacturer').attr('value', data.manufacturer);
        $('#stock-available').attr('value', data.quantity);

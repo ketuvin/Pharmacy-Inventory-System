@@ -13,6 +13,9 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>DEPOSIT NO.: </strong></span><i><?php echo $model->depositno;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>SKU: </strong></span><i><?php echo $model->sku;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>GENERIC NAME: </strong></span><i><?php echo $model->product_name;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">

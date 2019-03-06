@@ -119,12 +119,15 @@ class ReportsController extends Controller
             if($model->save(false)) {
                 Yii::$app->getSession()->setFlash('success','Report Created Successfully');
                 return $this->redirect(['reports']);
+            } else {
+                Yii::$app->getSession()->setFlash('error','Failed to Create Report');
+                return $this->redirect(['reports']);
             }
+        } else {
+            return $this->renderAjax('statusreport', [
+               'model' => $model
+           ]);
         }
-
-        return $this->renderAjax('statusreport', [
-           'model' => $model
-       ]);
     }
 
     public function actionGenerateReport(array $generic_name) {
@@ -197,19 +200,18 @@ class ReportsController extends Controller
             }
 
             if($model->save(false)) {
-                $model = Withdrawalsreport::findOne(['withdraw_reportno' => $model->withdraw_reportno]);
                 Yii::$app->getSession()->setFlash('success','Report Created Successfully');
-                return $this->render('generate-withdrawals-report', [
-                    'start_date' => $model->start_date,
-                    'end_date' => $model->end_date
-                ]);
+                return $this->redirect(['reports']);
+            } else {
+                Yii::$app->getSession()->setFlash('error','Failed to Create Report');
+                return $this->redirect(['reports']);
             }
 
+        } else {
+            return $this->renderAjax('withdrawalsreport', [
+               'model' => $model
+           ]);
         }
-        return $this->renderAjax('withdrawalsreport', [
-           'model' => $model
-       ]);
-
     }
 
     public function actionGenerateWithdrawalsReport($start_date, $end_date) {
@@ -258,7 +260,10 @@ class ReportsController extends Controller
     public function actionDeletereport($report_no) {
         $report = Reports::findOne($report_no)->delete();
         if($report) {
-            Yii::$app->getSession()->setFlash('success','Record Deleted Successfully');
+            Yii::$app->getSession()->setFlash('success','Report Deleted Successfully');
+            return $this->redirect(['reports']);
+        }else {
+            Yii::$app->getSession()->setFlash('error','Failed to Delete Report');
             return $this->redirect(['reports']);
         }
     }
@@ -266,7 +271,10 @@ class ReportsController extends Controller
     public function actionDeletewithdrawreport($withdraw_reportno) {
         $report = Withdrawalsreport::findOne($withdraw_reportno)->delete();
         if($report) {
-            Yii::$app->getSession()->setFlash('success','Record Deleted Successfully');
+            Yii::$app->getSession()->setFlash('success','Report Deleted Successfully');
+            return $this->redirect(['reports']);
+        }else {
+            Yii::$app->getSession()->setFlash('error','Failed to Delete Report');
             return $this->redirect(['reports']);
         }
     }

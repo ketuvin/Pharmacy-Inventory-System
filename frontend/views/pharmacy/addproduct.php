@@ -40,6 +40,8 @@ $this->title = 'Pharmacy Inventory System';
 
                     <?= $form->field($record, 'quantity') ?>
 
+                    <?= $form->field($record, 're_orderqty') ?>
+
                     <div class="form-group">
                         <div class="col-lg-3">
                             <span><?= Html::submitbutton('Add Product', ['class'=>'btn btn-primary']) ?></span>

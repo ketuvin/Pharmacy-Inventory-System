@@ -87,9 +87,11 @@ class WithdrawController extends Controller
             $record = Records::findOne(['id' => $postGetValue]);
 
             $record1->product_name = $record->generic_name;
+            $record1->sku = $record->sku;
             $record1->brand = $record->brand;
             $record1->manufacturer = $record->manufacturer;
             $record1->strength = $record->strength;
+            $record1->category = $record->category;
             date_default_timezone_set("Asia/Manila");
             $record1->created_date = date('F d, Y h:i:s A');
             $record1->withdrawby_user = Yii::$app->user->identity->fullname . ' (' . Yii::$app->user->identity->username . ')';

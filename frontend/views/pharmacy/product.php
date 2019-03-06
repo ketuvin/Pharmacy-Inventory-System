@@ -86,6 +86,13 @@ $this->title = 'Pharmacy Inventory System';
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
                                 'columns' => [
+                                    [
+                                        'attribute' => 'sku',
+                                        'format' => 'raw',
+                                        'value' => function ($model) {
+                                            return Html::a($model->sku, ['/pharmacy/viewproduct', 'id' => $model->id, 'category' => $model->category], ['class' => 'modalButtonViewProduct', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'View Product']);
+                                            },
+                                    ],
                                     'category',
                                     'generic_name',
                                     'brand',
@@ -95,12 +102,9 @@ $this->title = 'Pharmacy Inventory System';
                                         'class' => 'yii\grid\ActionColumn',
                                         'contentOptions' => ['style' => 'text-align:center;'],
                                         'headerOptions' => ['style' => 'text-align:center;'],
-                                        'template' => '{viewproduct} {updateproduct} {addstock}',
+                                        'template' => '{updateproduct} {addstock}',
                                         'header' => 'Actions',
                                         'buttons' => [
-                                        'viewproduct' => function ($url,$model) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/pharmacy/viewproduct', 'id' => $model->id, 'category' => $model->category], ['class' => 'modalButtonViewProduct', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'View Product']);
-                                            },
                                         'updateproduct' => function ($url, $model) {
                                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/pharmacy/updateproduct', 'id' => $model->id], ['class' => 'modalButtonUpdateProduct', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Update Product']);
                                             },

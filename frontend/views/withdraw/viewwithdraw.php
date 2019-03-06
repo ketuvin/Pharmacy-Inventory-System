@@ -13,13 +13,16 @@ $this->title = 'Pharmacy Inventory System';
                 <span><strong>PULL-OUT NO.: </strong></span><i><?php echo $model->pull_outno;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>REMARKS: </strong></span><i><?php echo $model->remarks;?></i>
+                <span><strong>SKU: </strong></span><i><?php echo $model->sku;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>GENERIC NAME: </strong></span><i><?php echo $model->product_name;?></i>
             </li>
              <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>STRENGTH: </strong></span><i><?php echo $model->strength;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>CATEGORY: </strong></span><i><?php echo $model->category;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>BRAND: </strong></span><i><?php echo $model->brand;?></i>
@@ -32,6 +35,9 @@ $this->title = 'Pharmacy Inventory System';
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CURRENT STOCK AFTER WITHDRAW: </strong></span><i><?php echo $model->current_stock;?></i>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>REMARKS: </strong></span><i><?php echo $model->remarks;?></i>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>CREATED DATE: </strong></span><i><?php echo $model->created_date;?></i>

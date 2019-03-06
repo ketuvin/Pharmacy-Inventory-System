@@ -71,10 +71,11 @@ $this->title = 'Pharmacy Inventory System';
                                         return Html::a($model->voidno, ['/voided/viewvoid', 'voidno' => $model->voidno], ['class' => 'modalButtonViewVoid', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Show Voided Product Details']);
                                      }
                                 ],
-                                'remarks:ntext',
+                                'sku',
                                 'product_name',
                                 'brand',
                                 'manufacturer',
+                                'remarks:ntext',
                                 'created_date',
                             ],
                         ]); ?>

@@ -54,9 +54,15 @@ class CategoryController extends Controller
     public function actionEditcategory($category) {
         $category = Category::findOne(['category' => $category]);
         $formData = Yii::$app->request->post();
-        if(($category->load($formData) && $category->save())) {
-            Yii::$app->getSession()->setFlash('message','Category Updated Successfully');
-            return $this->redirect(['category']);
+        if(($category->load($formData))) {
+
+            if($category->save()) {
+                Yii::$app->getSession()->setFlash('message','Category Updated Successfully');
+                return $this->redirect(['category']);
+            } else {
+                Yii::$app->getSession()->setFlash('error','Failed to Update Category');
+                return $this->redirect(['category']);
+            }
         }
          else{
             return $this->renderAjax('editcategory', [

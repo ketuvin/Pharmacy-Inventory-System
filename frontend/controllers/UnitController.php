@@ -74,9 +74,10 @@ class UnitController extends Controller
             if($unit->save()) {
                 Yii::$app->getSession()->setFlash('message','Unit Updated Successfully');
                 return $this->redirect(['unit']);
+            } else {
+                Yii::$app->getSession()->setFlash('error','Update Failed. Unit already Exist.');
+                return $this->redirect(['unit']);
             }
-            Yii::$app->getSession()->setFlash('error','Update Failed. Unit already Exist.');
-            return $this->redirect(['unit']);
         }
         else{
             return $this->renderAjax('editunit', [

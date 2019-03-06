@@ -24,7 +24,8 @@ class Deposits extends ActiveRecord {
 			'depositedby_user' => 'Deposited By',
 			'stock_deposited' => 'Amount of Stock Deposited',
 			'product_name' => 'Generic Name',
-			'current_stock' => 'Current Stock'
+			'current_stock' => 'Current Stock',
+			'sku' => 'SKU'
 		];
 	}
 

@@ -137,23 +137,6 @@ AppAsset::register($this);
                                 'label' => 'Reports',
                                 'icon' => 'th-list'
                             ],
-                            [
-                                'label' => 'User Management',
-                                'icon' => 'user',
-                                'items' => [
-                                    [
-                                        'label' => 'Change Password',
-                                        'icon' => 'edit', 
-                                        'url' => ['/user/changepassword']
-                                    ],
-                                    [
-                                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                                        'icon'=> 'log-out',
-                                        'url' => Url::to(['/site/logout']), 
-                                        'template' => '<a href="{url}" data-method="post">{icon}{label}</a>'
-                                    ],
-                                ],
-                            ],
                         ],
                     ]);
                 ?>

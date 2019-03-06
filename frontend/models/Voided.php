@@ -21,7 +21,8 @@
         	return [
             	'voidno' => 'Void No.',
             	'product_name' => 'Generic Name',
-            	'unit_price' => 'Unit Price'
+            	'unit_price' => 'Unit Price',
+            	'sku' => 'SKU'
         	];
     	}
 
