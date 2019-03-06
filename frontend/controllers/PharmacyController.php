@@ -77,12 +77,12 @@ class PharmacyController extends Controller
         // return $this->render('dashboard');
 
         $data = Yii::$app->db->createCommand('select 
-             generic_name,quantity,category
+             generic_name,quantity,category,strength
              from records 
              order by quantity ASC LIMIT 5')->queryAll();
 
         $data1 = Yii::$app->db->createCommand('select 
-             product_name,current_stock,category
+             product_name,current_stock,category,strength
              from deposits 
              order by depositno DESC LIMIT 5')->queryAll();
 
@@ -110,11 +110,13 @@ class PharmacyController extends Controller
             $postGetValue3 = Yii::$app->request->post('Records')['brand'];
             $postGetValue4 = Yii::$app->request->post('Records')['manufacturer'];
             $postGetValue5 = Yii::$app->request->post('Records')['strength'];
+            $postGetValue6 = Yii::$app->request->post('Records')['quantity'];
             $queryCat = Category::findOne(['categ_id' => $postGetValue]);
             $query1 = Units::findOne(['unit_id' => $postGetValue1]);
             $record->category = $queryCat->category;
             $record->unit = $query1->unit_name;
             $record->brand = $postGetValue3;
+            $record->threshold = $postGetValue6 * 0.10;
 
             $query2 = Records::find()->orderBy(['sku' => SORT_DESC])->one();
 
@@ -222,6 +224,7 @@ class PharmacyController extends Controller
             $record->quantity = $stock + $restock;
             $record1->current_stock = $record->quantity;
             $record1->stock_deposited = $restock;
+            $record->threshold = $record->quantity * 0.10;
             $record->removeRestock();
 
             if($record->save() && $record1->save()) {

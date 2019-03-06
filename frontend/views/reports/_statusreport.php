@@ -16,7 +16,9 @@ use kartik\select2\Select2;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'generic_name')->widget(Select2::classname(),[
-	    'data' => ArrayHelper::map(Records::find()->all(),'id', 'generic_name'),
+	    'data' => ArrayHelper::map(Records::find()->asArray()->all(),'id', function($model) {
+						return $model['sku'].': '.$model['generic_name'].' ('.$model['strength'].')';
+					},'category'),
 	    'maintainOrder' => true,
 	    'toggleAllSettings' => [
 	        'selectLabel' => '<i class="fas fa-ok-circle"></i> Tag All',

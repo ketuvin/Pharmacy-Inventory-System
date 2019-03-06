@@ -7,25 +7,27 @@ $quantity = [];
 $category = [];
 $categories = [];
 $names = [];
+$strength = [];
 
 	foreach($diagram as $values) {
 	    $name[] = $values['generic_name'];
 	    $quantity[] = $values['quantity'];
 	    $category[] = $values['category'];
+	    $strength[] = $values['strength'];
 	}
 	if(count($name) <= 5) {
 		for($counter=0; $counter < sizeof($name);$counter++){
 			$categories[] = $category[$counter];
 			if($counter == 0) {
-				$names[] = ['name' => $name[$counter], 'data' => [(int)$quantity[$counter]]];
+				$names[] = ['name' => $name[$counter].' ('.$strength[$counter].')', 'data' => [(int)$quantity[$counter]]];
 			}elseif($counter == 1) {
-				$names[] = ['name' => $name[$counter], 'data' => [0,(int)$quantity[$counter]]];
+				$names[] = ['name' => $name[$counter].' ('.$strength[$counter].')', 'data' => [0,(int)$quantity[$counter]]];
 			}elseif($counter == 2) {
-				$names[] = ['name' => $name[$counter], 'data' => [0,0,(int)$quantity[$counter]]];
+				$names[] = ['name' => $name[$counter].' ('.$strength[$counter].')', 'data' => [0,0,(int)$quantity[$counter]]];
 			}elseif($counter == 3) {
-				$names[] = ['name' => $name[$counter], 'data' => [0,0,0,(int)$quantity[$counter]]];
+				$names[] = ['name' => $name[$counter].' ('.$strength[$counter].')', 'data' => [0,0,0,(int)$quantity[$counter]]];
 			}else {
-				$names[] = ['name' => $name[$counter], 'data' => [0,0,0,0,(int)$quantity[$counter]]];
+				$names[] = ['name' => $name[$counter].' ('.$strength[$counter].')', 'data' => [0,0,0,0,(int)$quantity[$counter]]];
 			}
 		}
 	}

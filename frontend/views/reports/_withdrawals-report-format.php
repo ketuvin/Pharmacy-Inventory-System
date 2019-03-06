@@ -7,13 +7,15 @@ use yii\helpers\Html;
         <thead>
             <tr>
                 <th>Pull-out No.</td>
-                <th>Remarks</td>
+                <th>SKU</td>
                 <th>Generic Name</td>
-                <th>Strength</td>   
+                <th>Strength</td>
+                <th>Category</td>   
                 <th>Brand</td> 
                 <th>Manufacturer</td>
                 <th>Amount of Stock Withdrawn</td>
                 <th>Current Stock After Withdraw</td>
+                <th>Remarks</td>
                 <th>Withdrawn By</td>
                 <th>Created Date</td>
             </tr>
@@ -22,13 +24,15 @@ use yii\helpers\Html;
             <?php foreach ($model as $key => $value): ?>
                     <tr>
                         <td><?= $value['pull_outno'] ?></td>
-                        <td><?= $value['remarks'] ?></td>
+                        <td><?= $value['sku'] ?></td>
                         <td><?= $value['product_name'] ?></td>
                         <td><?= $value['strength'] ?></td>
+                        <td><?= $value['category'] ?></td>
                         <td><?= $value['brand'] ?></td>
                         <td><?= $value['manufacturer'] ?></td>
                         <td><?= $value['stock_withdrawn'] ?></td>
                         <td><?= $value['current_stock'] ?></td>
+                        <td><?= $value['remarks'] ?></td>
                         <td><?= $value['withdrawby_user'] ?></td>
                         <td><?= $value['created_date'] ?></td>
                     </tr>

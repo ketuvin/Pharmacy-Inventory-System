@@ -7,24 +7,26 @@ $current_stock = [];
 $category = [];
 $categories = [];
 $pnames = [];
+$strength = [];
 
     foreach($diagram1 as $values1) {
         $product_name[] = $values1['product_name'];
         $current_stock[] = $values1['current_stock'];
         $category[] = $values1['category'];
+        $strength[] = $values1['strength'];
     }
     for($counter=0;$counter < sizeof($product_name);$counter++) {
         $categories[] = $category[$counter];
         if($counter == 0) {
-            $pnames[] = ['name' => $product_name[$counter], 'data' => [(int)$current_stock[$counter]]];
+            $pnames[] = ['name' => $product_name[$counter].' ('.$strength[$counter].')', 'data' => [(int)$current_stock[$counter]]];
         }elseif($counter == 1) {
-            $pnames[] = ['name' => $product_name[$counter], 'data' => [0,(int)$current_stock[$counter]]];
+            $pnames[] = ['name' => $product_name[$counter].' ('.$strength[$counter].')', 'data' => [0,(int)$current_stock[$counter]]];
         }elseif($counter == 2) {
-            $pnames[] = ['name' => $product_name[$counter], 'data' => [0,0,(int)$current_stock[$counter]]];
+            $pnames[] = ['name' => $product_name[$counter].' ('.$strength[$counter].')', 'data' => [0,0,(int)$current_stock[$counter]]];
         }elseif($counter == 3) {
-            $pnames[] = ['name' => $product_name[$counter], 'data' => [0,0,0,(int)$current_stock[$counter]]];
+            $pnames[] = ['name' => $product_name[$counter].' ('.$strength[$counter].')', 'data' => [0,0,0,(int)$current_stock[$counter]]];
         }else {
-            $pnames[] = ['name' => $product_name[$counter], 'data' => [0,0,0,0,(int)$current_stock[$counter]]];
+            $pnames[] = ['name' => $product_name[$counter].' ('.$strength[$counter].')', 'data' => [0,0,0,0,(int)$current_stock[$counter]]];
         }
     }
     Pjax::begin();

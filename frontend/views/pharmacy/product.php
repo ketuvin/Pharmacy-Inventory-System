@@ -85,6 +85,11 @@ $this->title = 'Pharmacy Inventory System';
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
+                                'rowOptions' => function($model){
+                                        if($model->quantity < $model->threshold){
+                                            return ['style' => 'background-color:#ff9999;'];
+                                        }
+                                },
                                 'columns' => [
                                     [
                                         'attribute' => 'sku',

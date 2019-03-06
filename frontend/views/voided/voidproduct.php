@@ -23,7 +23,7 @@ $this->title = 'Pharmacy Inventory System';
                            <?= $form ->field($record, 'generic_name')->dropDownList(
                                 ArrayHelper::map(Records::find()->asArray()->all(),'id',
                                     function($model) {
-                                        return $model['sku'].': '.$model['generic_name'].' - '.$model['strength'];
+                                        return $model['sku'].': '.$model['generic_name'].' ('.$model['strength'].')';
                                     },'category'),
                                 ['prompt'=> 'Select Product', 'id' => 'generic_name']
                             );
