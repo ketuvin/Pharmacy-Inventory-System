@@ -106,20 +106,38 @@ body {
 .navbar-brand {
     padding-bottom: 40px;
 }
+.site-index {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    color: #fff;
+    padding: 15%;
+    height: 200px;
+    position: relative;
+}
+.center h1 {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 .jumbotron {
-    color: #fff;
-    background-color: rgb(0, 18, 26,.8);
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
-.body-content {
-    color: #fff;
-    background-color: rgb(0, 18, 26,.8);
-    padding: 5%;
+.center p {
+    margin: 0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-.contacts {
-    color: #fff;
+.center {
     background-color: rgb(0, 18, 26,.8);
-    padding: 5%;
-    margin-top: 3%;
+    width: 100%;
 }
 .site-about {
     color: #fff;

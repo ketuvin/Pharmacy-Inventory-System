@@ -41,7 +41,7 @@ Pjax::begin(['id'=>'reportID']);
                 'header' => 'Actions',
                 'buttons' => [
                 'export' => function ($url, $model) {
-                    return Html::a('Export', ['/reports/generate-report', 'generic_name' => $model->generic_name], ['class' => 'btn btn-primary', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Will open the generated PDF file in a new window', 'data-pjax' => 0]);
+                    return Html::a('View', ['/reports/view-status-report-pdf', 'id' => $model->report_no], ['class' => 'btn btn-primary', 'target'=>'_blank', 'data-toggle'=>'tooltip', 'title'=>'Will open the generated PDF file in a new window', 'data-pjax' => 0]);
                     },
                 'delete' => function ($url, $model) {
                     return Html::a('Delete', ['reports/deletereport', 'report_no' => $model->report_no], ['data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),'data-method'  => 'post', 'class' => 'btn btn-danger']);

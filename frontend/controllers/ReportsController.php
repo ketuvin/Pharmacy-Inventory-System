@@ -91,16 +91,14 @@ class ReportsController extends Controller
                     $multiProducts[] = $records->generic_name;
                 }
             }
-            else
-            {
-                $this->actionGenerateReport($postGetNames);
-            }
 
             // print_r($multiProducts);
             // die();
 
             date_default_timezone_set("Asia/Manila");
             $model->created_date = date('M d, Y h:i:s A');
+            $name = date('F d, Y h-i-s A');
+            $filename = $name . ' (Product-Status)';
 
             $report = Reports::find()->orderBy(['report_no' => SORT_DESC])->one();
 
@@ -115,7 +113,10 @@ class ReportsController extends Controller
                 $id = $report->report_no;
                 $model->report_no = ++$id;
             }
-
+            $this->actionGenerateReport($multiProducts, $filename);
+            // print_r($postGetNames);
+            // die();
+            $model->filename = $filename;
             if($model->save(false)) {
                 Yii::$app->getSession()->setFlash('success','Report Created Successfully');
                 return $this->redirect(['reports']);
@@ -130,7 +131,7 @@ class ReportsController extends Controller
         }
     }
 
-    public function actionGenerateReport(array $generic_name) {
+    public function actionGenerateReport(array $generic_name, $filename) {
         $models = [];
         if (sizeof($generic_name) > 0)
         {
@@ -144,7 +145,6 @@ class ReportsController extends Controller
         // get your HTML raw content without any layouts or scripts
         $content = $this->renderPartial('_status-report-format', [
                      'model' => $models]);
-        date_default_timezone_set('Asia/Manila');
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
             // set to use core fonts only
@@ -154,7 +154,8 @@ class ReportsController extends Controller
             // portrait orientation
             'orientation' => Pdf::ORIENT_PORTRAIT, 
             // stream to browser inline
-            'destination' => Pdf::DEST_BROWSER, 
+            'destination' => Pdf::DEST_FILE,
+            'filename' => '/opt/lappstack/apache2/htdocs/Yii/advanced/frontend/web/StatusReport/'.$filename.'.pdf', 
             // your html content input
             'content' => $content,  
             // format content from your own css file if needed or use the
@@ -186,6 +187,9 @@ class ReportsController extends Controller
 
             date_default_timezone_set("Asia/Manila");
             $model->created_date = date('M d, Y h:i:s A');
+            $name = date('F d, Y h-i-s A');
+            $filename = $name . ' (Withdrawal-Report)';
+
             $model->start_date = $postGetStart;
             $model->end_date = $postGetEnd;
             $model->remarks = $postGetValue;
@@ -198,7 +202,8 @@ class ReportsController extends Controller
                 $id = $withdrawalreport->withdraw_reportno;
                 $model->withdraw_reportno = ++$id;
             }
-
+            $this->actionGenerateWithdrawalsReport($postGetStart, $postGetEnd, $filename);
+            $model->filename = $filename;
             if($model->save(false)) {
                 Yii::$app->getSession()->setFlash('success','Report Created Successfully');
                 return $this->redirect(['reports']);
@@ -214,7 +219,7 @@ class ReportsController extends Controller
         }
     }
 
-    public function actionGenerateWithdrawalsReport($start_date, $end_date) {
+    public function actionGenerateWithdrawalsReport($start_date, $end_date, $filename) {
 
         $data = Yii::$app->db->createCommand("select *
                  from withdrawals
@@ -237,7 +242,8 @@ class ReportsController extends Controller
             // portrait orientation
             'orientation' => Pdf::ORIENT_PORTRAIT, 
             // stream to browser inline
-            'destination' => Pdf::DEST_DOWNLOAD,
+            'destination' => Pdf::DEST_FILE,
+            'filename' => '/opt/lappstack/apache2/htdocs/Yii/advanced/frontend/web/WithdrawalReport/'.$filename.'.pdf',
             // your html content input
             'content' => $content,  
             // format content from your own css file if needed or use the
@@ -258,6 +264,8 @@ class ReportsController extends Controller
     }
 
     public function actionDeletereport($report_no) {
+        $report = Reports::findOne($report_no);
+        unlink(Yii::getAlias('@pdfstatusreportpath').'/'.$report->filename.'.pdf');
         $report = Reports::findOne($report_no)->delete();
         if($report) {
             Yii::$app->getSession()->setFlash('success','Report Deleted Successfully');
@@ -269,12 +277,60 @@ class ReportsController extends Controller
     }
 
     public function actionDeletewithdrawreport($withdraw_reportno) {
+        $report = Withdrawalsreport::findOne($withdraw_reportno);
+        unlink(Yii::getAlias('@pdfwithdrawalreportpath').'/'.$report->filename.'.pdf');
         $report = Withdrawalsreport::findOne($withdraw_reportno)->delete();
         if($report) {
             Yii::$app->getSession()->setFlash('success','Report Deleted Successfully');
             return $this->redirect(['reports']);
         }else {
             Yii::$app->getSession()->setFlash('error','Failed to Delete Report');
+            return $this->redirect(['reports']);
+        }
+    }
+
+    /**
+     * View the pdf file.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionViewStatusReportPdf($id) {
+        $model = Reports::findOne($id);
+
+        $filePath = Yii::getAlias('@pdfstatusreportpath').'/'.$model->filename.'.pdf';
+        
+         if(file_exists($filePath)) {
+
+            header("Content-type: application/pdf");
+            $file = readFile($filePath);
+
+            return $file;
+
+         } else {
+            Yii::$app->getSession()->setFlash('error','Unable to open file. Unexpected Error.');
+            return $this->redirect(['reports']);
+        }
+    }
+
+    /**
+     * View the pdf file.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionViewWithdrawalReportPdf($id) {
+        $model = Withdrawalsreport::findOne($id);
+
+        $filePath = Yii::getAlias('@pdfwithdrawalreportpath').'/'.$model->filename.'.pdf';
+        
+         if(file_exists($filePath)) {
+
+            header("Content-type: application/pdf");
+            $file = readFile($filePath);
+
+            return $file;
+
+         } else {
+            Yii::$app->getSession()->setFlash('error','Unable to open file. Unexpected Error.');
             return $this->redirect(['reports']);
         }
     }

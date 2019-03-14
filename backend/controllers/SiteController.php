@@ -153,7 +153,7 @@ class SiteController extends Controller
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
-            return $this->redirect(['viewadmin']);
+            return $this->redirect(['dashboard']);
         } else {
             return $this->render('login', ['model' => $model]);
         }

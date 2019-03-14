@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 ?>
 <div class="pdf-dealer container">
-    <h2 style="text-align: center;">Farmako Inventus Inventory</h2>
+    <h2 style="text-align: center;">Farmako Inventus</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
