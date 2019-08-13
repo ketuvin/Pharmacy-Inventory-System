@@ -155,7 +155,7 @@ class ReportsController extends Controller
             'orientation' => Pdf::ORIENT_PORTRAIT, 
             // stream to browser inline
             'destination' => Pdf::DEST_FILE,
-            'filename' => '/opt/lappstack/apache2/htdocs/Yii/advanced/frontend/web/StatusReport/'.$filename.'.pdf', 
+            'filename' => Yii::$app->basePath .'\web\StatusReport\\' .$filename .'.pdf', 
             // your html content input
             'content' => $content,  
             // format content from your own css file if needed or use the
@@ -243,7 +243,7 @@ class ReportsController extends Controller
             'orientation' => Pdf::ORIENT_PORTRAIT, 
             // stream to browser inline
             'destination' => Pdf::DEST_FILE,
-            'filename' => '/opt/lappstack/apache2/htdocs/Yii/advanced/frontend/web/WithdrawalReport/'.$filename.'.pdf',
+            'filename' => Yii::$app->basePath .'\web\WithdrawalReport\\'.$filename.'.pdf',
             // your html content input
             'content' => $content,  
             // format content from your own css file if needed or use the
@@ -265,7 +265,7 @@ class ReportsController extends Controller
 
     public function actionDeletereport($report_no) {
         $report = Reports::findOne($report_no);
-        unlink(Yii::getAlias('@pdfstatusreportpath').'/'.$report->filename.'.pdf');
+        unlink(Yii::$app->basePath .'\web\StatusReport\\'.$report->filename.'.pdf');
         $report = Reports::findOne($report_no)->delete();
         if($report) {
             Yii::$app->getSession()->setFlash('success','Report Deleted Successfully');
@@ -278,7 +278,7 @@ class ReportsController extends Controller
 
     public function actionDeletewithdrawreport($withdraw_reportno) {
         $report = Withdrawalsreport::findOne($withdraw_reportno);
-        unlink(Yii::getAlias('@pdfwithdrawalreportpath').'/'.$report->filename.'.pdf');
+        unlink(Yii::$app->basePath .'\web\WithdrawalReport\\'.$report->filename.'.pdf');
         $report = Withdrawalsreport::findOne($withdraw_reportno)->delete();
         if($report) {
             Yii::$app->getSession()->setFlash('success','Report Deleted Successfully');
@@ -297,7 +297,7 @@ class ReportsController extends Controller
     public function actionViewStatusReportPdf($id) {
         $model = Reports::findOne($id);
 
-        $filePath = Yii::getAlias('@pdfstatusreportpath').'/'.$model->filename.'.pdf';
+        $filePath = Yii::$app->basePath .'\web\StatusReport\\'.$model->filename.'.pdf';
         
          if(file_exists($filePath)) {
 
@@ -320,7 +320,7 @@ class ReportsController extends Controller
     public function actionViewWithdrawalReportPdf($id) {
         $model = Withdrawalsreport::findOne($id);
 
-        $filePath = Yii::getAlias('@pdfwithdrawalreportpath').'/'.$model->filename.'.pdf';
+        $filePath = Yii::$app->basePath .'\web\WithdrawalReport\\'.$model->filename.'.pdf';
         
          if(file_exists($filePath)) {
 

@@ -39,7 +39,7 @@ return [
         ],
         'urlFrontEndManager' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => 'http://frontend.yii/',
+            'baseUrl' => 'http://frontend.pharma.com/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ]

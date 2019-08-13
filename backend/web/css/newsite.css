@@ -101,7 +101,7 @@ fieldset[disabled] .my-navbar .btn-link:focus {
     color: #444;
 }
 body {
-    background-image: url('../background.jpg');
+    background-image: url('../images/background.jpg');
 }
 .navbar-brand {
     padding-bottom: 40px;

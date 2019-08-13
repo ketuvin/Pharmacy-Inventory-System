@@ -94,7 +94,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['pharmacy/dashboard']);
+            return $this->redirect(['/pharmacy/dashboard']);
         } else {
             $model->password = '';
 
@@ -160,6 +160,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                    return $this->goHome();
+                } else {
+                    Yii::$app->session->setFlash('error', 'Failed to create account!');
                     return $this->goHome();
                 }
             }
