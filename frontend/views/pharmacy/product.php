@@ -86,9 +86,9 @@ $this->title = 'Pharmacy Inventory System';
                                 'dataProvider' => $dataProvider,
                                 'layout' => "{summary}\n{items}\n<div class='text-center'>{pager}</div>",
                                 'rowOptions' => function($model){
-                                        if($model->quantity < $model->threshold){
-                                            return ['style' => 'background-color:#ff9999;'];
-                                        }
+                                    if($model->quantity < $model->threshold){
+                                        return ['style' => 'background-color:#ff9999;'];
+                                    }
                                 },
                                 'columns' => [
                                     [
